@@ -10,7 +10,6 @@ int main() {
 
     std::string s;
     while(cin >> s) {
-        cout << s;
-        bq.updateDisplay();
+        bq.interpretCommand(s);
     }
 }
