@@ -1,9 +1,8 @@
 #ifndef cell_hpp
 #define cell_hpp
 
-#include "coordinate.h"
-
 class Cell {
+    int livesCounter;
     const int xcord;
     const int ycord;
     bool hasLetter;

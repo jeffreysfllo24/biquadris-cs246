@@ -1,6 +1,6 @@
 #include "cell.h"
 
-Cell::Cell(const int x, const int y) : xcord(x), ycord(y), hasLetter{false} {}
+Cell::Cell(const int x, const int y) : xcord(x), ycord(y), hasLetter{false},livesCounter(-1) {}
 
 bool Cell::isFilled() {
     return hasLetter;
