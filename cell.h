@@ -8,10 +8,10 @@ class Cell {
     bool hasLetter;
     char letter;
     public:
-        Cell(Coordinate);
+        Cell(Coordinate &);
         bool isFilled();
         char getLetter();
-        void setLetter(char);
+        void setLetter(const char &);
         ~Cell();
 };
 
