@@ -8,7 +8,7 @@
 class Block {
     int rotation; // ranges from 0 to 3
     Cell * bottomLeft; // pointer to the bottom left cell
-    std::vector<Cell *> blockCells; // vector of all the cells inside block
+    std::vector<Cell *> blockCells; // vector of all cells inside block
     public:
         Block(Cell *);
         virtual void clockwise() = 0;
