@@ -10,7 +10,8 @@ class Block {
     Cell * bottomLeft; // pointer to the bottom left cell
     std::vector<Cell *> blockCells; // vector of all cells inside block
     public:
-        Block(Cell *);
+        virtual char getBlockType() const = 0;
+        virtual bool isValidMove(std::vector<Cell *>) const = 0;
         virtual void clockwise() = 0;
         virtual void counterclockwise() = 0;
         virtual void left() = 0;
