@@ -2,12 +2,15 @@
 #define block_hpp
 
 #include <iostream>
-#include "coordinate.h"
+#include <vector>
+#include "cell.h"
 
 class Block {
-    int livesCounter;
-    Coordinate coord;
+    int rotation; // ranges from 0 to 3
+    Cell * bottomLeft; // pointer to the bottom left cell
+    std::vector<Cell *> blockCells; // vector of all the cells inside block
     public:
+        Block(Cell *);
         virtual void clockwise() = 0;
         virtual void counterclockwise() = 0;
         virtual void left() = 0;
