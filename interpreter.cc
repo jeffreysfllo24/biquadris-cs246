@@ -1,17 +1,102 @@
 #include <string>
-#include <vector>
+#include <stdlib.h>
+#include <iostream>
 
 #include "interpreter.h"
 #include "biquadris.h"
 
-Interpreter::Interpreter():
-    commandList{{"left", "right"}} {} // TODO: add all commands
+using namespace std;
 
-void Interpreter::interpretCommand(std::string command, Biquadris & bq) {
-    if (command == "left") {
-        // perform left rotation
-    } else if (command == "right") {
-        // perform right rotation
+Interpreter::Interpreter(Biquadris * biquadris):
+    biquadris{biquadris},
+    commandList{{"left", Interpreter::left},
+                {"right", Interpreter::right},
+                {"down", Interpreter::down},
+                {"clockwise", Interpreter::clockwise},
+                {"counterclockwise", Interpreter::counterclockwise},
+                {"drop", Interpreter::drop},
+                {"levelup", Interpreter::levelup},
+                {"leveldown", Interpreter::leveldown},
+                {"norandom", Interpreter::norandom},
+                {"random", Interpreter::random},
+                {"sequence", Interpreter::sequence},
+                {"I", Interpreter::I},
+                {"J", Interpreter::J},
+                {"L", Interpreter::L},
+                {"O", Interpreter::O},
+                {"S", Interpreter::S},
+                {"T", Interpreter::T},
+                {"Z", Interpreter::Z},
+                {"restart", Interpreter::restart}} {}
+
+void Interpreter::runInterpreter() {
+    string s;
+    while(cin >> s) {
+        interpretCommand(s);
+    }
+}
+
+void Interpreter::interpretCommand(std::string command) {
+    Interpreter::Command chosenCommand = noCommand;
+
+    for (auto & x : commandList) {
+        if (command == x.first) {
+            chosenCommand = x.second;
+        }
+    }
+
+    switch (chosenCommand) {
+        case left:
+            break;
+        case right:
+            break;
+        case down:
+            break;
+        case clockwise:
+            break;
+        case counterclockwise:
+            break;
+        case drop:
+            break;
+        case levelup:
+            break;
+        case leveldown:
+            break;
+        case norandom: {
+            string file;
+            if (cin >> file) {
+                // do something with file
+            }
+            break;
+        }
+        case random:
+            break;
+        case sequence: {
+            string file;
+            if (cin >> file) {
+                // do something with file
+            }
+            break;
+        }
+        case I:
+            break;
+        case J:
+            break;
+        case L:
+            break;
+        case O:
+            break;
+        case S:
+            break;
+        case T:
+            break;
+        case Z:
+            break;
+        case restart:
+            break;
+        default:
+            cerr << "bad command";
+            break;
     }
     // TODO: allow for "autocomplete" commands
     // TODO: allow for repeated commands

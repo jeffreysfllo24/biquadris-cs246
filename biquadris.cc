@@ -5,10 +5,10 @@
 using namespace std;
 
 Biquadris::Biquadris():
-    textDisplay{new TextDisplay} {}
+    textDisplay{new TextDisplay}, interpreter{Interpreter{this}} {}
 
-void Biquadris::interpretCommand(string command) {
-    interpreter.interpretCommand(command, *this);
+void Biquadris::run() {
+    interpreter.runInterpreter();
 }
 
 
