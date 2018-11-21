@@ -13,10 +13,11 @@ class Biquadris {
     AbstractGame * playerTwo;
     DisplayObserver * textDisplay;
     Interpreter interpreter;
+
+    void updateDisplay();
 public:
     Biquadris();
-    void interpretCommand(std::string);
-    void updateDisplay();
+    void run();
 };
 
 #endif //BIQUADRIS_H
