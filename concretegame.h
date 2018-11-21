@@ -3,10 +3,14 @@
 
 #include "abstractgame.h"
 
+// Forward Declarations
+class Level;
+
 class ConcreteGame : public AbstractGame {
-    int level;
+    int levelInt;
+    Level * level;
     AbstractGame * otherGame;
-    // Board board;
+    Board board;
     // Score score;
 public:
     ConcreteGame();

@@ -3,10 +3,16 @@
 
 #include <string>
 
+#include "board.h"
+
+// Forward Declaration
+class Level;
+
 class AbstractGame {
-    int level;
+    int levelInt;
+    Level * level;
     AbstractGame * otherGame;
-    // Board board;
+    Board board;
     // Score score;
 public:
     void setOtherGame(AbstractGame *);
