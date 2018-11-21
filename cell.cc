@@ -1,13 +1,12 @@
 #include "cell.h"
 
-Cell::Cell(const int x, const int y) : xCoord(x), yCoord(y), hasLetter{false},livesCounter(-1) {}
-
-bool Cell::isSet() {
-    return hasSet;
-}
+Cell::Cell(const int x, const int y) : xCoord{x}, yCoord{y}, letter{0}, livesCounter{-1} {}
 
 bool Cell::isFilled() {
-    return hasLetter;
+    if (letter == 0) {
+        return false;
+    }
+    return true;
 }
 
 int Cell::getX() {
@@ -24,7 +23,6 @@ char Cell::getLetter() {
 
 void Cell::setLetter(const char &c) {
     letter = c;
-    hasLetter = true;
 }
 
 Cell::~Cell() {}
