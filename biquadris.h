@@ -9,6 +9,7 @@ class DisplayObserver;
 
 
 class Biquadris {
+    bool isPlayerOnePlaying;
     AbstractGame * playerOne;
     AbstractGame * playerTwo;
     DisplayObserver * textDisplay;
@@ -18,6 +19,7 @@ class Biquadris {
 public:
     Biquadris();
     void run();
+    AbstractGame * getCurrentPlayer();
 };
 
 #endif //BIQUADRIS_H

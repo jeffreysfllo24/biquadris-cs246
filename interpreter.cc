@@ -4,6 +4,7 @@
 
 #include "interpreter.h"
 #include "biquadris.h"
+#include "abstractgame.h"
 
 using namespace std;
 
@@ -29,14 +30,8 @@ Interpreter::Interpreter(Biquadris * biquadris):
                 {"Z", Interpreter::Z},
                 {"restart", Interpreter::restart}} {}
 
-void Interpreter::runInterpreter() {
-    string s;
-    while(cin >> s) {
-        interpretCommand(s);
-    }
-}
 
-void Interpreter::interpretCommand(std::string command) {
+Interpreter::Command Interpreter::interpretCommand(std::string command) {
     Interpreter::Command chosenCommand = noCommand;
 
     for (auto & x : commandList) {
@@ -46,53 +41,59 @@ void Interpreter::interpretCommand(std::string command) {
     }
 
     switch (chosenCommand) {
-        case left:
+        case Interpreter::left:
+            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->left();
             break;
-        case right:
+        case Interpreter::right:
+            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->right();
             break;
-        case down:
+        case Interpreter::down:
+            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->down();
             break;
-        case clockwise:
+        case Interpreter::clockwise:
+            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->clockwise();
             break;
-        case counterclockwise:
+        case Interpreter::counterclockwise:
+            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->counterclockwise();
             break;
-        case drop:
+        case Interpreter::drop:
+            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->drop();
             break;
-        case levelup:
+        case Interpreter::levelup:
             break;
-        case leveldown:
+        case Interpreter::leveldown:
             break;
-        case norandom: {
+        case Interpreter::norandom: {
             string file;
             if (cin >> file) {
                 // do something with file
             }
             break;
         }
-        case random:
+        case Interpreter::random:
             break;
-        case sequence: {
+        case Interpreter::sequence: {
             string file;
             if (cin >> file) {
                 // do something with file
             }
             break;
         }
-        case I:
+        case Interpreter::I:
             break;
-        case J:
+        case Interpreter::J:
             break;
-        case L:
+        case Interpreter::L:
             break;
-        case O:
+        case Interpreter::O:
             break;
-        case S:
+        case Interpreter::S:
             break;
-        case T:
+        case Interpreter::T:
             break;
-        case Z:
+        case Interpreter::Z:
             break;
-        case restart:
+        case Interpreter::restart:
             break;
         default:
             cerr << "bad command";

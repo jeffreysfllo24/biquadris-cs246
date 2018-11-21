@@ -16,6 +16,7 @@ class Board{
         void clearRow(Cell **);
         bool isAlive();
         void setBlock(Block *);    //Game calls board->setBlock(block)
+        Block * getCurrentBlock();
         std::string getLine(Cell **);
         ~Board();
         void init();

@@ -14,7 +14,7 @@ class ConcreteGame : public AbstractGame {
     // Score score;
 public:
     ConcreteGame();
-    void takeTurn() override;
+    void createBlock();
     void restart() override;
 };
 

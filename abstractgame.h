@@ -16,8 +16,8 @@ class AbstractGame {
     // Score score;
 public:
     void setOtherGame(AbstractGame *);
-    virtual void takeTurn() = 0;
     virtual void restart() = 0;
+    Board & getBoard();
 };
 
 #endif // ABSTRACTGAME_H
