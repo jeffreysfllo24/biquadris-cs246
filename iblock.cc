@@ -32,7 +32,7 @@ bool IBlock::isValidMove(vector<Cell *> newBlockCells) const {
 void IBlock::replaceCells(vector<Cell *> cells) {
     if (isValidMove(cells)) {
         for (int i = 0; i < blockCells.size(); i++) {
-            blockCells[i]->setLetter(0); // set old block cells to empty letter
+            blockCells[i]->setLetter(""); // set old block cells to empty letter
         }
         blockCells.clear(); // remove all past cells from vector
         blockCells = cells; // reassign vector to new cells
