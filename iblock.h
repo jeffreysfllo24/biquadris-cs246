@@ -5,13 +5,16 @@
 
 class IBlock : public Block {
     int rotation;
+    int maxWidth;
+    bool isBottom;
     Cell * bottomLeft;
     Cell *** blockGrid;
     std::vector<Cell *> blockCells;
     public:
         IBlock(Cell *, Cell ***);
-        char getBlockType() const override;
+        char prettyPrint() const override;
         bool isValidMove(std::vector<Cell *>) const override;
+        void replaceCells(std::vector<Cell *>) override;
         void clockwise() override;
         void counterclockwise() override;
         void left() override;
