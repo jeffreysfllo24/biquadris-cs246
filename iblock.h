@@ -12,7 +12,7 @@ class IBlock : public Block {
     std::vector<Cell *> blockCells;
     public:
         IBlock(Cell *, Cell ***);
-        char prettyPrint() const override;
+        std::string getType() const override;
         bool isValidMove(std::vector<Cell *>) const override;
         void replaceCells(std::vector<Cell *>) override;
         void clockwise() override;

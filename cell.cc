@@ -1,9 +1,11 @@
 #include "cell.h"
 
+using namespace std;
+
 Cell::Cell(const int x, const int y) : xCoord{x}, yCoord{y}, letter{0}, livesCounter{-1} {}
 
 bool Cell::isFilled() {
-    if (letter == 0) {
+    if (letter == "") { // should change to default cell
         return false;
     }
     return true;
@@ -17,12 +19,12 @@ int Cell::getY() {
     return yCoord;
 }
 
-char Cell::getLetter() {
+string Cell::getLetter() {
     return letter;
 }
 
-void Cell::setLetter(const char &c) {
-    letter = c;
+void Cell::setLetter(const string &s) {
+    letter = s;
 }
 
 Cell::~Cell() {}
