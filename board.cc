@@ -4,7 +4,6 @@ using namespace std;
 
 const int width = 11;
 const int height = 18;
-const int startBoard = 3;
 Board::Board() : block{nullptr}, theGrid{} {
 }
 
@@ -27,18 +26,18 @@ void Board::clearBoard(){
     delete block;   //Delete the block pointer in the grid
 }
 
-bool Board::isRowFull(Cell ** row){
-    for(int i = 0; i < width; ++i){
-        if (!row[i]->isFilled()){
+bool Board::isRowFull(int row){
+    for(int j = 0; j < width; ++j){
+        if (theGrid[row][j]->isFilled()){
             return false;
         }
     }
     return true;
 }
 
-void Board::clearRow(Cell ** row){
-    for(int i = 0; i < width; ++i){
-        delete row[i];
+void Board::clearRow(int row){
+    for(int j = 0; j < width; ++j){
+        delete theGrid[row][j];
     }
 }
 
@@ -59,14 +58,26 @@ Board::~Board(){
     this->clearBoard();
 }
 
-string getLine(Cell ** row){
+string Board::getLine(int row){
+    
     string res = "";
-    for(int i = 0; i < width; ++i){
-        if(row[i]->isFilled()){
-            res += row[i]->getLetter();
+    for(int j = 0; j < width; ++j){
+        if(theGrid[row][j]->isFilled()){
+            res += theGrid[row][j]->getLetter();
         }else{
             res += " ";
         }
     }
     return res;
 }
+
+Block * Board::getCurrentBlock(){
+    return block;
+}
+
+void Board::copyRow(int firstRow,int secondRow){
+    for(int j = 0; j < width;++j){
+        theGrid[secondRow][j]->copyData(theGrid[firstRow][j]);
+    }
+}
+

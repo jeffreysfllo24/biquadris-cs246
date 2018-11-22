@@ -16,6 +16,7 @@ class Cell {
         int getY();
         char getLetter();
         void setLetter(const char &);
+        void copyData(Cell * other); //Copies data of other into the cell calling copyData
         ~Cell();
 };
 

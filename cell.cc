@@ -26,5 +26,11 @@ void Cell::setLetter(const char &c) {
     letter = c;
     hasLetter = true;
 }
+void Cell::copyData(Cell * other){
+    livesCounter = other->livesCounter;
+    hasLetter = other->hasLetter;
+    hasSet = other->hasSet;
+    letter = other->letter;
+}
 
 Cell::~Cell() {}

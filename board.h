@@ -12,12 +12,13 @@ class Board{
     public:
         Board();
         void clearBoard();
-        bool isRowFull(Cell **);
-        void clearRow(Cell **);
+        bool isRowFull(int);
+        void clearRow(int);
         bool isAlive();
         void setBlock(Block *);    //Game calls board->setBlock(block)
         Block * getCurrentBlock();
-        std::string getLine(Cell **);
+        std::string getLine(int);
+        void copyRow(int firstRow,int secondRow);  //Copy contents of firstRow into secondRow
         ~Board();
         void init();
 };

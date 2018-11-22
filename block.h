@@ -11,6 +11,7 @@ class Block {
     std::vector<Cell *> blockCells; // vector of all cells inside block
     public:
         virtual char getBlockType() const = 0;
+        virtual Cell * getCell() const = 0;
         virtual bool isValidMove(std::vector<Cell *>) const = 0;
         virtual void clockwise() = 0;
         virtual void counterclockwise() = 0;
