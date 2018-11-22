@@ -4,7 +4,7 @@ using namespace std;
 
 // TODO: MUST ACCOUNT FOR WHEN WE KNOW BLOCK IS DONE
 
-IBlock::IBlock(Cell *cell, Cell ***grid) : rotation{0}, bottomLeft{cell}, blockGrid{grid} {
+IBlock::IBlock(Cell *cell, Cell ***grid) : bottomLeft{cell}, blockGrid{grid}, isBottom{false}, rotation{0}, maxWidth{1} {
     // initial cells
     Cell * firstCell = blockGrid[1][3];
     Cell * secondCell = blockGrid[2][3];
@@ -39,96 +39,119 @@ void IBlock::replaceCells(vector<Cell *> cells) {
     }
 }
 
-void IBlock::clockwise() {
+// GET POSITION METHODS =================================================
+
+vector<Cell *> IBlock::getPositionZero() {
     int bottomLeftX = bottomLeft->getX();
     int bottomLeftY = bottomLeft->getY();
     vector<Cell *> tempCells;
+    // add new rotation to tempCells
+    tempCells.push_back(bottomLeft);
+    tempCells.push_back(blockGrid[bottomLeftX+1][bottomLeftY]);
+    tempCells.push_back(blockGrid[bottomLeftX+2][bottomLeftY]);
+    tempCells.push_back(blockGrid[bottomLeftX+3][bottomLeftY]);
+    return tempCells;
+}
+
+vector<Cell *> IBlock::getPositionOne() {
+    int bottomLeftX = bottomLeft->getX();
+    int bottomLeftY = bottomLeft->getY();
+    vector<Cell *> tempCells;
+    // add new rotation to tempCells
+    tempCells.push_back(bottomLeft);
+    tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-1]);
+    tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-2]);
+    tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-3]);
+    return tempCells;
+}
+
+// ======================================================================
+
+void IBlock::clockwise() {
+    vector<Cell *> newRotation;
     if (rotation == 0 || rotation == 2) { // same rotation for positions 0 and 2
-        tempCells.push_back(bottomLeft);
-        tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-1]);
-        tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-2]);
-        tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-3]);
-        if (isValidMove(tempCells)) maxWidth = 1; // adjust maxWidth if this rotation can happen
+        newRotation = getPositionOne();
+        if (isValidMove(newRotation)) {
+            maxWidth = 1;
+            rotation++;
+        }
     } else if (rotation == 1 || rotation == 3) { // same rotation for positions 1 and 3
         if (bottomLeft->getX() + 4 > 10) {
             return; // can't rotate
         }
-        tempCells.push_back(bottomLeft);
-        tempCells.push_back(blockGrid[bottomLeftX+1][bottomLeftY]);
-        tempCells.push_back(blockGrid[bottomLeftX+2][bottomLeftY]);
-        tempCells.push_back(blockGrid[bottomLeftX+3][bottomLeftY]);
-        if (isValidMove(tempCells)) maxWidth = 4; // adjust maxWidth if this rotation can happen
+        if (isValidMove(newRotation)) {
+            maxWidth = 4;
+            if (rotation == 1) rotation++;
+            else rotation = 0;
+        }
     }
-    replaceCells(tempCells); // call replaceCells() to update blockCells vector
+    replaceCells(newRotation);
 }
 
 void IBlock::counterclockwise() {
-    int bottomLeftX = bottomLeft->getX();
-    int bottomLeftY = bottomLeft->getY();
-    vector<Cell *> tempCells;
-    if (rotation == 0 || rotation == 2) {
-        tempCells.push_back(bottomLeft);
-        tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-1]);
-        tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-2]);
-        tempCells.push_back(blockGrid[bottomLeftX][bottomLeftY-3]);
-        if (isValidMove(tempCells)) maxWidth = 1;
-    } else if (rotation == 1 || rotation == 3) {
+    vector<Cell *> newRotation;
+    if (rotation == 0 || rotation == 2) { // same rotation for positions 0 and 2
+        newRotation = getPositionOne();
+        if (isValidMove(newRotation)) {
+            maxWidth = 1;
+            if (rotation == 2) rotation--;
+            else rotation = 3;
+        }
+    } else if (rotation == 1 || rotation == 3) { // same rotation for positions 1 and 3
         if (bottomLeft->getX() + 4 > 10) {
             return; // can't rotate
         }
-        tempCells.push_back(bottomLeft);
-        tempCells.push_back(blockGrid[bottomLeftX+1][bottomLeftY]);
-        tempCells.push_back(blockGrid[bottomLeftX+2][bottomLeftY]);
-        tempCells.push_back(blockGrid[bottomLeftX+3][bottomLeftY]);
-        if (isValidMove(tempCells)) maxWidth = 4;
+        if (isValidMove(newRotation)) {
+            maxWidth = 4;
+            rotation--;
+        }
     }
-    replaceCells(tempCells);
+    replaceCells(newRotation);
 }
 
 void IBlock::left() {
     if (bottomLeft->getX() == 0) {
         return; // can't move left
     }
-    vector<Cell *> tempCells;
+    vector<Cell *> newMovement;
     int curX, curY;
     for (int i = 0; i < blockCells.size(); i++) {
         curX = blockCells[i]->getX();
         curY = blockCells[i]->getY();
-        tempCells.push_back(blockGrid[curX-1][curY]);
+        newMovement.push_back(blockGrid[curX-1][curY]);
     }
-    replaceCells(tempCells); // call replaceCells() to update blockCells vector
+    replaceCells(newMovement);
 }
 
 void IBlock::right() {
     if (bottomLeft->getX() + maxWidth > 10) {
         return; // can't move right
     }
-    vector<Cell *> tempCells;
+    vector<Cell *> newMovement;
     int curX, curY;
     for (int i = 0; i < blockCells.size(); i++) {
         curX = blockCells[i]->getX();
         curY = blockCells[i]->getY();
-        tempCells.push_back(blockGrid[curX+1][curY]);
+        newMovement.push_back(blockGrid[curX+1][curY]);
     }
-    replaceCells(tempCells); // call replaceCells() to update blockCells vector
+    replaceCells(newMovement);
 }
 
 void IBlock::down() {
-    int bottomLeftY = bottomLeft->getY();
-    if (bottomLeftY == 0) {
+    if (bottomLeft->getY() == 0) {
         isBottom = true;
         return; // can't move down, at bottom row
     }
     if (!isBottom) {
-        vector<Cell *> tempCells;
+        vector<Cell *> newMovement;
         int curX, curY;
         for (int i = 0; i < blockCells.size(); i++) {
             curX = blockCells[i]->getX();
             curY = blockCells[i]->getY();
-            tempCells.push_back(blockGrid[curX][curY+1]);
+            newMovement.push_back(blockGrid[curX][curY+1]);
         }
-        if (!isValidMove(tempCells)) isBottom = true; // overlapping cells below means block is unmovable
-        replaceCells(tempCells);
+        if (!isValidMove(newMovement)) isBottom = true; // overlapping cells below means block is at bottom
+        replaceCells(newMovement);
     }
 }
 
