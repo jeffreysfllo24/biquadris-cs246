@@ -31,3 +31,11 @@ AbstractGame * Biquadris::getCurrentPlayer() {
         return playerTwo;
     }
 }
+
+AbstractGame * Biquadris::getFirstPlayer(){
+    return playerOne;
+}
+
+AbstractGame * Biquadris::getSecondPlayer(){
+    return playerTwo;
+}
