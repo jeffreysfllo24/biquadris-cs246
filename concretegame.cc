@@ -6,7 +6,7 @@
 ConcreteGame::ConcreteGame(bool isPlayerOne) {
     this->isPlayerOne = isPlayerOne;
     this->levelInt = 0;
-    this->level = new Level0{"sequence1.txt"}
+    this->level = new Level0{"sequence1.txt"};
     this->otherGame = nullptr;
 }
 
