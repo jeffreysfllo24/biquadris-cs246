@@ -3,7 +3,7 @@
 
 class DisplayObserver {
 public:
-    virtual void notify() = 0;
+    virtual void displayBoard() = 0;
 };
 
 #endif //DISPLAYOBSERVER_H

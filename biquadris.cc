@@ -6,16 +6,21 @@ using namespace std;
 
 Biquadris::Biquadris():
     isPlayerOnePlaying{true}, playerOne{new ConcreteGame{}}, playerTwo{new ConcreteGame{}},
-    textDisplay{new TextDisplay}, interpreter{Interpreter{this}} {}
+    textDisplay{new TextDisplay}, interpreter{Interpreter{this}} {
+
+    playerOne->setOtherGame(playerTwo); // Give players access to other player
+    playerTwo->setOtherGame(playerOne); // for special actions
+}
 
 void Biquadris::updateDisplay() {
-
+    textDisplay->displayBoard();
 }
 
 void Biquadris::run() {
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);
+        updateDisplay();
     }
 }
 

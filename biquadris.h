@@ -14,8 +14,8 @@ class Biquadris {
     AbstractGame * playerTwo;
     DisplayObserver * textDisplay;
     Interpreter interpreter;
-
     void updateDisplay();
+
 public:
     Biquadris();
     void run();

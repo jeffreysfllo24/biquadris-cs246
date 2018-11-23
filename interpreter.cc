@@ -80,18 +80,25 @@ Interpreter::Command Interpreter::interpretCommand(std::string command) {
             break;
         }
         case Interpreter::I:
+            biquadris->getCurrentPlayer()->createSpecificBlock('I');
             break;
         case Interpreter::J:
+            biquadris->getCurrentPlayer()->createSpecificBlock('J');
             break;
         case Interpreter::L:
+            biquadris->getCurrentPlayer()->createSpecificBlock('L');
             break;
         case Interpreter::O:
+            biquadris->getCurrentPlayer()->createSpecificBlock('O');
             break;
         case Interpreter::S:
+            biquadris->getCurrentPlayer()->createSpecificBlock('S');
             break;
         case Interpreter::T:
+            biquadris->getCurrentPlayer()->createSpecificBlock('T');
             break;
         case Interpreter::Z:
+            biquadris->getCurrentPlayer()->createSpecificBlock('Z');
             break;
         case Interpreter::restart:
             break;
@@ -99,6 +106,7 @@ Interpreter::Command Interpreter::interpretCommand(std::string command) {
             cerr << "bad command";
             break;
     }
+
     // TODO: allow for "autocomplete" commands
     // TODO: allow for repeated commands
     // TODO: extension for renaming commands

@@ -1,5 +1,5 @@
 #include "textdisplay.h"
 
-void TextDisplay::notify() {
+void TextDisplay::displayBoard() {
 
 }

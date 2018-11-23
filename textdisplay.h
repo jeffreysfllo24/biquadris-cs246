@@ -5,7 +5,7 @@
 
 class TextDisplay : public DisplayObserver {
 private:
-    void notify();
+    void displayBoard() override;
 };
 
 #endif //TEXTDISPLAY_H
