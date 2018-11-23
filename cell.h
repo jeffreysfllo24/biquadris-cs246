@@ -15,6 +15,8 @@ class Cell {
         int getY();
         std::string getLetter();
         void setLetter(const std::string &);
+        void copyData(Cell * other); //Copies data of other into the cell calling copyData
+
         ~Cell();
 };
 

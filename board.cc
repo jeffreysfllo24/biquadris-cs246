@@ -4,7 +4,6 @@ using namespace std;
 
 const int width = 11;
 const int height = 18;
-const int startBoard = 3;
 Board::Board() : block{nullptr}, theGrid{} {
 }
 
@@ -27,18 +26,19 @@ void Board::clearBoard(){
     delete block;   //Delete the block pointer in the grid
 }
 
-bool Board::isRowFull(Cell ** row){
-    for(int i = 0; i < width; ++i){
-        if (!row[i]->isFilled()){
+bool Board::isRowFull(int row){
+    for(int j = 0; j < width; ++j){
+        if (theGrid[row][j]->isFilled()){
             return false;
         }
     }
     return true;
 }
 
-void Board::clearRow(Cell ** row){
-    for(int i = 0; i < width; ++i){
-        delete row[i];
+//Delete if not used
+void Board::clearRow(int row){
+    for(int j = 0; j < width; ++j){
+        delete theGrid[row][j];
     }
 }
 
@@ -51,22 +51,50 @@ bool Board::isAlive(){
     return true;
 }
 
-void Board::setBlock(Block *block){
-    
+void Board::dropBlock(Block *block){
+    block->drop();
+   /* int blockRow = block->getCell()->x
+    while(isRowFull(blockRow)){
+        for(int i = blockRow; i > 2; --i){
+            copyRow(i - 1, i);
+            //TODO: make more efficient check if row is empty
+        }
+    }
+    */
 }
 
 Board::~Board(){
     this->clearBoard();
 }
 
-string getLine(Cell ** row){
+string Board::getLine(int row){
     string res = "";
-    for(int i = 0; i < width; ++i){
-        if(row[i]->isFilled()){
-            res += row[i]->getLetter();
+    for(int j = 0; j < width; ++j){
+        if(theGrid[row][j]->isFilled()){
+            res += theGrid[row][j]->getLetter();
         }else{
             res += " ";
         }
     }
     return res;
 }
+
+Block * Board::getCurrentBlock(){
+    return block;
+}
+
+void Board::copyRow(int firstRow,int secondRow){
+    for(int j = 0; j < width;++j){
+        theGrid[secondRow][j]->copyData(theGrid[firstRow][j]);
+    }
+}
+
+void Board::createBlock(Block * other){
+    if(block){
+        delete block;
+    }
+    block = other;
+    //block->init; TODO Jayson 
+}
+
+
