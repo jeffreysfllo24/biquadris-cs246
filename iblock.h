@@ -11,7 +11,7 @@ class IBlock : public Block {
     //movement
     bool isBottom;
     bool isValidMove(std::vector<Cell *>) const override;
-    void replaceCells(std::vector<Cell *>) override;
+    void replaceCells(std::vector<Cell *>, std::string letter) override;
 
     // rotation
     int rotation;
@@ -20,13 +20,15 @@ class IBlock : public Block {
     std::vector<Cell *> getPositionOne();
     
     public:
-        IBlock(Cell *, Cell ***);
+        IBlock();
+        void init(Cell *, Cell ***);
         std::string getType() const override;
+        Cell * getBottomLeft() const override;
         void clockwise() override;
         void counterclockwise() override;
         void left() override;
         void right() override;
-        void down() override;
+        bool down() override;
         void drop() override;
         ~IBlock() override;
 };
