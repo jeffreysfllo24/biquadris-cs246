@@ -15,7 +15,7 @@ private:
     Biquadris * biquadris;
 public:
     Interpreter(Biquadris *);
-    Interpreter::Command interpretCommand(std::string);
+    void interpretCommand(std::string);
 };
 
 #endif //INTERPRETER_H

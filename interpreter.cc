@@ -31,7 +31,7 @@ Interpreter::Interpreter(Biquadris * biquadris):
                 {"restart", Interpreter::restart}} {}
 
 
-Interpreter::Command Interpreter::interpretCommand(std::string command) {
+void Interpreter::interpretCommand(std::string command) {
     Interpreter::Command chosenCommand = noCommand;
 
     for (auto & x : commandList) {
