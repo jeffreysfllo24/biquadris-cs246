@@ -22,6 +22,8 @@ public:
     virtual void createBlock() = 0;
     virtual void createSpecificBlock(char) = 0;
     virtual ~AbstractGame() = 0;
+    Score & getScore();
+    int getLevel();
 };
 
 #endif // ABSTRACTGAME_H

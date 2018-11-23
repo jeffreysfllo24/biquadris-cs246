@@ -9,4 +9,12 @@ Board & AbstractGame::getBoard() {
     return board;
 }
 
+Score & AbstractGame::getScore(){
+    return score;
+}
+
+int AbstractGame::getLevel(){
+    return levelInt;
+}
+
 AbstractGame::~AbstractGame() = default;

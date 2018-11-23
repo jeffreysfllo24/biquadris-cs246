@@ -20,6 +20,8 @@ public:
     Biquadris();
     void run();
     AbstractGame * getCurrentPlayer();
+    AbstractGame *getFirstPlayer();
+    AbstractGame *getSecondPlayer();
 };
 
 #endif //BIQUADRIS_H
