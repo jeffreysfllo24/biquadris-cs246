@@ -15,7 +15,6 @@ class Biquadris {
     DisplayObserver * textDisplay;
     Interpreter interpreter;
     void updateDisplay();
-
 public:
     Biquadris();
     void run();
