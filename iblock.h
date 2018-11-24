@@ -6,12 +6,12 @@
 class IBlock : public Block {
     Cell * bottomLeft;
     std::vector<Cell *> blockCells;
-    Cell *** blockGrid;
+    std::vector<std::vector<Cell *>> blockGrid;
 
     //movement
     bool isBottom;
     bool isValidMove(std::vector<Cell *>) const override;
-    void replaceCells(std::vector<Cell *>, std::string letter) override;
+    bool replaceCells(std::vector<Cell *>, std::string letter) override;
 
     // rotation
     int rotation;
@@ -21,7 +21,7 @@ class IBlock : public Block {
     
     public:
         IBlock();
-        void init(Cell *, Cell ***);
+        void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
         Cell * getBottomLeft() const override;
         void clockwise() override;

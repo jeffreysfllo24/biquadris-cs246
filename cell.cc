@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Cell::Cell(const int x, const int y) : xCoord{x}, yCoord{y}, letter{""}, livesCounter{-1} {}
+Cell::Cell(const int x, const int y) : rowCord{x}, colCord{y}, letter{""}, livesCounter{-1} {}
 
 bool Cell::isFilled() {
     if (letter == "") { // should change to default cell
@@ -11,12 +11,12 @@ bool Cell::isFilled() {
     return true;
 }
 
-int Cell::getX() {
-    return xCoord;
+int Cell::getRow() {
+    return rowCord;
 }
 
-int Cell::getY() {
-    return yCoord;
+int Cell::getCol() {
+    return colCord;
 }
 
 string Cell::getLetter() {

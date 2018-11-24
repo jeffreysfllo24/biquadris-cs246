@@ -17,6 +17,8 @@ void Biquadris::updateDisplay() {
 }
 
 void Biquadris::run() {
+    getFirstPlayer()->createBlock();
+    
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);

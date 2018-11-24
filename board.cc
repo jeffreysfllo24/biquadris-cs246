@@ -75,7 +75,7 @@ string Board::getLine(int row){
         if(theGrid[row][j]->isFilled()){
             res += theGrid[row][j]->getLetter();
         }else{
-            res += " ";
+            res += "."; // TODO change back to spaces
         }
     }
     return res;
@@ -96,7 +96,7 @@ void Board::createBlock(Block * other){
         delete block;
     }
     block = other;
-    //block->init; TODO Jayson 
+    block->init(theGrid[3][0], theGrid);
 }
 
 

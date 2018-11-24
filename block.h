@@ -12,14 +12,14 @@ class Block {
     // movement
     bool isBottom;
     virtual bool isValidMove(std::vector<Cell *>) const = 0;
-    virtual void replaceCells(std::vector<Cell *>, std::string) = 0;
+    virtual bool replaceCells(std::vector<Cell *>, std::string) = 0;
 
     // rotation
     int rotation;
     int maxWidth; // width of the next rotation
     
     public:
-        virtual void init(Cell *, Cell ***) = 0;
+        virtual void init(Cell *, std::vector<std::vector<Cell *>>) = 0;
         virtual std::string getType() const = 0;
         virtual Cell * getBottomLeft() const = 0;
         virtual void clockwise() = 0;
