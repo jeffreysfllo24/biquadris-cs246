@@ -1,22 +1,22 @@
 #ifndef cell_hpp
 #define cell_hpp
 
+#include <string>
+
 class Cell {
     int livesCounter;
     const int xCoord;
     const int yCoord;
-    bool hasLetter;
-    bool hasSet;
-    char letter;
+    std::string letter;
     public:
         Cell(int x, int y);
-        bool isSet();
         bool isFilled();
         int getX();
         int getY();
-        char getLetter();
-        void setLetter(const char &);
+        std::string getLetter();
+        void setLetter(const std::string &);
         void copyData(Cell * other); //Copies data of other into the cell calling copyData
+
         ~Cell();
 };
 

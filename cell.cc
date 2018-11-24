@@ -1,13 +1,14 @@
 #include "cell.h"
 
-Cell::Cell(const int x, const int y) : xCoord(x), yCoord(y), hasLetter{false},livesCounter(-1) {}
+using namespace std;
 
-bool Cell::isSet() {
-    return hasSet;
-}
+Cell::Cell(const int x, const int y) : xCoord{x}, yCoord{y}, letter{""}, livesCounter{-1} {}
 
 bool Cell::isFilled() {
-    return hasLetter;
+    if (letter == "") { // should change to default cell
+        return false;
+    }
+    return true;
 }
 
 int Cell::getX() {
@@ -18,13 +19,12 @@ int Cell::getY() {
     return yCoord;
 }
 
-char Cell::getLetter() {
+string Cell::getLetter() {
     return letter;
 }
 
-void Cell::setLetter(const char &c) {
-    letter = c;
-    hasLetter = true;
+void Cell::setLetter(const string &s) {
+    letter = s;
 }
 void Cell::copyData(Cell * other){
     livesCounter = other->livesCounter;
