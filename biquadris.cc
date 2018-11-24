@@ -6,7 +6,7 @@ using namespace std;
 
 Biquadris::Biquadris():
     isPlayerOnePlaying{true}, playerOne{new ConcreteGame{true}}, playerTwo{new ConcreteGame{false}},
-    textDisplay{new TextDisplay}, interpreter{Interpreter{this}} {
+    textDisplay{new TextDisplay{this}}, interpreter{Interpreter{this}} {
 
     playerOne->setOtherGame(playerTwo); // Give players access to other player
     playerTwo->setOtherGame(playerOne); // for special actions

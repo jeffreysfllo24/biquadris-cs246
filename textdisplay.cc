@@ -18,21 +18,24 @@ void printLevel(AbstractGame * myGame){
     cout << res;
 }
 
+TextDisplay::TextDisplay(Biquadris * biquadris):
+    biquadris{biquadris} {}
+
 void TextDisplay::displayBoard() {
     
-    Board & firstPlayerBoard = biquadrisGame->getFirstPlayer()->getBoard();
-    Board & secondPlayerBoard = biquadrisGame->getSecondPlayer()->getBoard();
+    Board & firstPlayerBoard = biquadris->getFirstPlayer()->getBoard();
+    Board & secondPlayerBoard = biquadris->getSecondPlayer()->getBoard();
     
     //Print Level
-    printScore(biquadrisGame->getFirstPlayer());
+    printScore(biquadris->getFirstPlayer());
     cout << "   ";
-    printScore(biquadrisGame->getSecondPlayer());
+    printScore(biquadris->getSecondPlayer());
     cout << endl;
     
     //Print Score
-    printScore(biquadrisGame->getFirstPlayer());
+    printScore(biquadris->getFirstPlayer());
     cout << "   ";
-    printScore(biquadrisGame->getSecondPlayer());
+    printScore(biquadris->getSecondPlayer());
     cout << endl;
     
     

@@ -4,8 +4,9 @@
 #include "displayobserver.h"
 
 class TextDisplay : public DisplayObserver {
-    Biquadris * biquadrisGame;
-private:
+    Biquadris * biquadris;
+public:
+    TextDisplay(Biquadris *);
     void displayBoard() override;
 };
 
