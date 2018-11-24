@@ -18,6 +18,7 @@ class Biquadris {
 public:
     Biquadris();
     void run();
+    void switchPlayers();
     AbstractGame * getCurrentPlayer();
     AbstractGame *getFirstPlayer();
     AbstractGame *getSecondPlayer();

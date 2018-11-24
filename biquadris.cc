@@ -26,6 +26,11 @@ void Biquadris::run() {
     }
 }
 
+void Biquadris::switchPlayers() {
+    isPlayerOnePlaying = !isPlayerOnePlaying;
+    getCurrentPlayer()->createBlock();
+}
+
 AbstractGame * Biquadris::getCurrentPlayer() {
     if (isPlayerOnePlaying) {
         return playerOne;

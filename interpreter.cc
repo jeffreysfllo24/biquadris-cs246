@@ -58,6 +58,7 @@ void Interpreter::interpretCommand(std::string command) {
             break;
         case Interpreter::drop:
             biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->drop();
+            biquadris->switchPlayers();
             break;
         case Interpreter::levelup:
             break;
