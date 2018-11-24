@@ -8,6 +8,7 @@ class Level {
 public:
     virtual Block * generateBlock() = 0;
     Block * createSpecificBlock(char);
+    virtual char nextBlock() = 0;
     virtual ~Level() = 0;
 };
 

@@ -10,8 +10,9 @@ class Level0 : public Level {
     int index;
     std::vector<char> sequence;
 public:
-    Level0(std::string);
+    explicit Level0(std::string &);
     Block * generateBlock() override;
+    char nextBlock() override;
 };
 
 #endif //LEVEL0_H

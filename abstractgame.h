@@ -24,6 +24,7 @@ public:
     void restart();
     Board & getBoard();
     Score & getScore();
+    char getNextBlock();
     int getLevel();
     virtual ~AbstractGame() = 0;
 };

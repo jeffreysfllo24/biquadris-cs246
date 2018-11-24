@@ -4,70 +4,107 @@
 #include <string>
 using namespace std;
 
-void printScore(AbstractGame * myGame){
+void printScores(int firstPlayerScore, int secondPlayerScore) {
     string res = "Score:    ";
-    int scoreVal = myGame->getScore().getCurrentScore();
-    res += to_string(scoreVal);
-    cout << res;
+    cout << res << firstPlayerScore;
+    cout << "       "; //TODO Dynamic spacing for more than 1 digit
+    cout << res << secondPlayerScore;
+    cout << endl;
 }
 
-void printLevel(AbstractGame * myGame){
+void printLevels(int firstPlayerLevel, int secondPlayerLevel){
     string res = "Level:    ";
-    int levelVal = myGame->getLevel();
-    res += to_string(levelVal);
-    cout << res;
+    cout << res << firstPlayerLevel;
+    cout << "       ";
+    cout << res << secondPlayerLevel;
+    cout << endl;
 }
 
-void printDividor(){
+void printBoards(Board & firstPlayerBoard, Board & secondPlayerBoard) {
+    for(int i = 0; i < 18; ++i){
+        cout << firstPlayerBoard.getLine(i);
+        cout << "       ";
+        cout << secondPlayerBoard.getLine(i);
+        cout << endl;
+    }
+}
+
+void printDivider(){
     cout << "-----------" ;
     cout << "       ";
-    cout << "-----------" << endl;
+    cout << "-----------";
+    cout << endl;
 }
 
 void printNext(){
     cout << "Next:      ";
     cout << "       ";
-    cout << "Next:      " << endl;
+    cout << "Next:      ";
+    cout << endl;
+}
+
+void printBlockTop(char block) {
+    if (block == 'I') {
+        cout << "           ";
+    } else if (block == 'J') {
+        cout << "J          ";
+    } else if (block == 'L') {
+        cout << "  L        ";
+    } else if (block == 'O') {
+        cout << "OO         ";
+    } else if (block == 'S') {
+        cout << " SS        ";
+    } else if (block == 'T') {
+        cout << "TTT        ";
+    } else { // if (block == 'Z') {
+        cout << "ZZ        ";
+    }
+}
+
+void printBlockBottom(char block) {
+    if (block == 'I') {
+        cout << "IIII       ";
+    } else if (block == 'J') {
+        cout << "JJJ        ";
+    } else if (block == 'L') {
+        cout << "LLL        ";
+    } else if (block == 'O') {
+        cout << "OO         ";
+    } else if (block == 'S') {
+        cout << "SS         ";
+    } else if (block == 'T') {
+        cout << " T         ";
+    } else { // if (block == 'Z') {
+        cout << " ZZ        ";
+    }
+};
+
+void printBlocks(char firstPlayerBlock, char secondPlayerBlock) {
+    printBlockTop(firstPlayerBlock);
+    cout << "       ";
+    printBlockTop(secondPlayerBlock);
+    cout << endl;
+    printBlockBottom(firstPlayerBlock);
+    cout << "       ";
+    printBlockBottom(secondPlayerBlock);
+    cout << endl;
 }
 
 TextDisplay::TextDisplay(Biquadris * biquadris):
     biquadris{biquadris} {}
 
 void TextDisplay::displayBoard() {
-    
-    Board & firstPlayerBoard = biquadris->getFirstPlayer()->getBoard();
-    Board & secondPlayerBoard = biquadris->getSecondPlayer()->getBoard();
-    
-    //Print Level
-    printLevel(biquadris->getFirstPlayer());
-    cout << "       ";
-    printLevel(biquadris->getSecondPlayer());
-    cout << endl;
-    
-    //Print Score
-    printScore(biquadris->getFirstPlayer());
-    cout << "       "; //TODO FIX SPACING
-    printScore(biquadris->getSecondPlayer());
-    cout << endl;
-    
-    //Print Dividor
-    printDividor();
-    
-    for(int i = 0; i < 18; ++i){
-        string line = "";
-        line += firstPlayerBoard.getLine(i);
-        line += "       ";
-        line += secondPlayerBoard.getLine(i);
-        cout << line << endl;
-    }
-    
-    //Print Dividor
-    printDividor();
-    
-    //Print Next
+    printLevels(biquadris->getFirstPlayer()->getLevel(),
+                biquadris->getSecondPlayer()->getLevel());
+    printScores(biquadris->getFirstPlayer()->getScore().getCurrentScore(),
+                biquadris->getSecondPlayer()->getScore().getCurrentScore());
+    printDivider();
+    printBoards(biquadris->getFirstPlayer()->getBoard(),
+                biquadris->getSecondPlayer()->getBoard());
+    printDivider();
     printNext();
-    
-    //TODO: Print the next block
+    printBlocks(biquadris->getFirstPlayer()->getNextBlock(),
+                biquadris->getSecondPlayer()->getNextBlock());
 }
 
 

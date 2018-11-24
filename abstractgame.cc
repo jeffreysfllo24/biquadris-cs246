@@ -1,4 +1,5 @@
 #include "abstractgame.h"
+#include "level.h"
 
 void AbstractGame::restart() {
     board.clearBoard();
@@ -15,6 +16,10 @@ Score & AbstractGame::getScore(){
 
 int AbstractGame::getLevel(){
     return levelInt;
+}
+
+char AbstractGame::getNextBlock() {
+    return level->nextBlock();
 }
 
 AbstractGame::~AbstractGame() = default;
