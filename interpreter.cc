@@ -103,7 +103,7 @@ void Interpreter::interpretCommand(std::string command) {
         case Interpreter::restart:
             break;
         default:
-            cerr << "bad command";
+            cerr << "bad command" << endl;
             break;
     }
 

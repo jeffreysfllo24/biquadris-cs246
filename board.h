@@ -8,7 +8,7 @@
 
 class Board{
     Block *block;
-    Cell *** theGrid;
+    std::vector<std::vector<Cell *>> theGrid;
     public:
         Board();
         void clearBoard();

@@ -4,15 +4,18 @@ using namespace std;
 
 const int width = 11;
 const int height = 18;
-Board::Board() : block{nullptr}, theGrid{} {
+Board::Board() : block{nullptr}{
+    init();
 }
 
 void Board::init(){
     for(int i = 0; i < height; ++i){
+        vector<Cell *> vec;
         for(int j = 0; j < width; ++j){
             Cell * newCell = new Cell(i,j);
-            theGrid[i][j] = newCell;
+            vec.push_back(newCell);
         }
+        theGrid.push_back(vec);
     }
 }
 
@@ -22,7 +25,6 @@ void Board::clearBoard(){
             delete theGrid[i][j];   //Delete the cell pointers in the grid
         }
     }
-    delete theGrid; //Delete the grid itself
     delete block;   //Delete the block pointer in the grid
 }
 

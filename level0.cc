@@ -18,7 +18,7 @@ Level0::Level0(string filename): // Add each letter from input file to a vector
 }
 
 Block * Level0::generateBlock() {
-    // return new IBlock;
+     return new IBlock;
 
     /*if (sequence[index] == 'I') {
         return new IBlock;
@@ -35,5 +35,5 @@ Block * Level0::generateBlock() {
     } else  {// if (sequence[index] == 'Z')
         return new ZBlock;
     }*/
-
+    
 }

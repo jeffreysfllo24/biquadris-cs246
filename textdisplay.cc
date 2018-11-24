@@ -18,6 +18,18 @@ void printLevel(AbstractGame * myGame){
     cout << res;
 }
 
+void printDividor(){
+    cout << "-----------" ;
+    cout << "       ";
+    cout << "-----------" << endl;
+}
+
+void printNext(){
+    cout << "Next:      ";
+    cout << "       ";
+    cout << "Next:      " << endl;
+}
+
 TextDisplay::TextDisplay(Biquadris * biquadris):
     biquadris{biquadris} {}
 
@@ -27,17 +39,19 @@ void TextDisplay::displayBoard() {
     Board & secondPlayerBoard = biquadris->getSecondPlayer()->getBoard();
     
     //Print Level
-    printScore(biquadris->getFirstPlayer());
-    cout << "   ";
-    printScore(biquadris->getSecondPlayer());
+    printLevel(biquadris->getFirstPlayer());
+    cout << "       ";
+    printLevel(biquadris->getSecondPlayer());
     cout << endl;
     
     //Print Score
     printScore(biquadris->getFirstPlayer());
-    cout << "   ";
+    cout << "       "; //TODO FIX SPACING
     printScore(biquadris->getSecondPlayer());
     cout << endl;
     
+    //Print Dividor
+    printDividor();
     
     for(int i = 0; i < 18; ++i){
         string line = "";
@@ -46,6 +60,14 @@ void TextDisplay::displayBoard() {
         line += secondPlayerBoard.getLine(i);
         cout << line << endl;
     }
+    
+    //Print Dividor
+    printDividor();
+    
+    //Print Next
+    printNext();
+    
+    //TODO: Print the next block
 }
 
 
