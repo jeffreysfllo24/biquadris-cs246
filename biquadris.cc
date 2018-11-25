@@ -17,8 +17,11 @@ void Biquadris::updateDisplay() {
 }
 
 void Biquadris::run() {
-    getFirstPlayer()->createBlock();
-    
+    playerOne->createBlock();
+    playerTwo->createBlock();
+
+    updateDisplay();1
+
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);
@@ -27,8 +30,8 @@ void Biquadris::run() {
 }
 
 void Biquadris::switchPlayers() {
+    getCurrentPlayer()->createBlock(); // Create new block for current player as other player already has a block
     isPlayerOnePlaying = !isPlayerOnePlaying;
-    getCurrentPlayer()->createBlock();
 }
 
 AbstractGame * Biquadris::getCurrentPlayer() {

@@ -14,6 +14,12 @@ private:
     std::map<std::string, Interpreter::Command> commandMap;
     Biquadris * biquadris;
 
+    void runLeft(int);
+    void runRight(int);
+    void runDown(int);
+    void runClockwise(int);
+    void runCounterclockwise(int);
+    void runDrop(int);
 public:
     Interpreter(Biquadris *);
     void interpretCommand(std::string);
