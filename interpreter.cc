@@ -85,9 +85,12 @@ void Interpreter::runCounterclockwise(int multiplier) {
 }
 
 void Interpreter::runDrop(int multiplier) {
-    Board & currentBoard = biquadris->getCurrentPlayer()->getBoard();
     for (int i = 0; i < multiplier; i++) {
-        currentBoard.dropBlock();
+        if (biquadris->getIsGameOver()) { // Check game over every iteration
+            return;
+        }
+        // Get board every time to use other board
+        biquadris->getCurrentPlayer()->getBoard().dropBlock();
         biquadris->switchPlayers();
     }
 }
@@ -103,10 +106,20 @@ void Interpreter::interpretCommand(string command) {
         if (command == x.first.substr(0, command.length())) {
             chosenCommand = x.second;
             if (commandFound) {
-                cout << "ambiguous command" << endl;
+                cerr << "ambiguous command" << endl;
                 return;
             }
             commandFound = true;
+        }
+    }
+
+    if (biquadris->getIsGameOver()) { // If in game over state, the only allowed action is restart
+        if (chosenCommand == restart) {
+            biquadris->getFirstPlayer()->restart();
+            biquadris->getSecondPlayer()->restart();
+        } else {
+            cout << "invalid command, game over";
+            return;
         }
     }
 

@@ -5,7 +5,8 @@
 using namespace std;
 
 Biquadris::Biquadris():
-    isPlayerOnePlaying{true}, playerOne{new ConcreteGame{true}}, playerTwo{new ConcreteGame{false}},
+    isPlayerOnePlaying{true}, isGameOver{false},
+    playerOne{new ConcreteGame{true}}, playerTwo{new ConcreteGame{false}},
     textDisplay{new TextDisplay{this}}, interpreter{Interpreter{this}} {
 
     playerOne->setOtherGame(playerTwo); // Give players access to other player
@@ -20,7 +21,7 @@ void Biquadris::run() {
     playerOne->createBlock();
     playerTwo->createBlock();
 
-    updateDisplay();1
+    updateDisplay();
 
     string command;
     while (cin >> command) {
@@ -30,8 +31,17 @@ void Biquadris::run() {
 }
 
 void Biquadris::switchPlayers() {
-    getCurrentPlayer()->createBlock(); // Create new block for current player as other player already has a block
-    isPlayerOnePlaying = !isPlayerOnePlaying;
+    try {
+        getCurrentPlayer()->createBlock(); // Create new block for current player as other player already has a block
+        isPlayerOnePlaying = !isPlayerOnePlaying;
+    } catch (runtime_error & err) {
+        cerr << err.what() << endl;
+        isGameOver = true;
+}
+}
+
+bool Biquadris::getIsGameOver() {
+    return isGameOver;
 }
 
 AbstractGame * Biquadris::getCurrentPlayer() {

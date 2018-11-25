@@ -10,6 +10,7 @@ class DisplayObserver;
 
 class Biquadris {
     bool isPlayerOnePlaying;
+    bool isGameOver;
     AbstractGame * playerOne;
     AbstractGame * playerTwo;
     DisplayObserver * textDisplay;
@@ -19,6 +20,7 @@ public:
     Biquadris();
     void run();
     void switchPlayers();
+    bool getIsGameOver();
     AbstractGame * getCurrentPlayer();
     AbstractGame *getFirstPlayer();
     AbstractGame *getSecondPlayer();
