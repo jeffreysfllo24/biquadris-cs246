@@ -11,7 +11,7 @@ class Interpreter {
 private:
     enum Command { noCommand, left, right, down, clockwise, counterclockwise, drop, levelup, leveldown, norandom,
         random, sequence, I, J, L, O, S, T, Z, restart };
-    std::map<std::string, Interpreter::Command> commandList;
+    std::map<std::string, Interpreter::Command> commandMap;
     Biquadris * biquadris;
 public:
     Interpreter(Biquadris *);

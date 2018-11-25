@@ -10,31 +10,33 @@ using namespace std;
 
 Interpreter::Interpreter(Biquadris * biquadris):
     biquadris{biquadris},
-    commandList{{"left", Interpreter::left},
-                {"right", Interpreter::right},
-                {"down", Interpreter::down},
-                {"clockwise", Interpreter::clockwise},
-                {"counterclockwise", Interpreter::counterclockwise},
-                {"drop", Interpreter::drop},
-                {"levelup", Interpreter::levelup},
-                {"leveldown", Interpreter::leveldown},
-                {"norandom", Interpreter::norandom},
-                {"random", Interpreter::random},
-                {"sequence", Interpreter::sequence},
-                {"I", Interpreter::I},
-                {"J", Interpreter::J},
-                {"L", Interpreter::L},
-                {"O", Interpreter::O},
-                {"S", Interpreter::S},
-                {"T", Interpreter::T},
-                {"Z", Interpreter::Z},
-                {"restart", Interpreter::restart}} {}
-
+    commandMap{{"left", Interpreter::left},
+               {"right", Interpreter::right},
+               {"down", Interpreter::down},
+               {"clockwise", Interpreter::clockwise},
+               {"counterclockwise", Interpreter::counterclockwise},
+               {"drop", Interpreter::drop},
+               {"levelup", Interpreter::levelup},
+               {"leveldown", Interpreter::leveldown},
+               {"norandom", Interpreter::norandom},
+               {"random", Interpreter::random},
+               {"sequence", Interpreter::sequence},
+               {"I", Interpreter::I},
+               {"J", Interpreter::J},
+               {"L", Interpreter::L},
+               {"O", Interpreter::O},
+               {"S", Interpreter::S},
+               {"T", Interpreter::T},
+               {"Z", Interpreter::Z},
+               {"restart", Interpreter::restart}} {}
 
 void Interpreter::interpretCommand(std::string command) {
     Interpreter::Command chosenCommand = noCommand;
 
-    for (auto & x : commandList) {
+    //char multiplier = command[0];
+    //while (multiplier >)
+
+    for (auto & x : commandMap) { // look for command in the commandMap
         if (command == x.first) {
             chosenCommand = x.second;
         }
@@ -57,7 +59,7 @@ void Interpreter::interpretCommand(std::string command) {
             biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->counterclockwise();
             break;
         case Interpreter::drop:
-            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->drop();
+            biquadris->getCurrentPlayer()->getBoard().dropBlock();
             biquadris->switchPlayers();
             break;
         case Interpreter::levelup:
