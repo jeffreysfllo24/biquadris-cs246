@@ -7,6 +7,9 @@ IBlock::IBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{4
 void IBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
     blockGrid = grid;
+    if(didLose()){
+        throw runtime_error("Game Over");
+    }
     // create pointers to cells in the block
     bottomLeft->setLetter("I");
     Cell * firstCell = blockGrid[3][1];
@@ -20,6 +23,13 @@ void IBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     blockCells.push_back(firstCell);
     blockCells.push_back(secondCell);
     blockCells.push_back(thirdCell);
+}
+
+bool IBlock::didLose(){
+    if(bottomLeft->isFilled() || blockGrid[3][1]->isFilled() || blockGrid[3][2]->isFilled() || blockGrid[3][3]->isFilled()){
+        return true;
+    }
+    return false;
 }
 
 string IBlock::getType() const {

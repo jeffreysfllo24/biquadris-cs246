@@ -32,6 +32,7 @@ class TBlock : public Block {
         void right() override;
         bool down() override;
         void drop() override;
+        bool didLose() override;
         ~TBlock() override;
 };
 

@@ -30,7 +30,7 @@ void Board::clearBoard(){
 
 bool Board::isRowFull(int row){
     for(int j = 0; j < width; ++j){
-        if (theGrid[row][j]->isFilled()){
+        if (!theGrid[row][j]->isFilled()){
             return false;
         }
     }
@@ -53,16 +53,14 @@ bool Board::isAlive(){
     return true;
 }
 
-void Board::dropBlock(Block *block){
+void Board::dropBlock(){
     block->drop();
-   /* int blockRow = block->getCell()->x
+    int blockRow = block->getBottomLeft()->getRow();
     while(isRowFull(blockRow)){
         for(int i = blockRow; i > 2; --i){
             copyRow(i - 1, i);
-            //TODO: make more efficient check if row is empty
         }
     }
-    */
 }
 
 Board::~Board(){
