@@ -1,9 +1,9 @@
-#ifndef iblock_hpp
-#define iblock_hpp
+#ifndef oblock_hpp
+#define oblock_hpp
 
 #include "block.h"
 
-class IBlock : public Block {
+class OBlock : public Block {
     Cell * bottomLeft;
     std::vector<Cell *> blockCells;
     std::vector<std::vector<Cell *>> blockGrid;
@@ -16,11 +16,9 @@ class IBlock : public Block {
     // rotation
     int rotation;
     int maxWidth;
-    std::vector<Cell *> getPositionZero();
-    std::vector<Cell *> getPositionOne();
     
     public:
-        IBlock();
+        OBlock();
         void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
         Cell * getBottomLeft() const override;
@@ -30,7 +28,7 @@ class IBlock : public Block {
         void right() override;
         bool down() override;
         void drop() override;
-        ~IBlock() override;
+        ~OBlock() override;
 };
 
 #endif
