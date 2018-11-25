@@ -2,9 +2,9 @@
 
 using namespace std;
 
-IBlock::IBlock() : bottomLeft{nullptr},isBottom{false}, rotation{0}, maxWidth{4} {}
+IBlock::IBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{4} {}
 
-void IBlock::init(Cell *cell, std::vector<std::vector<Cell *>> grid) {
+void IBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
     blockGrid = grid;
     // create pointers to cells in the block
@@ -32,12 +32,12 @@ Cell * IBlock::getBottomLeft() const {
 
 bool IBlock::isValidMove(vector<Cell *> newBlockCells) const {
     for (int i = 0; i < blockCells.size(); i++) {
-        blockCells[i]->setLetter(""); // Temporarily set old block cells to empty letter
+        blockCells[i]->setLetter(""); // temporarily set old block cells to empty letter
     }
     for (int i = 0; i < newBlockCells.size(); i++) {
         if (newBlockCells[i]->isFilled()) { // check if cell is already occupied by another block
             for (int i = 0; i < blockCells.size(); i++) {
-                blockCells[i]->setLetter("I"); // Temporarily set old block cells to empty letter
+                blockCells[i]->setLetter("I"); // temporarily set old block cells to empty letter
             }
             return false;
         }
@@ -50,7 +50,7 @@ bool IBlock::replaceCells(vector<Cell *> cells, string letter) {
         for (int i = 0; i < blockCells.size(); i++) {
             cells[i]->setLetter(letter);
         }
-        bottomLeft = cells[0]; //Set Bottom left
+        bottomLeft = cells[0]; // set bottomLeft
         blockCells.clear(); // remove all past cells from vector
         blockCells = cells; // reassign vector to new cells
         return true;
@@ -59,8 +59,8 @@ bool IBlock::replaceCells(vector<Cell *> cells, string letter) {
 }
 
 vector<Cell *> IBlock::getPositionZero() {
-    int bottomLeftCol = bottomLeft->getCol();
     int bottomLeftRow = bottomLeft->getRow();
+    int bottomLeftCol = bottomLeft->getCol();
     vector<Cell *> tempCells;
     // add new rotation to tempCells
     tempCells.push_back(bottomLeft);
@@ -71,8 +71,8 @@ vector<Cell *> IBlock::getPositionZero() {
 }
 
 vector<Cell *> IBlock::getPositionOne() {
-    int bottomLeftCol = bottomLeft->getCol();
     int bottomLeftRow = bottomLeft->getRow();
+    int bottomLeftCol = bottomLeft->getCol();
     vector<Cell *> tempCells;
     // add new rotation to tempCells
     tempCells.push_back(bottomLeft);
@@ -85,9 +85,9 @@ vector<Cell *> IBlock::getPositionOne() {
 void IBlock::clockwise() {
     vector<Cell *> newRotation;
     if (rotation == 0 || rotation == 2) { // same rotation for positions 0 and 2
-        try{
+        try {
             newRotation = getPositionOne();
-        } catch(...) {
+        } catch (...) {
             return;
         }
         if (isValidMove(newRotation)) {
@@ -98,9 +98,9 @@ void IBlock::clockwise() {
         if (bottomLeft->getRow() + 4 > 10) {
             return; // can't rotate
         }
-        try{
+        try {
             newRotation = getPositionZero();
-        } catch(...) {
+        } catch (...) {
             return;
         }
         if (isValidMove(newRotation)) {
@@ -121,11 +121,11 @@ void IBlock::left() {
         return; // can't move left
     }
     vector<Cell *> newMovement;
-    int curX, curY;
+    int curRow, curCol;
     for (int i = 0; i < blockCells.size(); i++) {
-        curX = blockCells[i]->getRow();
-        curY = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curX][curY-1]);
+        curRow = blockCells[i]->getRow();
+        curCol = blockCells[i]->getCol();
+        newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
     replaceCells(newMovement, "I");
 }
@@ -135,11 +135,11 @@ void IBlock::right() {
         return; // can't move right
     }
     vector<Cell *> newMovement;
-    int curX, curY;
+    int curRow, curCol;
     for (int i = 0; i < blockCells.size(); i++) {
-        curX = blockCells[i]->getRow();
-        curY = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curX][curY+1]);
+        curRow = blockCells[i]->getRow();
+        curCol = blockCells[i]->getCol();
+        newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
     replaceCells(newMovement, "I");
 }
@@ -149,11 +149,11 @@ bool IBlock::down() {
         return false; // can't move down, at bottom row
     }
     vector<Cell *> newMovement;
-    int curX, curY;
+    int curRow, curCol;
     for (int i = 0; i < blockCells.size(); i++) {
-        curX = blockCells[i]->getRow();
-        curY = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curX+1][curY]);
+        curRow = blockCells[i]->getRow();
+        curCol = blockCells[i]->getCol();
+        newMovement.push_back(blockGrid[curRow+1][curCol]);
     }
     return replaceCells(newMovement, "I");
 }
@@ -162,7 +162,6 @@ void IBlock::drop() {
     while (down() == true) {
         continue;
     }
-    // tell board that I am unmovable
 }
 
 IBlock::~IBlock() {
