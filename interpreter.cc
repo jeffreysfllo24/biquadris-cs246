@@ -33,8 +33,20 @@ Interpreter::Interpreter(Biquadris * biquadris):
 void Interpreter::interpretCommand(std::string command) {
     Interpreter::Command chosenCommand = noCommand;
 
-    //char multiplier = command[0];
-    //while (multiplier >)
+    string multiplierString;
+    for (int i = 0; i < command.length(); i++) { // remove multiplier number from command
+        char currChar = command[i];
+        if (currChar >= '0' && currChar <= '9') {
+            multiplierString += currChar;
+        } else {
+            command = command.substr(i, command.length() - i);
+            cout << command;
+            break;
+        }
+    }
+    // Multiplier is taken from input if numbers were inputted and 0 otherwise
+    int multiplier = multiplierString.length() > 0 ? stoi(multiplierString) : 1;
+
 
     for (auto & x : commandMap) { // look for command in the commandMap
         if (command == x.first) {
@@ -44,23 +56,35 @@ void Interpreter::interpretCommand(std::string command) {
 
     switch (chosenCommand) {
         case Interpreter::left:
-            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->left();
+            for (int i = 0; i < multiplier; i++) {
+                biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->left();
+            }
             break;
         case Interpreter::right:
-            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->right();
+            for (int i = 0; i < multiplier; i++) {
+                biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->right();
+            }
             break;
         case Interpreter::down:
-            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->down();
+            for (int i = 0; i < multiplier; i++) {
+                biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->down();
+            }
             break;
         case Interpreter::clockwise:
-            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->clockwise();
+            for (int i = 0; i < multiplier; i++) {
+                biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->clockwise();
+            }
             break;
         case Interpreter::counterclockwise:
-            biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->counterclockwise();
+            for (int i = 0; i < multiplier; i++) {
+                biquadris->getCurrentPlayer()->getBoard().getCurrentBlock()->counterclockwise();
+            }
             break;
         case Interpreter::drop:
-            biquadris->getCurrentPlayer()->getBoard().dropBlock();
-            biquadris->switchPlayers();
+            for (int i = 0; i < multiplier; i++) {
+                biquadris->getCurrentPlayer()->getBoard().dropBlock();
+                biquadris->switchPlayers();
+            }
             break;
         case Interpreter::levelup:
             break;

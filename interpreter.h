@@ -13,6 +13,7 @@ private:
         random, sequence, I, J, L, O, S, T, Z, restart };
     std::map<std::string, Interpreter::Command> commandMap;
     Biquadris * biquadris;
+
 public:
     Interpreter(Biquadris *);
     void interpretCommand(std::string);
