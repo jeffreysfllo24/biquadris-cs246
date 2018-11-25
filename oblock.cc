@@ -8,6 +8,9 @@ void OBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
     blockGrid = grid;
     // create pointers to cells in the block
+    if(didLose()){
+        throw runtime_error("Game Over");
+    }
     bottomLeft->setLetter("O");
     Cell * firstCell = blockGrid[3][1];
     firstCell->setLetter("O");
@@ -20,6 +23,13 @@ void OBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     blockCells.push_back(firstCell);
     blockCells.push_back(secondCell);
     blockCells.push_back(thirdCell);
+}
+
+bool OBlock::didLose(){
+    if(bottomLeft->isFilled() || blockGrid[3][1]->isFilled() || blockGrid[2][0]->isFilled() || blockGrid[2][1]->isFilled()){
+        return true;
+    }
+    return false;
 }
 
 string OBlock::getType() const {

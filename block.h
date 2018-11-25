@@ -28,6 +28,7 @@ class Block {
         virtual void right() = 0;
         virtual bool down() = 0;
         virtual void drop() = 0;
+        virtual bool didLose() = 0;
         virtual ~Block();
 };
 

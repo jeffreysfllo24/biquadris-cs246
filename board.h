@@ -15,7 +15,7 @@ class Board{
         bool isRowFull(int);
         void clearRow(int);
         bool isAlive();
-        void dropBlock(Block *);    //Game calls board->dropBlock(block) to PLACE block
+        void dropBlock();    //Game calls board->dropBlock() to PLACE block
         Block * getCurrentBlock();
         std::string getLine(int);
         void copyRow(int firstRow,int secondRow);  //Copy contents of firstRow into secondRow

@@ -1,5 +1,7 @@
 #include "level.h"
 #include "iblock.h"
+#include "oblock.h"
+#include "tblock.h"
 
 Block * Level::createSpecificBlock(char blockChar) {
 //    if (sequence[index] == 'I') {

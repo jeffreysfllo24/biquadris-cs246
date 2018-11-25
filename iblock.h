@@ -30,6 +30,7 @@ class IBlock : public Block {
         void right() override;
         bool down() override;
         void drop() override;
+        bool didLose() override;
         ~IBlock() override;
 };
 

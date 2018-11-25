@@ -5,6 +5,8 @@
 
 #include "level0.h"
 #include "iblock.h"
+#include "oblock.h"
+#include "tblock.h"
 
 using namespace std;
 
@@ -48,4 +50,5 @@ Block * Level0::generateBlock() {
 
 char Level0::nextBlock() {
     return sequence[index];
+//    return 'O';
 }
