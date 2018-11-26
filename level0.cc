@@ -10,45 +10,41 @@
 
 using namespace std;
 
-Level0::Level0(string & filename): // Add each letter from input file to a vector
+Level0::Level0(bool isPlayerOne, char nextBlock, bool providedBlock): // Add each letter from input file to a vector
     index{0} {
-    ifstream file{filename};
+    string sequenceFile = isPlayerOne ? "sequence1.txt" : "sequence2.txt"; // set sequence based on player
+    ifstream file{sequenceFile};
 
     string letter;
     while (file >> letter) {
         sequence.push_back(letter[0]); // Take the first index of each string to get the character
     }
+
+    if (providedBlock) { // a nextBlock was provided
+        index--; // Set index to -1 so the next iteration sets it to 0
+        this->nextBlock = nextBlock;
+
+    } else { // take from sequence
+        this->nextBlock = sequence[0];
+    }
 }
 
 Block * Level0::generateBlock() {
-     return new IBlock;
+    return new IBlock;
 
     /*
-    Block * newBlock;
-    if (sequence[index] == 'I') {
-        newBlock = new IBlock;
-    } else if (sequence[index] == 'J') {
-        newBlock = new JBlock;
-    } else if (sequence[index] == 'L') {
-        newBlock = new LBlock;
-    } else if (sequence[index] == 'O') {
-        newBlock = new OBlock;
-    } else if (sequence[index] == 'S') {
-        newBlock = new SBlock;
-    } else if (sequence[index] == 'T') {
-        newBlock = new TBlock;
-    } else  {// if (sequence[index] == 'Z')
-        newBlock = new ZBlock;
-    }
+    Block * newBlock = createSpecificBlock(nextBlock);
 
     index++;
-    if (index >= sequence.length()) {
+    if (index >= sequence.size()) {
         index = 0;
     }
+    nextBlock = sequence[index];
+
+    return newBlock;
      */
 }
 
-char Level0::nextBlock() {
-    return sequence[index];
-//    return 'O';
+char Level0::getNextBlock() {
+    return nextBlock;
 }

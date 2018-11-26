@@ -20,6 +20,8 @@ private:
     void runClockwise(int);
     void runCounterclockwise(int);
     void runDrop(int);
+    void runLevelUp(int);
+    void runLevelDown(int);
 public:
     Interpreter(Biquadris *);
     void interpretCommand(std::string);

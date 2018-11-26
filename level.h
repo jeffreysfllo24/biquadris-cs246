@@ -5,10 +5,12 @@
 class Block;
 
 class Level {
+protected:
+    char nextBlock;
 public:
     virtual Block * generateBlock() = 0;
     Block * createSpecificBlock(char);
-    virtual char nextBlock() = 0;
+    virtual char getNextBlock() = 0;
     virtual ~Level() = 0;
 };
 

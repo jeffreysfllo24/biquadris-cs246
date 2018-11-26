@@ -21,6 +21,8 @@ public:
     virtual void setOtherGame(AbstractGame *) = 0;
     virtual void createBlock() = 0;
     virtual void createSpecificBlock(char) = 0;
+    void levelUp();
+    void levelDown();
     void restart();
     Board & getBoard();
     Score & getScore();

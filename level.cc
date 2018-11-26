@@ -4,20 +4,22 @@
 #include "tblock.h"
 
 Block * Level::createSpecificBlock(char blockChar) {
-//    if (sequence[index] == 'I') {
+//    if (nextBlock == 'I') {
 //        return new IBlock;
-//    } else if (sequence[index] == 'J') {
+//    } else if (nextBlock == 'J') {
 //        return new JBlock;
-//    } else if (sequence[index] == 'L') {
+//    } else if (nextBlock == 'L') {
 //        return new LBlock;
-//    } else if (sequence[index] == 'O') {
+//    } else if (nextBlock == 'O') {
 //        return new OBlock;
-//    } else if (sequence[index] == 'S') {
+//    } else if (nextBlock == 'S') {
 //        return new SBlock;
-//    } else if (sequence[index] == 'T') {
+//    } else if (nextBlock == 'T') {
 //        return new TBlock;
-//    } else  { if (sequence[index] == 'Z')
+//    } else if (nextBlock == 'Z') {
 //        return new ZBlock;
+//    } else {
+//        return nullptr;
 //    }
     return new IBlock;
 }

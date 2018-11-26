@@ -95,6 +95,18 @@ void Interpreter::runDrop(int multiplier) {
     }
 }
 
+void Interpreter::runLevelUp(int multiplier) {
+    for (int i = 0; i < multiplier; i++) {
+        biquadris->getCurrentPlayer()->levelUp();
+    }
+}
+
+void Interpreter::runLevelDown(int multiplier) {
+    for (int i = 0; i < multiplier; i++) {
+        biquadris->getCurrentPlayer()->levelDown();
+    }
+}
+
 void Interpreter::interpretCommand(string command) {
     // getMultiplier returns the multiplier and modifies command to remove the numbers
     int multiplier = getMultiplier(command);
@@ -143,8 +155,10 @@ void Interpreter::interpretCommand(string command) {
             runDrop(multiplier);
             break;
         case Interpreter::levelup:
+            runLevelUp(multiplier);
             break;
         case Interpreter::leveldown:
+            runLevelDown(multiplier);
             break;
         case Interpreter::norandom: {
             string file;

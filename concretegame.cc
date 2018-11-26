@@ -8,8 +8,7 @@ using namespace std;
 ConcreteGame::ConcreteGame(bool isPlayerOne) {
     this->isPlayerOne = isPlayerOne;
     this->levelInt = 0;
-    string s = isPlayerOne ? "sequence1.txt" : "sequence2.txt"; // set sequence based on player
-    this->level = new Level0{s};
+    this->level = new Level0{isPlayerOne};
     this->otherGame = nullptr;
 }
 
