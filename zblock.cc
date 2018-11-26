@@ -1,57 +1,58 @@
-#include "iblock.h"
+#include "zblock.h"
 
 using namespace std;
 
-IBlock::IBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{4} {}
+ZBlock::ZBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{3} {}
 
-void IBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
+void ZBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
     blockGrid = grid;
+    // create pointers to cells in the block
     if (didLose()) {
         throw runtime_error("Game Over");
     }
-    // create pointers to cells in the block
-    bottomLeft->setLetter("I");
-    Cell * firstCell = blockGrid[3][1];
-    firstCell->setLetter("I");
-    Cell * secondCell = blockGrid[3][2];
-    secondCell->setLetter("I");
-    Cell * thirdCell = blockGrid[3][3];
-    thirdCell->setLetter("I");
+    Cell * zeroCell = blockGrid[3][1];
+    zeroCell->setLetter("Z");
+    Cell * firstCell = blockGrid[3][2];
+    firstCell->setLetter("Z");
+    Cell * secondCell = blockGrid[2][0];
+    secondCell->setLetter("Z");
+    Cell * thirdCell = blockGrid[2][1];
+    thirdCell->setLetter("Z");
     // add to vector
-    blockCells.push_back(bottomLeft);
+    blockCells.push_back(zeroCell);
     blockCells.push_back(firstCell);
     blockCells.push_back(secondCell);
     blockCells.push_back(thirdCell);
 }
 
-bool IBlock::didLose(){
-    if (bottomLeft->isFilled() || blockGrid[3][1]->isFilled() || blockGrid[3][2]->isFilled() || blockGrid[3][3]->isFilled()) {
+bool ZBlock::didLose() {
+    if (blockGrid[3][1]->isFilled() || blockGrid[3][2]->isFilled() || blockGrid[2][0]->isFilled() || blockGrid[2][1]->isFilled()) {
         return true;
     }
     return false;
 }
 
-string IBlock::getType() const {
-    return "I";
+string ZBlock::getType() const {
+    return "Z";
 }
 
-vector<Cell *> IBlock::getCells() const {
+vector<Cell *> ZBlock::getCells() const {
     return blockCells;
 }
 
-Cell * IBlock::getBottomLeft() const {
+Cell * ZBlock::getBottomLeft() const {
     return bottomLeft;
 }
 
-bool IBlock::isValidMove(vector<Cell *> newBlockCells) const {
+bool ZBlock::isValidMove(vector<Cell *> newBlockCells) const {
     for (int i = 0; i < blockCells.size(); i++) {
         blockCells[i]->setLetter(""); // temporarily set old block cells to empty letter
     }
     for (int i = 0; i < newBlockCells.size(); i++) {
         if (newBlockCells[i]->isFilled()) { // check if cell is already occupied by another block
             for (int i = 0; i < blockCells.size(); i++) {
-                blockCells[i]->setLetter("I"); // temporarily set old block cells to empty letter
+                blockCells[i]->setLetter("Z"); // temporarily set old block cells to empty letter
             }
             return false;
         }
@@ -59,12 +60,18 @@ bool IBlock::isValidMove(vector<Cell *> newBlockCells) const {
     return true; // newBlockCells does not overlap any existing blocks
 }
 
-bool IBlock::replaceCells(vector<Cell *> cells, string letter) {
+bool ZBlock::replaceCells(vector<Cell *> cells, string letter) {
     if (isValidMove(cells)) {
         for (int i = 0; i < blockCells.size(); i++) {
             cells[i]->setLetter(letter);
         }
-        bottomLeft = cells[0]; // set bottomLeft
+        if (rotation == 0 || rotation == 2) {
+            int firstRow = cells[0]->getRow();
+            int firstCol = cells[0]->getCol();
+            bottomLeft = blockGrid[firstRow][firstCol-1];
+        } else if (rotation == 1 || rotation == 3) {
+            bottomLeft = cells[0];
+        }
         blockCells.clear(); // remove all past cells from vector
         blockCells = cells; // reassign vector to new cells
         return true;
@@ -72,31 +79,31 @@ bool IBlock::replaceCells(vector<Cell *> cells, string letter) {
     return false;
 }
 
-vector<Cell *> IBlock::getPositionZero() {
+vector<Cell *> ZBlock::getPositionZero() {
     int bottomLeftRow = bottomLeft->getRow();
     int bottomLeftCol = bottomLeft->getCol();
     vector<Cell *> tempCells;
     // add new rotation to tempCells
-    tempCells.push_back(bottomLeft);
     tempCells.push_back(blockGrid[bottomLeftRow][bottomLeftCol+1]);
     tempCells.push_back(blockGrid[bottomLeftRow][bottomLeftCol+2]);
-    tempCells.push_back(blockGrid[bottomLeftRow][bottomLeftCol+3]);
+    tempCells.push_back(blockGrid[bottomLeftRow-1][bottomLeftCol]);
+    tempCells.push_back(blockGrid[bottomLeftRow-1][bottomLeftCol+1]);
     return tempCells;
 }
 
-vector<Cell *> IBlock::getPositionOne() {
+vector<Cell *> ZBlock::getPositionOne() {
     int bottomLeftRow = bottomLeft->getRow();
     int bottomLeftCol = bottomLeft->getCol();
     vector<Cell *> tempCells;
     // add new rotation to tempCells
     tempCells.push_back(bottomLeft);
     tempCells.push_back(blockGrid[bottomLeftRow-1][bottomLeftCol]);
-    tempCells.push_back(blockGrid[bottomLeftRow-2][bottomLeftCol]);
-    tempCells.push_back(blockGrid[bottomLeftRow-3][bottomLeftCol]);
+    tempCells.push_back(blockGrid[bottomLeftRow-1][bottomLeftCol+1]);
+    tempCells.push_back(blockGrid[bottomLeftRow-2][bottomLeftCol+1]);
     return tempCells;
 }
 
-void IBlock::clockwise() {
+void ZBlock::clockwise() {
     vector<Cell *> newRotation;
     if (rotation == 0 || rotation == 2) { // same rotation for positions 0 and 2
         try {
@@ -105,11 +112,11 @@ void IBlock::clockwise() {
             return;
         }
         if (isValidMove(newRotation)) {
-            maxWidth = 1;
+            maxWidth = 2;
             rotation++;
         }
     } else if (rotation == 1 || rotation == 3) { // same rotation for positions 1 and 3
-        if (bottomLeft->getRow() + 4 > 10) {
+        if (bottomLeft->getRow() + 3 > 10) {
             return; // can't rotate
         }
         try {
@@ -118,19 +125,19 @@ void IBlock::clockwise() {
             return;
         }
         if (isValidMove(newRotation)) {
-            maxWidth = 4;
+            maxWidth = 3;
             if (rotation == 1) rotation++;
             else rotation = 0;
         }
     }
-    replaceCells(newRotation, "I");
+    replaceCells(newRotation, "Z");
 }
 
-void IBlock::counterclockwise() {
+void ZBlock::counterclockwise() {
     clockwise();
 }
 
-void IBlock::left() {
+void ZBlock::left() {
     if (bottomLeft->getCol() == 0) {
         return; // can't move left
     }
@@ -141,10 +148,10 @@ void IBlock::left() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
-    replaceCells(newMovement, "I");
+    replaceCells(newMovement, "Z");
 }
 
-void IBlock::right() {
+void ZBlock::right() {
     if (bottomLeft->getCol() + maxWidth > 10) {
         return; // can't move right
     }
@@ -155,10 +162,10 @@ void IBlock::right() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
-    replaceCells(newMovement, "I");
+    replaceCells(newMovement, "Z");
 }
 
-bool IBlock::down() {
+bool ZBlock::down() {
     if (bottomLeft->getRow() == 17) {
         return false; // can't move down, at bottom row
     }
@@ -169,16 +176,16 @@ bool IBlock::down() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow+1][curCol]);
     }
-    return replaceCells(newMovement, "I");
+    return replaceCells(newMovement, "Z");
 }
 
-void IBlock::drop() {
+void ZBlock::drop() {
     while (down() == true) {
         continue;
     }
 }
 
-IBlock::~IBlock() {
+ZBlock::~ZBlock() {
     bottomLeft = nullptr;
     blockCells.clear();
 }

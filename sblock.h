@@ -1,9 +1,9 @@
-#ifndef tblock_hpp
-#define tblock_hpp
+#ifndef sblock_hpp
+#define sblock_hpp
 
 #include "block.h"
 
-class TBlock : public Block {
+class SBlock : public Block {
     Cell * bottomLeft;
     std::vector<Cell *> blockCells;
     std::vector<std::vector<Cell *>> blockGrid;
@@ -18,11 +18,9 @@ class TBlock : public Block {
     int maxWidth;
     std::vector<Cell *> getPositionZero();
     std::vector<Cell *> getPositionOne();
-    std::vector<Cell *> getPositionTwo();
-    std::vector<Cell *> getPositionThree();
     
     public:
-        TBlock();
+        SBlock();
         void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
         std::vector<Cell *> getCells() const override;
@@ -34,7 +32,7 @@ class TBlock : public Block {
         bool down() override;
         void drop() override;
         bool didLose() override;
-        ~TBlock() override;
+        ~SBlock() override;
 };
 
 #endif
