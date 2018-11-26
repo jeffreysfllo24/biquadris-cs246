@@ -1,10 +1,11 @@
 #include "board.h"
 #include <string>
+#include <cmath>
 using namespace std;
 
 const int width = 11;
 const int height = 18;
-Board::Board() : block{nullptr}{
+Board::Board() : block{nullptr},level(0){
     init();
 }
 
@@ -37,10 +38,9 @@ bool Board::isRowFull(int row){
     return true;
 }
 
-//Delete if not used
 void Board::clearRow(int row){
     for(int j = 0; j < width; ++j){
-        delete theGrid[row][j];
+        theGrid[row][j]->setLetter("");
     }
 }
 
@@ -53,13 +53,30 @@ bool Board::isAlive(){
     return true;
 }
 
-void Board::dropBlock(){
+int Board::dropBlock(){    //Called from abstract game
+    int numLines = 0;
+    int scoredPoints = 0;
     block->drop();
+    blockList.push_back(block);
+    
     int blockRow = block->getBottomLeft()->getRow();
     while(isRowFull(blockRow)){
-        for(int i = blockRow; i > 2; --i){
+        numLines += 1;  //Increment number of lines
+        copyRow(blockRow - 1, blockRow);
+        scoredPoints += updateBlockList();
+        for(int i = blockRow - 1; i > 2; --i){
             copyRow(i - 1, i);
         }
+    }
+    
+    //Make sure the dropped block doesn't get deleted
+    block = nullptr;
+    
+    if (numLines > 0){
+        scoredPoints += pow(numLines + level,2);
+        return scoredPoints;
+    }else{
+        return 0;
     }
 }
 
@@ -85,12 +102,23 @@ Block * Board::getCurrentBlock(){
 
 void Board::copyRow(int firstRow,int secondRow){
     for(int j = 0; j < width;++j){
+        //Copies data of first row into second row
         theGrid[secondRow][j]->copyData(theGrid[firstRow][j]);
     }
+    clearRow(firstRow);
+}
+
+int Board::updateBlockList(){
+    int scoredPoints = 0;
+    for ( auto &i : blockList ) {
+        scoredPoints += i->updateBlock();
+    }
+    return scoredPoints;
 }
 
 void Board::createBlock(Block * other){
     if(block){
+        //Used when we want to replace the current undropped block
         delete block;
     }
     block = other;

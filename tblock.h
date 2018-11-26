@@ -7,7 +7,7 @@ class TBlock : public Block {
     Cell * bottomLeft;
     std::vector<Cell *> blockCells;
     std::vector<std::vector<Cell *>> blockGrid;
-
+    int level;
     // movement
     bool isBottom;
     bool isValidMove(std::vector<Cell *>) const override;
@@ -26,6 +26,7 @@ class TBlock : public Block {
         void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
         Cell * getBottomLeft() const override;
+        std::vector<Cell *> getBlockCells() const override;
         void clockwise() override;
         void counterclockwise() override;
         void left() override;

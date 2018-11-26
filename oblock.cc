@@ -2,7 +2,7 @@
 
 using namespace std;
 
-OBlock::OBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{2} {}
+OBlock::OBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{2},level(0) {}
 
 void OBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
@@ -38,6 +38,10 @@ string OBlock::getType() const {
 
 Cell * OBlock::getBottomLeft() const {
     return bottomLeft;
+}
+
+vector<Cell *> OBlock::getBlockCells() const{
+    return blockCells;
 }
 
 bool OBlock::isValidMove(vector<Cell *> newBlockCells) const {

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-TBlock::TBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{3} {}
+TBlock::TBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{3},level(0) {}
 
 void TBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
@@ -39,6 +39,10 @@ string TBlock::getType() const {
 
 Cell * TBlock::getBottomLeft() const {
     return bottomLeft;
+}
+
+vector<Cell *> TBlock::getBlockCells() const{
+    return blockCells;
 }
 
 bool TBlock::isValidMove(vector<Cell *> newBlockCells) const {

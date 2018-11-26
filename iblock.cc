@@ -2,7 +2,7 @@
 
 using namespace std;
 
-IBlock::IBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{4} {}
+IBlock::IBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{4},level(0) {}
 
 void IBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
@@ -38,6 +38,10 @@ string IBlock::getType() const {
 
 Cell * IBlock::getBottomLeft() const {
     return bottomLeft;
+}
+
+vector<Cell *> IBlock::getBlockCells() const{
+    return blockCells;
 }
 
 bool IBlock::isValidMove(vector<Cell *> newBlockCells) const {

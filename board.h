@@ -9,13 +9,17 @@
 class Board{
     Block *block;
     std::vector<std::vector<Cell *>> theGrid;
+    int level;  //TODO: Change level integer based on command interpreter
+    std::vector<Block *> blockList;
+    
     public:
         Board();
+        int updateBlockList(); //Checks if any blocks have been fully deleted
         void clearBoard();
         bool isRowFull(int);
         void clearRow(int);
         bool isAlive();
-        void dropBlock();    //Game calls board->dropBlock() to PLACE block
+        int dropBlock();    //Abstract game calls board->drop and returns the score if any rows cleared
         Block * getCurrentBlock();
         std::string getLine(int);
         void copyRow(int firstRow,int secondRow);  //Copy contents of firstRow into secondRow

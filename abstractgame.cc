@@ -73,5 +73,10 @@ char AbstractGame::getNextBlock() {
     return level->getNextBlock();
 }
 
+void AbstractGame::dropBlock(){
+    int pointsScored = board.dropBlock(); //Called from interpreter
+    score.addScore(pointsScored);
+}
+
 AbstractGame::~AbstractGame() = default;
 
