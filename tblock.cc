@@ -37,15 +37,11 @@ string TBlock::getType() const {
     return "T";
 }
 
-vector<Cell *> TBlock::getCells() const {
-    return blockCells;
-}
-
 Cell * TBlock::getBottomLeft() const {
     return bottomLeft;
 }
 
-vector<Cell *> TBlock::getBlockCells() const{
+vector<Cell *> TBlock::getBlockCells() const {
     return blockCells;
 }
 

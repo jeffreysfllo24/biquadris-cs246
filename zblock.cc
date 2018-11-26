@@ -37,12 +37,12 @@ string ZBlock::getType() const {
     return "Z";
 }
 
-vector<Cell *> ZBlock::getCells() const {
-    return blockCells;
-}
-
 Cell * ZBlock::getBottomLeft() const {
     return bottomLeft;
+}
+
+vector<Cell *> ZBlock::getBlockCells() const {
+    return blockCells;
 }
 
 bool ZBlock::isValidMove(vector<Cell *> newBlockCells) const {

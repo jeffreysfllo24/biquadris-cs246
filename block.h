@@ -21,7 +21,6 @@ class Block {
     public:
         virtual void init(Cell *, std::vector<std::vector<Cell *>>) = 0;
         virtual std::string getType() const = 0;
-        virtual std::vector<Cell *> getCells() const = 0;
         virtual Cell * getBottomLeft() const = 0;
         virtual std::vector<Cell *> getBlockCells() const = 0;
         virtual void clockwise() = 0;

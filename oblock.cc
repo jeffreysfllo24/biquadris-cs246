@@ -36,15 +36,11 @@ string OBlock::getType() const {
     return "O";
 }
 
-vector<Cell *> OBlock::getCells() const {
-    return blockCells;
-}
-
 Cell * OBlock::getBottomLeft() const {
     return bottomLeft;
 }
 
-vector<Cell *> OBlock::getBlockCells() const{
+vector<Cell *> OBlock::getBlockCells() const {
     return blockCells;
 }
 

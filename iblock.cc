@@ -36,15 +36,11 @@ string IBlock::getType() const {
     return "I";
 }
 
-vector<Cell *> IBlock::getCells() const {
-    return blockCells;
-}
-
 Cell * IBlock::getBottomLeft() const {
     return bottomLeft;
 }
 
-vector<Cell *> IBlock::getBlockCells() const{
+vector<Cell *> IBlock::getBlockCells() const {
     return blockCells;
 }
 

@@ -23,8 +23,8 @@ class ZBlock : public Block {
         ZBlock();
         void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
-        std::vector<Cell *> getCells() const override;
         Cell * getBottomLeft() const override;
+            std::vector<Cell *> getBlockCells() const override;
         void clockwise() override;
         void counterclockwise() override;
         void left() override;

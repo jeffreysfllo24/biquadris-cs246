@@ -36,12 +36,12 @@ string SBlock::getType() const {
     return "S";
 }
 
-vector<Cell *> SBlock::getCells() const {
-    return blockCells;
-}
-
 Cell * SBlock::getBottomLeft() const {
     return bottomLeft;
+}
+
+vector<Cell *> SBlock::getBlockCells() const {
+    return blockCells;
 }
 
 bool SBlock::isValidMove(vector<Cell *> newBlockCells) const {

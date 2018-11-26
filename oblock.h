@@ -21,7 +21,6 @@ class OBlock : public Block {
         OBlock();
         void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
-        std::vector<Cell *> getCells() const override;
         Cell * getBottomLeft() const override;
         std::vector<Cell *> getBlockCells() const override;
         void clockwise() override;
