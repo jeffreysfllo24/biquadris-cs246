@@ -7,7 +7,7 @@ TBlock::TBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{3
 void TBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
     blockGrid = grid;
-    if(didLose()){
+    if (didLose()) {
         throw runtime_error("Game Over");
     }
     // create pointers to cells in the block
@@ -27,7 +27,7 @@ void TBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
 }
 
 bool TBlock::didLose(){
-    if(bottomLeft->isFilled() || blockGrid[3][1]->isFilled() || blockGrid[2][0]->isFilled() || blockGrid[2][1]->isFilled() || blockGrid[2][2]->isFilled()){
+    if (blockGrid[3][1]->isFilled() || blockGrid[2][0]->isFilled() || blockGrid[2][1]->isFilled() || blockGrid[2][2]->isFilled()) {
         return true;
     }
     return false;
@@ -35,6 +35,10 @@ bool TBlock::didLose(){
 
 string TBlock::getType() const {
     return "T";
+}
+
+vector<Cell *> TBlock::getCells() const {
+    return blockCells;
 }
 
 Cell * TBlock::getBottomLeft() const {

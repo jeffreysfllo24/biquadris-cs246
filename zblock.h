@@ -1,13 +1,13 @@
-#ifndef tblock_hpp
-#define tblock_hpp
+#ifndef zblock_hpp
+#define zblock_hpp
 
 #include "block.h"
 
-class TBlock : public Block {
+class ZBlock : public Block {
     Cell * bottomLeft;
     std::vector<Cell *> blockCells;
     std::vector<std::vector<Cell *>> blockGrid;
-    int level;
+
     // movement
     bool isBottom;
     bool isValidMove(std::vector<Cell *>) const override;
@@ -18,16 +18,13 @@ class TBlock : public Block {
     int maxWidth;
     std::vector<Cell *> getPositionZero();
     std::vector<Cell *> getPositionOne();
-    std::vector<Cell *> getPositionTwo();
-    std::vector<Cell *> getPositionThree();
     
     public:
-        TBlock();
+        ZBlock();
         void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
         std::vector<Cell *> getCells() const override;
         Cell * getBottomLeft() const override;
-        std::vector<Cell *> getBlockCells() const override;
         void clockwise() override;
         void counterclockwise() override;
         void left() override;
@@ -35,7 +32,7 @@ class TBlock : public Block {
         bool down() override;
         void drop() override;
         bool didLose() override;
-        ~TBlock() override;
+        ~ZBlock() override;
 };
 
 #endif
