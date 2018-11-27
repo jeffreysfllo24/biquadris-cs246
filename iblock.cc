@@ -102,7 +102,7 @@ vector<Cell *> IBlock::getPositionOne() {
     return tempCells;
 }
 
-void IBlock::clockwise() {
+void IBlock::clockwise(int dropAmount) {
     vector<Cell *> newRotation;
     if (rotation == 0 || rotation == 2) { // same rotation for positions 0 and 2
         try {
@@ -113,6 +113,7 @@ void IBlock::clockwise() {
         if (isValidMove(newRotation)) {
             maxWidth = 1;
             rotation++;
+            down(dropAmount);
         }
     } else if (rotation == 1 || rotation == 3) { // same rotation for positions 1 and 3
         if (bottomLeft->getRow() + 4 > 10) {
@@ -129,14 +130,14 @@ void IBlock::clockwise() {
             else rotation = 0;
         }
     }
-    replaceCells(newRotation, "I");
+    if (replaceCells(newRotation, "I")) down(dropAmount);
 }
 
-void IBlock::counterclockwise() {
-    clockwise();
+void IBlock::counterclockwise(int dropAmount) {
+    clockwise(dropAmount);
 }
 
-void IBlock::left() {
+void IBlock::left(int dropAmount) {
     if (bottomLeft->getCol() == 0) {
         return; // can't move left
     }
@@ -147,10 +148,10 @@ void IBlock::left() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
-    replaceCells(newMovement, "I");
+    if (replaceCells(newMovement, "I")) down(dropAmount);
 }
 
-void IBlock::right() {
+void IBlock::right(int dropAmount) {
     if (bottomLeft->getCol() + maxWidth > 10) {
         return; // can't move right
     }
@@ -161,21 +162,25 @@ void IBlock::right() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
-    replaceCells(newMovement, "I");
+    if (replaceCells(newMovement, "I")) down(dropAmount);
 }
 
-bool IBlock::down() {
-    if (bottomLeft->getRow() == 17) {
-        return false; // can't move down, at bottom row
+bool IBlock::down(int dropAmount) {
+    for (int i = 0; i < dropAmount; i++) {
+        if (bottomLeft->getRow() == 17) {
+            return false; // can't move down, at bottom row
+        }
+        vector<Cell *> newMovement;
+        int curRow, curCol;
+        for (int i = 0; i < blockCells.size(); i++) {
+            curRow = blockCells[i]->getRow();
+            curCol = blockCells[i]->getCol();
+            newMovement.push_back(blockGrid[curRow+1][curCol]);
+        }
+        if (replaceCells(newMovement, "I")) continue;
+        else return false;
     }
-    vector<Cell *> newMovement;
-    int curRow, curCol;
-    for (int i = 0; i < blockCells.size(); i++) {
-        curRow = blockCells[i]->getRow();
-        curCol = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curRow+1][curCol]);
-    }
-    return replaceCells(newMovement, "I");
+    return true;
 }
 
 void IBlock::drop() {

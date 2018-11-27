@@ -110,7 +110,7 @@ vector<Cell *> ZBlock::getPositionOne() {
     return tempCells;
 }
 
-void ZBlock::clockwise() {
+void ZBlock::clockwise(int dropAmount) {
     vector<Cell *> newRotation;
     if (rotation == 0 || rotation == 2) { // same rotation for positions 0 and 2
         try {
@@ -137,14 +137,14 @@ void ZBlock::clockwise() {
             else rotation = 0;
         }
     }
-    replaceCells(newRotation, "Z");
+    if (replaceCells(newRotation, "Z")) down(dropAmount);
 }
 
-void ZBlock::counterclockwise() {
-    clockwise();
+void ZBlock::counterclockwise(int dropAmount) {
+    clockwise(dropAmount);
 }
 
-void ZBlock::left() {
+void ZBlock::left(int dropAmount) {
     if (bottomLeft->getCol() == 0) {
         return; // can't move left
     }
@@ -155,10 +155,10 @@ void ZBlock::left() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
-    replaceCells(newMovement, "Z");
+    if (replaceCells(newMovement, "Z")) down(dropAmount);
 }
 
-void ZBlock::right() {
+void ZBlock::right(int dropAmount) {
     if (bottomLeft->getCol() + maxWidth > 10) {
         return; // can't move right
     }
@@ -169,21 +169,25 @@ void ZBlock::right() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
-    replaceCells(newMovement, "Z");
+    if (replaceCells(newMovement, "Z")) down(dropAmount);
 }
 
-bool ZBlock::down() {
-    if (bottomLeft->getRow() == 17) {
-        return false; // can't move down, at bottom row
+bool ZBlock::down(int dropAmount) {
+    for (int i = 0; i < dropAmount; i++) {
+        if (bottomLeft->getRow() == 17) {
+            return false; // can't move down, at bottom row
+        }
+        vector<Cell *> newMovement;
+        int curRow, curCol;
+        for (int i = 0; i < blockCells.size(); i++) {
+            curRow = blockCells[i]->getRow();
+            curCol = blockCells[i]->getCol();
+            newMovement.push_back(blockGrid[curRow+1][curCol]);
+        }
+        if (replaceCells(newMovement, "Z")) continue;
+        else return false;
     }
-    vector<Cell *> newMovement;
-    int curRow, curCol;
-    for (int i = 0; i < blockCells.size(); i++) {
-        curRow = blockCells[i]->getRow();
-        curCol = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curRow+1][curCol]);
-    }
-    return replaceCells(newMovement, "Z");
+    return true;
 }
 
 void ZBlock::drop() {

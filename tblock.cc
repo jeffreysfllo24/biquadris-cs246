@@ -134,7 +134,7 @@ vector<Cell *> TBlock::getPositionThree() {
     return tempCells;
 }
 
-void TBlock::clockwise() {
+void TBlock::clockwise(int dropAmount) {
     vector<Cell *> newRotation;
     if (rotation == 0) {
         try {
@@ -183,10 +183,10 @@ void TBlock::clockwise() {
             rotation = 0;
         }
     }
-    replaceCells(newRotation, "T");
+    if (replaceCells(newRotation, "T")) down(dropAmount);
 }
 
-void TBlock::counterclockwise() {
+void TBlock::counterclockwise(int dropAmount) {
     vector<Cell *> newRotation;
     if (rotation == 0) {
         try {
@@ -235,10 +235,10 @@ void TBlock::counterclockwise() {
             rotation--;
         }
     }
-    replaceCells(newRotation, "T");
+    if (replaceCells(newRotation, "T")) down(dropAmount);
 }
 
-void TBlock::left() {
+void TBlock::left(int dropAmount) {
     if (bottomLeft->getCol() == 0) {
         return; // can't move left
     }
@@ -249,10 +249,10 @@ void TBlock::left() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
-    replaceCells(newMovement, "T");
+    if (replaceCells(newMovement, "T")) down(dropAmount);
 }
 
-void TBlock::right() {
+void TBlock::right(int dropAmount) {
     if (bottomLeft->getCol() + maxWidth > 10) {
         return; // can't move right
     }
@@ -263,21 +263,25 @@ void TBlock::right() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
-    replaceCells(newMovement, "T");
+    if (replaceCells(newMovement, "T")) down(dropAmount);
 }
 
-bool TBlock::down() {
-    if (bottomLeft->getRow() == 17) {
-        return false; // can't move down, at bottom row
+bool TBlock::down(int dropAmount) {
+    for (int i = 0; i < dropAmount; i++) {
+        if (bottomLeft->getRow() == 17) {
+            return false; // can't move down, at bottom row
+        }
+        vector<Cell *> newMovement;
+        int curRow, curCol;
+        for (int i = 0; i < blockCells.size(); i++) {
+            curRow = blockCells[i]->getRow();
+            curCol = blockCells[i]->getCol();
+            newMovement.push_back(blockGrid[curRow+1][curCol]);
+        }
+        if (replaceCells(newMovement, "T")) continue;
+        else return false;
     }
-    vector<Cell *> newMovement;
-    int curRow, curCol;
-    for (int i = 0; i < blockCells.size(); i++) {
-        curRow = blockCells[i]->getRow();
-        curCol = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curRow+1][curCol]);
-    }
-    return replaceCells(newMovement, "T");
+    return true;
 }
 
 void TBlock::drop() {

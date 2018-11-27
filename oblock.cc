@@ -78,15 +78,17 @@ bool OBlock::replaceCells(vector<Cell *> cells, string letter) {
     return false;
 }
 
-void OBlock::clockwise() {
-    // do nothing, rotation results in exact same position
+void OBlock::clockwise(int dropAmount) {
+    // rotation results in exact same position
+    down(dropAmount);
 }
 
-void OBlock::counterclockwise() {
-    // do nothing
+void OBlock::counterclockwise(int dropAmount) {
+    // rotation results in exact same position
+    down(dropAmount);
 }
 
-void OBlock::left() {
+void OBlock::left(int dropAmount) {
     if (bottomLeft->getCol() == 0) {
         return; // can't move left
     }
@@ -97,10 +99,10 @@ void OBlock::left() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
-    replaceCells(newMovement, "O");
+    if (replaceCells(newMovement, "O")) down(dropAmount);
 }
 
-void OBlock::right() {
+void OBlock::right(int dropAmount) {
     if (bottomLeft->getCol() + maxWidth > 10) {
         return; // can't move right
     }
@@ -111,21 +113,25 @@ void OBlock::right() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
-    replaceCells(newMovement, "O");
+    if (replaceCells(newMovement, "O")) down(dropAmount);
 }
 
-bool OBlock::down() {
-    if (bottomLeft->getRow() == 17) {
-        return false; // can't move down, at bottom row
+bool OBlock::down(int dropAmount) {
+    for (int i = 0; i < dropAmount; i++) {
+        if (bottomLeft->getRow() == 17) {
+            return false; // can't move down, at bottom row
+        }
+        vector<Cell *> newMovement;
+        int curRow, curCol;
+        for (int i = 0; i < blockCells.size(); i++) {
+            curRow = blockCells[i]->getRow();
+            curCol = blockCells[i]->getCol();
+            newMovement.push_back(blockGrid[curRow+1][curCol]);
+        }
+        if (replaceCells(newMovement, "O")) continue;
+        else return false;
     }
-    vector<Cell *> newMovement;
-    int curRow, curCol;
-    for (int i = 0; i < blockCells.size(); i++) {
-        curRow = blockCells[i]->getRow();
-        curCol = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curRow+1][curCol]);
-    }
-    return replaceCells(newMovement, "O");
+    return true;
 }
 
 void OBlock::drop() {
