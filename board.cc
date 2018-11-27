@@ -134,4 +134,7 @@ void Board::createBlock(Block * other){
     block->init(theGrid[3][0], theGrid);
 }
 
+void Board::setLevel(int newLevel){
+    level = newLevel;
+}
 

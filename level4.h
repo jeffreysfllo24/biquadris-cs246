@@ -6,6 +6,7 @@
 class Level4 : public Level {
     char generateRandom();
 public:
+    Block * createSpecificBlock(char) override;
     Level4(char = ' ', bool = false);
     Block * generateBlock() override;
 };

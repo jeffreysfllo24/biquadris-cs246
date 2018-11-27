@@ -2,12 +2,12 @@
 
 using namespace std;
 
-LBlock::LBlock(){
+LBlock::LBlock(int levelVal){
     this->bottomLeft = nullptr;
     this->isBottom = false;
     this->rotation = 0;
     this->maxWidth = 3;
-    this->level = 0;
+    this->level = levelVal;
 }
 
 void LBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
@@ -290,5 +290,8 @@ void LBlock::drop() {
 
 LBlock::~LBlock() {
     bottomLeft = nullptr;
+    for(int i = 0; i < blockCells.size();++i){
+        blockCells[i]->setLetter("");
+    }
     blockCells.clear();
 }

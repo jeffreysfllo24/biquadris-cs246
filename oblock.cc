@@ -2,12 +2,12 @@
 
 using namespace std;
 
-OBlock::OBlock(){
+OBlock::OBlock(int levelVal){
     this->bottomLeft = nullptr;
     this->isBottom = false;
     this->rotation = 0;
     this->maxWidth = 2;
-    this->level = 0;
+    this->level = levelVal;
 }
 
 void OBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
@@ -142,5 +142,8 @@ void OBlock::drop() {
 
 OBlock::~OBlock() {
     bottomLeft = nullptr;
+    for(int i = 0; i < blockCells.size();++i){
+        blockCells[i]->setLetter("");
+    }
     blockCells.clear();
 }

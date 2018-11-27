@@ -3,12 +3,12 @@
 
 using namespace std;
 
-ZBlock::ZBlock(){
+ZBlock::ZBlock(int levelVal){
      this->bottomLeft = nullptr;
      this->isBottom = false;
      this->rotation = 0;
      this->maxWidth = 3;
-    this->level = 0;
+     this->level = levelVal;
 }
 
 void ZBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
@@ -198,5 +198,8 @@ void ZBlock::drop() {
 
 ZBlock::~ZBlock() {
     bottomLeft = nullptr;
+    for(int i = 0; i < blockCells.size();++i){
+        blockCells[i]->setLetter("");
+    }
     blockCells.clear();
 }

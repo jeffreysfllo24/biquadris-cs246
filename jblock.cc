@@ -2,12 +2,12 @@
 
 using namespace std;
 
-JBlock::JBlock(){
+JBlock::JBlock(int levelVal){
     this->bottomLeft = nullptr;
     this->isBottom = false;
     this->rotation = 0;
     this->maxWidth = 3;
-    this->level = 0;
+    this->level = levelVal;
 }
 
 void JBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
@@ -290,5 +290,8 @@ void JBlock::drop() {
 
 JBlock::~JBlock() {
     bottomLeft = nullptr;
+    for(int i = 0; i < blockCells.size();++i){
+        blockCells[i]->setLetter("");
+    }
     blockCells.clear();
 }

@@ -11,7 +11,7 @@ class IBlock : public Block {
     bool isValidMove(std::vector<Cell *>) const override;
     bool replaceCells(std::vector<Cell *>, std::string) override;
     public:
-        IBlock();
+        IBlock(int levelVal = 0);
         void init(Cell *, std::vector<std::vector<Cell *>>) override;
         std::string getType() const override;
         Cell * getBottomLeft() const override;

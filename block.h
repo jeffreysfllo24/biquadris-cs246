@@ -32,8 +32,8 @@ class Block {
         virtual void drop() = 0;
         virtual bool didLose() = 0;
         int updateBlock();
+        void setLevel(int);
         virtual ~Block();
-    
 };
 
 #endif /* block_hpp */
