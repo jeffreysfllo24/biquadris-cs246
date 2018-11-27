@@ -2,7 +2,13 @@
 
 using namespace std;
 
-JBlock::JBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{3} {}
+JBlock::JBlock(){
+    this->bottomLeft = nullptr;
+    this->isBottom = false;
+    this->rotation = 0;
+    this->maxWidth = 3;
+    this->level = 0;
+}
 
 void JBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;

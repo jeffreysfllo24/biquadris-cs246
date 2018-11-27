@@ -2,7 +2,13 @@
 
 using namespace std;
 
-IBlock::IBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{4},level(0) {}
+IBlock::IBlock(){
+    this->bottomLeft = nullptr;
+    this->isBottom = false;
+    this->rotation = 0;
+    this->maxWidth = 4;
+    this->level = 0;
+}
 
 void IBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;

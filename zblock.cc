@@ -1,8 +1,15 @@
 #include "zblock.h"
+#include "block.h"
 
 using namespace std;
 
-ZBlock::ZBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{3} {}
+ZBlock::ZBlock(){
+     this->bottomLeft = nullptr;
+     this->isBottom = false;
+     this->rotation = 0;
+     this->maxWidth = 3;
+    this->level = 0;
+}
 
 void ZBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;

@@ -6,17 +6,18 @@
 #include "cell.h"
 
 class Block {
-    Cell * bottomLeft; // pointer to the bottom left cell
-    std::vector<Cell *> blockCells; // vector of all cells inside block
-    int level; //The Level that the block was generated in 
-    // movement
-    bool isBottom;
-    virtual bool isValidMove(std::vector<Cell *>) const = 0;
-    virtual bool replaceCells(std::vector<Cell *>, std::string) = 0;
+    protected:
+        Cell * bottomLeft; // pointer to the bottom left cell
+        std::vector<Cell *> blockCells; // vector of all cells inside block
+        int level; //The Level that the block was generated in
+        // movement
+        bool isBottom;
+        virtual bool isValidMove(std::vector<Cell *>) const = 0;
+        virtual bool replaceCells(std::vector<Cell *>, std::string) = 0;
 
-    // rotation
-    int rotation;
-    int maxWidth; // width of the next rotation
+        // rotation
+        int rotation;
+        int maxWidth; // width of the next rotation
     
     public:
         virtual void init(Cell *, std::vector<std::vector<Cell *>>) = 0;

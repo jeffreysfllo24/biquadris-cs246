@@ -110,8 +110,13 @@ void Board::copyRow(int firstRow,int secondRow){
 
 int Board::updateBlockList(){
     int scoredPoints = 0;
-    for ( auto &i : blockList ) {
-        scoredPoints += i->updateBlock();
+    for(int i = 0; i < blockList.size();++i ) {
+        int blockScore = blockList[i]->updateBlock();
+        if(blockScore > 0){
+            blockList.erase(blockList.begin()+i);
+            i -= 1;
+        }
+        scoredPoints += blockScore;
     }
     return scoredPoints;
 }

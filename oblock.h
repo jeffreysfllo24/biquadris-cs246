@@ -4,19 +4,12 @@
 #include "block.h"
 
 class OBlock : public Block {
-    Cell * bottomLeft;
-    std::vector<Cell *> blockCells;
     std::vector<std::vector<Cell *>> blockGrid;
-    int level;
-    // movement
-    bool isBottom;
-    bool isValidMove(std::vector<Cell *>) const override;
-    bool replaceCells(std::vector<Cell *>, std::string letter) override;
-
     // rotation
-    int rotation;
-    int maxWidth;
-    
+    std::vector<Cell *> getPositionZero();
+    std::vector<Cell *> getPositionOne();
+    bool isValidMove(std::vector<Cell *>) const override;
+    bool replaceCells(std::vector<Cell *>, std::string) override;
     public:
         OBlock();
         void init(Cell *, std::vector<std::vector<Cell *>>) override;

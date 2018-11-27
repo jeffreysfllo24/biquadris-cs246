@@ -2,7 +2,13 @@
 
 using namespace std;
 
-OBlock::OBlock() : bottomLeft{nullptr}, isBottom{false}, rotation{0}, maxWidth{2},level(0) {}
+OBlock::OBlock(){
+    this->bottomLeft = nullptr;
+    this->isBottom = false;
+    this->rotation = 0;
+    this->maxWidth = 2;
+    this->level = 0;
+}
 
 void OBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;

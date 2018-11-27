@@ -90,7 +90,7 @@ void Interpreter::runDrop(int multiplier) {
             return;
         }
         // Get board every time to use other board
-        biquadris->getCurrentPlayer()->getBoard().dropBlock();
+        biquadris->getCurrentPlayer()->dropBlock();
         biquadris->switchPlayers();
     }
 }

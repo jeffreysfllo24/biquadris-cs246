@@ -4,23 +4,14 @@
 #include "block.h"
 
 class LBlock : public Block {
-    Cell * bottomLeft;
-    std::vector<Cell *> blockCells;
     std::vector<std::vector<Cell *>> blockGrid;
-
-    // movement
-    bool isBottom;
-    bool isValidMove(std::vector<Cell *>) const override;
-    bool replaceCells(std::vector<Cell *>, std::string letter) override;
-
     // rotation
-    int rotation;
-    int maxWidth;
     std::vector<Cell *> getPositionZero();
     std::vector<Cell *> getPositionOne();
     std::vector<Cell *> getPositionTwo();
     std::vector<Cell *> getPositionThree();
-    
+    bool isValidMove(std::vector<Cell *>) const override;
+    bool replaceCells(std::vector<Cell *>, std::string) override;
     public:
         LBlock();
         void init(Cell *, std::vector<std::vector<Cell *>>) override;

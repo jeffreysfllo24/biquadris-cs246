@@ -6,15 +6,14 @@ Block::~Block() {}
 
 int Block::updateBlock(){
     int score = 0;
-    int count = 0;
-    for( auto &cell : blockCells){
-        if(!cell->isFilled()){  //Remove cell from block if it is deleted
-            blockCells.erase(blockCells.begin() + count);
-        }else{
-            count += 1;
+    for(int i = 0; i < blockCells.size();i++){
+        //Remove cell from block if it is deleted
+        if(!(blockCells[i]->isFilled())){
+            blockCells.erase(blockCells.begin() + i);
+            i -= 1;
         }
     }
-    if(blockCells.empty()){
+    if(blockCells.size() == 0){
         score += pow(level + 1,2);
     }
     return score;
