@@ -1,12 +1,8 @@
 #include <cstdlib>
-
-#include <string>
 #include <fstream>
+#include <string>
 
 #include "level0.h"
-#include "iblock.h"
-#include "oblock.h"
-#include "tblock.h"
 
 using namespace std;
 
@@ -30,9 +26,7 @@ Level0::Level0(bool isPlayerOne, char nextBlock, bool providedBlock): // Add eac
 }
 
 Block * Level0::generateBlock() {
-    return new IBlock;
 
-    /*
     Block * newBlock = createSpecificBlock(nextBlock);
 
     index++;
@@ -42,9 +36,4 @@ Block * Level0::generateBlock() {
     nextBlock = sequence[index];
 
     return newBlock;
-     */
-}
-
-char Level0::getNextBlock() {
-    return nextBlock;
 }

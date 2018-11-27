@@ -2,6 +2,9 @@
 #include "level.h"
 #include "level0.h"
 #include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 void AbstractGame::levelUp() {
     if (levelInt == 4) {
@@ -9,6 +12,7 @@ void AbstractGame::levelUp() {
     }
 
     levelInt++;
+    // TODO update level stored in board
     char nextBlock = level->getNextBlock();
     switch (levelInt) {
         case 1:
@@ -16,10 +20,16 @@ void AbstractGame::levelUp() {
             level = new Level1{nextBlock, true};
             break;
         case 2:
+            delete level;
+            level = new Level2{nextBlock, true};
             break;
         case 3:
+            delete level;
+            level = new Level3{nextBlock, true};
             break;
         case 4:
+            delete level;
+            level = new Level4{nextBlock, true};
             break;
         default:
             break;
@@ -32,6 +42,7 @@ void AbstractGame::levelDown() {
     }
 
     levelInt--;
+    // TODO update level stored in board
     char nextBlock = level->getNextBlock();
     switch (levelInt) {
         case 0:
@@ -43,8 +54,12 @@ void AbstractGame::levelDown() {
             level = new Level1{nextBlock, true};
             break;
         case 2:
+            delete level;
+            level = new Level2{nextBlock, true};
             break;
         case 3:
+            delete level;
+            level = new Level3{nextBlock, true};
             break;
         default:
             break;
@@ -54,7 +69,9 @@ void AbstractGame::levelDown() {
 void AbstractGame::restart() {
     board.clearBoard();
     score.resetScore();
-    // TODO reset level sequence?
+
+    delete level; // TODO currently restarting resets level to 0
+    level = new Level0{isPlayerOne};
 }
 
 Board & AbstractGame::getBoard() {

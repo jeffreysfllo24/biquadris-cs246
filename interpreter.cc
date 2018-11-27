@@ -127,8 +127,7 @@ void Interpreter::interpretCommand(string command) {
 
     if (biquadris->getIsGameOver()) { // If in game over state, the only allowed action is restart
         if (chosenCommand == restart) {
-            biquadris->getFirstPlayer()->restart();
-            biquadris->getSecondPlayer()->restart();
+            biquadris->restart();
         } else {
             cout << "invalid command, game over";
             return;
@@ -198,6 +197,7 @@ void Interpreter::interpretCommand(string command) {
             biquadris->getCurrentPlayer()->createSpecificBlock('Z');
             break;
         case Interpreter::restart:
+            biquadris->restart();
             break;
         default:
             cerr << "bad command" << endl;

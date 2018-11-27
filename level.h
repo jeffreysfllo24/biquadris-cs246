@@ -10,7 +10,7 @@ protected:
 public:
     virtual Block * generateBlock() = 0;
     Block * createSpecificBlock(char);
-    virtual char getNextBlock() = 0;
+    char getNextBlock();
     virtual ~Level() = 0;
 };
 

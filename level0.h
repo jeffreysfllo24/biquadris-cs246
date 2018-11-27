@@ -12,7 +12,6 @@ class Level0 : public Level {
 public:
     Level0(bool, char = ' ', bool = false);
     Block * generateBlock() override;
-    char getNextBlock() override;
 };
 
 #endif //LEVEL0_H

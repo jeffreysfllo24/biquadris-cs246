@@ -20,6 +20,7 @@ public:
     Biquadris();
     void run();
     void switchPlayers();
+    void restart();
     bool getIsGameOver();
     AbstractGame * getCurrentPlayer();
     AbstractGame *getFirstPlayer();

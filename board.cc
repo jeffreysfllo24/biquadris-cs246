@@ -26,7 +26,11 @@ void Board::clearBoard(){
             delete theGrid[i][j];   //Delete the cell pointers in the grid
         }
     }
+    theGrid.clear();
     delete block;   //Delete the block pointer in the grid
+    block = nullptr;
+
+    init();
 }
 
 bool Board::isRowFull(int row){

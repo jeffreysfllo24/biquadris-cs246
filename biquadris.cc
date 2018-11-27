@@ -37,7 +37,18 @@ void Biquadris::switchPlayers() {
     } catch (runtime_error & err) {
         cerr << err.what() << endl;
         isGameOver = true;
+    }
 }
+
+void Biquadris::restart() {
+    playerOne->restart(); // reset boards
+    playerTwo->restart();
+    isPlayerOnePlaying = true; // player one begins
+
+    playerOne->createBlock(); // create first blocks
+    playerTwo->createBlock();
+
+    isGameOver = false; // allow play again
 }
 
 bool Biquadris::getIsGameOver() {

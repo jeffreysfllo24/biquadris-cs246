@@ -1,28 +1,28 @@
 #include <cstdlib>
 
-#include "level1.h"
+#include "level2.h"
 
-char Level1::generateRandom() {
-    int r = rand() % 12;
+char Level2::generateRandom() {
+    int r = rand() % 7;
 
-    if (r < 2) {
+    if (r < 1) {
         return 'I';
-    } else if (r < 4) {
+    } else if (r < 2) {
         return 'J';
-    } else if (r < 6) {
+    } else if (r < 3) {
         return 'L';
-    } else if (r < 8) {
+    } else if (r < 4) {
         return 'O';
-    } else if (r < 9) {
+    } else if (r < 5) {
         return 'S';
-    } else if (r < 11) {
+    } else if (r < 6) {
         return 'T';
-    } else { // if (r < 12) {
+    } else { // if (r < 7) {
         return 'Z';
     }
 }
 
-Level1::Level1(char nextBlock, bool providedBlock) {
+Level2::Level2(char nextBlock, bool providedBlock) {
     if (providedBlock) {
         this->nextBlock = nextBlock;
     } else {
@@ -30,7 +30,7 @@ Level1::Level1(char nextBlock, bool providedBlock) {
     }
 }
 
-Block * Level1::generateBlock() {
+Block * Level2::generateBlock() {
     Block * newBlock = createSpecificBlock(nextBlock);
 
     nextBlock = generateRandom();
