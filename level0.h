@@ -10,7 +10,6 @@ class Level0 : public Level {
     int index;
     std::vector<char> sequence;
 public:
-    Block * createSpecificBlock(char) override;
     Level0(bool, char = ' ', bool = false);
     Block * generateBlock() override;
 };

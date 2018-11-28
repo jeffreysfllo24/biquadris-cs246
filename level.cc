@@ -8,29 +8,26 @@
 #include "zblock.h"
 using namespace std;
 
-//Block * Level::createSpecificBlock(char blockChar) {
-//    if (blockChar == 'I') {
-//        return new IBlock;
-//    } else if (blockChar == 'J') {
-//        return new JBlock;
-//    } else if (blockChar == 'L') {
-//        return new LBlock;
-//    } else if (blockChar == 'O') {
-//        return new OBlock;
-//    } else if (blockChar == 'S') {
-//        return new SBlock;
-//    } else if (blockChar == 'T') {
-//        return new TBlock;
-//    } else if (blockChar == 'Z') {
-//        return new ZBlock;
-//    } else {
-//        return nullptr;
-//    }
-//}
-
-char Level::getNextBlock() {
-    return nextBlock;
+Block * Level::createSpecificBlock(char blockChar, int level) {
+    if (blockChar == 'I') {
+        return new IBlock{level};
+    } else if (blockChar == 'J') {
+        return new JBlock{level};
+    } else if (blockChar == 'L') {
+        return new LBlock{level};
+    } else if (blockChar == 'O') {
+        return new OBlock{level};
+    } else if (blockChar == 'S') {
+        return new SBlock{level};
+    } else if (blockChar == 'T') {
+        return new TBlock{level};
+    } else if (blockChar == 'Z') {
+        return new ZBlock{level};
+    } else {
+        return nullptr;
+    }
 }
+
 
 void Level::norandom(std::string) {
     // empty implementation
@@ -38,6 +35,10 @@ void Level::norandom(std::string) {
 
 void Level::random() {
     // empty implementation
+}
+
+char Level::getNextBlock() {
+    return nextBlock;
 }
 
 Level::~Level() = default;

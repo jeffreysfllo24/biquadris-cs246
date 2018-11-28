@@ -37,29 +37,9 @@ Level2::Level2(char nextBlock, bool providedBlock) {
 }
 
 Block * Level2::generateBlock() {
-    Block * newBlock = createSpecificBlock(nextBlock);
+    Block * newBlock = createSpecificBlock(nextBlock, 2);
 
     nextBlock = generateRandom();
 
     return newBlock;
-}
-
-Block * Level2::createSpecificBlock(char blockChar) {
-    if (blockChar == 'I') {
-        return new IBlock(2);
-    } else if (blockChar == 'J') {
-        return new JBlock(2);
-    } else if (blockChar == 'L') {
-        return new LBlock(2);
-    } else if (blockChar == 'O') {
-        return new OBlock(2);
-    } else if (blockChar == 'S') {
-        return new SBlock(2);
-    } else if (blockChar == 'T') {
-        return new TBlock(2);
-    } else if (blockChar == 'Z') {
-        return new ZBlock(2);
-    } else {
-        return nullptr;
-    }
 }

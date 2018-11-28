@@ -10,11 +10,11 @@ class Level {
 protected:
     char nextBlock;
 public:
+    Block * createSpecificBlock(char, int);
     virtual Block * generateBlock() = 0;
-    virtual Block * createSpecificBlock(char) = 0;
-    char getNextBlock();
     virtual void norandom(std::string);
     virtual void random();
+    char getNextBlock();
     virtual ~Level() = 0;
 };
 

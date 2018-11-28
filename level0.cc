@@ -1,14 +1,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <string>
+
 #include "level0.h"
-#include "iblock.h"
-#include "jblock.h"
-#include "lblock.h"
-#include "oblock.h"
-#include "sblock.h"
-#include "tblock.h"
-#include "zblock.h"
 
 using namespace std;
 
@@ -33,7 +27,7 @@ Level0::Level0(bool isPlayerOne, char nextBlock, bool providedBlock): // Add eac
 
 Block * Level0::generateBlock() {
 
-    Block * newBlock = createSpecificBlock(nextBlock);
+    Block * newBlock = createSpecificBlock(nextBlock, 0);
 
     index++;
     if (index >= sequence.size()) {
@@ -42,24 +36,4 @@ Block * Level0::generateBlock() {
     nextBlock = sequence[index];
 
     return newBlock;
-}
-
-Block * Level0::createSpecificBlock(char blockChar) {
-    if (blockChar == 'I') {
-        return new IBlock(0);
-    } else if (blockChar == 'J') {
-        return new JBlock(0);
-    } else if (blockChar == 'L') {
-        return new LBlock(0);
-    } else if (blockChar == 'O') {
-        return new OBlock(0);
-    } else if (blockChar == 'S') {
-        return new SBlock(0);
-    } else if (blockChar == 'T') {
-        return new TBlock(0);
-    } else if (blockChar == 'Z') {
-        return new ZBlock(0);
-    } else {
-        return nullptr;
-    }
 }
