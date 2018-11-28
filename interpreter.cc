@@ -1,6 +1,7 @@
 #include <string>
 #include <stdlib.h>
 #include <iostream>
+#include <fstream>
 
 #include "interpreter.h"
 #include "biquadris.h"
@@ -129,7 +130,7 @@ void Interpreter::interpretCommand(string command) {
         if (chosenCommand == restart) {
             biquadris->restart();
         } else {
-            cout << "invalid command, game over";
+            cout << "invalid command, game over" << endl;
             return;
         }
     }
@@ -160,18 +161,24 @@ void Interpreter::interpretCommand(string command) {
             runLevelDown(multiplier);
             break;
         case Interpreter::norandom: {
-            string file;
-            if (cin >> file) {
-                // do something with file
+            string filename;
+            if (cin >> filename) {
+                biquadris->getCurrentPlayer()->norandom(filename);
             }
             break;
         }
         case Interpreter::random:
+            biquadris->getCurrentPlayer()->random();
             break;
         case Interpreter::sequence: {
-            string file;
-            if (cin >> file) {
-                // do something with file
+            string filename;
+            if (cin >> filename) {
+                ifstream file{filename};
+
+                string fileCommand;
+                while (file >> fileCommand) {
+                    interpretCommand(fileCommand);
+                }
             }
             break;
         }
@@ -204,7 +211,5 @@ void Interpreter::interpretCommand(string command) {
             break;
     }
 
-    // TODO: allow for "autocomplete" commands
-    // TODO: allow for repeated commands
     // TODO: extension for renaming commands
 }

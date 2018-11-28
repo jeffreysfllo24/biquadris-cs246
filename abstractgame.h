@@ -24,9 +24,11 @@ public:
     void levelUp();
     void levelDown();
     void restart();
+    void norandom(std::string);
+    void random();
+    void dropBlock();
     Board & getBoard();
     Score & getScore();
-    void dropBlock();
     char getNextBlock();
     int getLevel();
     virtual ~AbstractGame() = 0;

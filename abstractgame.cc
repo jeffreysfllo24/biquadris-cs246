@@ -6,6 +6,8 @@
 #include "level3.h"
 #include "level4.h"
 
+using namespace std;
+
 void AbstractGame::levelUp() {
     if (levelInt == 4) {
         return;
@@ -74,6 +76,19 @@ void AbstractGame::restart() {
     level = new Level0{isPlayerOne};
 }
 
+void AbstractGame::norandom(string filename) {
+    level->norandom(filename);
+}
+
+void AbstractGame::random() {
+    level->random();
+}
+
+void AbstractGame::dropBlock(){ // called from interpreter
+    int pointsScored = board.dropBlock();
+    score.addScore(pointsScored);
+}
+
 Board & AbstractGame::getBoard() {
     return board;
 }
@@ -88,11 +103,6 @@ int AbstractGame::getLevel(){
 
 char AbstractGame::getNextBlock() {
     return level->getNextBlock();
-}
-
-void AbstractGame::dropBlock(){
-    int pointsScored = board.dropBlock(); //Called from interpreter
-    score.addScore(pointsScored);
 }
 
 AbstractGame::~AbstractGame() = default;

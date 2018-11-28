@@ -31,4 +31,12 @@ char Level::getNextBlock() {
     return nextBlock;
 }
 
+void Level::norandom(std::string) {
+    // empty implementation
+}
+
+void Level::random() {
+    // empty implementation
+}
+
 Level::~Level() = default;

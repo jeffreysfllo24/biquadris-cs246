@@ -1,6 +1,10 @@
 #include <cstdlib>
+#include <fstream>
+#include <string>
 
 #include "level3.h"
+
+using namespace std;
 
 char Level3::generateRandom() {
     int r = rand() % 9;
@@ -22,7 +26,7 @@ char Level3::generateRandom() {
     }
 }
 
-Level3::Level3(char nextBlock, bool providedBlock) {
+Level3::Level3(char nextBlock, bool providedBlock): useSequence{false} {
     if (providedBlock) {
         this->nextBlock = nextBlock;
     } else {
@@ -33,7 +37,32 @@ Level3::Level3(char nextBlock, bool providedBlock) {
 Block * Level3::generateBlock() {
     Block * newBlock = createSpecificBlock(nextBlock);
 
-    nextBlock = generateRandom();
+    if (useSequence) {
+        index++;
+        if (index >= sequence.size()) {
+            index = 0;
+        }
+        nextBlock = sequence[index];
+    } else {
+        nextBlock = generateRandom();
+    }
 
     return newBlock;
+}
+
+void Level3::norandom(string filename) {
+    useSequence = true;
+
+    ifstream file{filename};
+
+    string letter;
+    while (file >> letter) {
+        sequence.push_back(letter[0]); // Take the first index of each string to get the character
+    }
+}
+
+void Level3::random() {
+    useSequence = false;
+    index = 0;
+    sequence.clear();
 }
