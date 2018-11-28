@@ -3,6 +3,13 @@
 #include <string>
 
 #include "level4.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "sblock.h"
+#include "tblock.h"
+#include "zblock.h"
 
 using namespace std;
 
@@ -65,4 +72,23 @@ void Level4::random() {
     useSequence = false;
     index = 0;
     sequence.clear();
+}
+Block * Level4::createSpecificBlock(char blockChar) {
+    if (blockChar == 'I') {
+        return new IBlock(4);
+    } else if (blockChar == 'J') {
+        return new JBlock(4);
+    } else if (blockChar == 'L') {
+        return new LBlock(4);
+    } else if (blockChar == 'O') {
+        return new OBlock(4);
+    } else if (blockChar == 'S') {
+        return new SBlock(4);
+    } else if (blockChar == 'T') {
+        return new TBlock(4);
+    } else if (blockChar == 'Z') {
+        return new ZBlock(4);
+    } else {
+        return nullptr;
+    }
 }

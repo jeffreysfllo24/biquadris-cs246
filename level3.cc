@@ -3,6 +3,13 @@
 #include <string>
 
 #include "level3.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "sblock.h"
+#include "tblock.h"
+#include "zblock.h"
 
 using namespace std;
 
@@ -66,3 +73,24 @@ void Level3::random() {
     index = 0;
     sequence.clear();
 }
+
+Block * Level3::createSpecificBlock(char blockChar) {
+    if (blockChar == 'I') {
+        return new IBlock(3);
+    } else if (blockChar == 'J') {
+        return new JBlock(3);
+    } else if (blockChar == 'L') {
+        return new LBlock(3);
+    } else if (blockChar == 'O') {
+        return new OBlock(3);
+    } else if (blockChar == 'S') {
+        return new SBlock(3);
+    } else if (blockChar == 'T') {
+        return new TBlock(3);
+    } else if (blockChar == 'Z') {
+        return new ZBlock(3);
+    } else {
+        return nullptr;
+    }
+}
+

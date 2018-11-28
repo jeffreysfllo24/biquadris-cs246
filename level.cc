@@ -6,26 +6,27 @@
 #include "sblock.h"
 #include "tblock.h"
 #include "zblock.h"
+using namespace std;
 
-Block * Level::createSpecificBlock(char blockChar) {
-    if (nextBlock == 'I') {
-        return new IBlock;
-    } else if (nextBlock == 'J') {
-        return new JBlock;
-    } else if (nextBlock == 'L') {
-        return new LBlock;
-    } else if (nextBlock == 'O') {
-        return new OBlock;
-    } else if (nextBlock == 'S') {
-        return new SBlock;
-    } else if (nextBlock == 'T') {
-        return new TBlock;
-    } else if (nextBlock == 'Z') {
-        return new ZBlock;
-    } else {
-        return nullptr;
-    }
-}
+//Block * Level::createSpecificBlock(char blockChar) {
+//    if (blockChar == 'I') {
+//        return new IBlock;
+//    } else if (blockChar == 'J') {
+//        return new JBlock;
+//    } else if (blockChar == 'L') {
+//        return new LBlock;
+//    } else if (blockChar == 'O') {
+//        return new OBlock;
+//    } else if (blockChar == 'S') {
+//        return new SBlock;
+//    } else if (blockChar == 'T') {
+//        return new TBlock;
+//    } else if (blockChar == 'Z') {
+//        return new ZBlock;
+//    } else {
+//        return nullptr;
+//    }
+//}
 
 char Level::getNextBlock() {
     return nextBlock;

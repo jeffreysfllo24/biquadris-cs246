@@ -14,7 +14,7 @@ void AbstractGame::levelUp() {
     }
 
     levelInt++;
-    // TODO update level stored in board
+    board.setLevel(levelInt);
     char nextBlock = level->getNextBlock();
     switch (levelInt) {
         case 1:
@@ -44,7 +44,7 @@ void AbstractGame::levelDown() {
     }
 
     levelInt--;
-    // TODO update level stored in board
+     board.setLevel(levelInt);
     char nextBlock = level->getNextBlock();
     switch (levelInt) {
         case 0:
@@ -72,7 +72,7 @@ void AbstractGame::restart() {
     board.clearBoard();
     score.resetScore();
 
-    delete level; // TODO currently restarting resets level to 0
+    delete level;
     level = new Level0{isPlayerOne};
 }
 

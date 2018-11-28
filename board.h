@@ -11,7 +11,6 @@ class Board{
     std::vector<std::vector<Cell *>> theGrid;
     int level;  //TODO: Change level integer based on command interpreter
     std::vector<Block *> blockList;
-    
     public:
         Board();
         int updateBlockList(); //Checks if any blocks have been fully deleted
@@ -25,6 +24,7 @@ class Board{
         void copyRow(int firstRow,int secondRow);  //Copy contents of firstRow into secondRow
         ~Board();
         void init();
+        void setLevel(int); //Setter for integer 
         void createBlock(Block *);
 };
 

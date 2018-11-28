@@ -2,12 +2,12 @@
 
 using namespace std;
 
-JBlock::JBlock(){
+JBlock::JBlock(int levelVal){
     this->bottomLeft = nullptr;
     this->isBottom = false;
     this->rotation = 0;
     this->maxWidth = 3;
-    this->level = 0;
+    this->level = levelVal;
 }
 
 void JBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
@@ -132,7 +132,7 @@ vector<Cell *> JBlock::getPositionThree() {
     return tempCells;
 }
 
-void JBlock::clockwise() {
+void JBlock::clockwise(int dropAmount) {
     vector<Cell *> newRotation;
     if (rotation == 0) {
         try {
@@ -181,10 +181,10 @@ void JBlock::clockwise() {
             rotation = 0;
         }
     }
-    replaceCells(newRotation, "J");
+    if (replaceCells(newRotation, "J")) down(dropAmount);
 }
 
-void JBlock::counterclockwise() {
+void JBlock::counterclockwise(int dropAmount) {
     vector<Cell *> newRotation;
     if (rotation == 0) {
         try {
@@ -233,10 +233,10 @@ void JBlock::counterclockwise() {
             rotation--;
         }
     }
-    replaceCells(newRotation, "J");
+    if(replaceCells(newRotation, "J")) down(dropAmount);
 }
 
-void JBlock::left() {
+void JBlock::left(int dropAmount) {
     if (bottomLeft->getCol() == 0) {
         return; // can't move left
     }
@@ -247,10 +247,10 @@ void JBlock::left() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
-    replaceCells(newMovement, "J");
+    if (replaceCells(newMovement, "J")) down(dropAmount);
 }
 
-void JBlock::right() {
+void JBlock::right(int dropAmount) {
     if (bottomLeft->getCol() + maxWidth > 10) {
         return; // can't move right
     }
@@ -261,21 +261,25 @@ void JBlock::right() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
-    replaceCells(newMovement, "J");
+    if (replaceCells(newMovement, "J")) down(dropAmount);
 }
 
-bool JBlock::down() {
-    if (bottomLeft->getRow() == 17) {
-        return false; // can't move down, at bottom row
+bool JBlock::down(int dropAmount) {
+    for (int i = 0; i < dropAmount; i++) {
+        if (bottomLeft->getRow() == 17) {
+            return false; // can't move down, at bottom row
+        }
+        vector<Cell *> newMovement;
+        int curRow, curCol;
+        for (int i = 0; i < blockCells.size(); i++) {
+            curRow = blockCells[i]->getRow();
+            curCol = blockCells[i]->getCol();
+            newMovement.push_back(blockGrid[curRow+1][curCol]);
+        }
+        if (replaceCells(newMovement, "J")) continue;
+        else return false;
     }
-    vector<Cell *> newMovement;
-    int curRow, curCol;
-    for (int i = 0; i < blockCells.size(); i++) {
-        curRow = blockCells[i]->getRow();
-        curCol = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curRow+1][curCol]);
-    }
-    return replaceCells(newMovement, "J");
+    return true;
 }
 
 void JBlock::drop() {
@@ -286,5 +290,8 @@ void JBlock::drop() {
 
 JBlock::~JBlock() {
     bottomLeft = nullptr;
+    for(int i = 0; i < blockCells.size();++i){
+        blockCells[i]->setLetter("");
+    }
     blockCells.clear();
 }

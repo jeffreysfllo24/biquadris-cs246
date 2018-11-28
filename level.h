@@ -11,7 +11,7 @@ protected:
     char nextBlock;
 public:
     virtual Block * generateBlock() = 0;
-    Block * createSpecificBlock(char);
+    virtual Block * createSpecificBlock(char) = 0;
     char getNextBlock();
     virtual void norandom(std::string);
     virtual void random();

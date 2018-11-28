@@ -2,12 +2,12 @@
 
 using namespace std;
 
-SBlock::SBlock(){
+SBlock::SBlock(int levelVal){
     this->bottomLeft = nullptr;
     this->isBottom = false;
     this->rotation = 0;
     this->maxWidth = 3;
-    this->level = 0;
+    this->level = levelVal;
 }
 
 void SBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
@@ -108,7 +108,7 @@ vector<Cell *> SBlock::getPositionOne() {
     return tempCells;
 }
 
-void SBlock::clockwise() {
+void SBlock::clockwise(int dropAmount) {
     vector<Cell *> newRotation;
     if (rotation == 0 || rotation == 2) { // same rotation for positions 0 and 2
         try {
@@ -135,14 +135,14 @@ void SBlock::clockwise() {
             else rotation = 0;
         }
     }
-    replaceCells(newRotation, "S");
+    if (replaceCells(newRotation, "S")) down(dropAmount);
 }
 
-void SBlock::counterclockwise() {
-    clockwise();
+void SBlock::counterclockwise(int dropAmount) {
+    clockwise(dropAmount);
 }
 
-void SBlock::left() {
+void SBlock::left(int dropAmount) {
     if (bottomLeft->getCol() == 0) {
         return; // can't move left
     }
@@ -153,10 +153,10 @@ void SBlock::left() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol-1]);
     }
-    replaceCells(newMovement, "S");
+    if (replaceCells(newMovement, "S")) down(dropAmount);
 }
 
-void SBlock::right() {
+void SBlock::right(int dropAmount) {
     if (bottomLeft->getCol() + maxWidth > 10) {
         return; // can't move right
     }
@@ -167,21 +167,25 @@ void SBlock::right() {
         curCol = blockCells[i]->getCol();
         newMovement.push_back(blockGrid[curRow][curCol+1]);
     }
-    replaceCells(newMovement, "S");
+    if (replaceCells(newMovement, "S")) down(dropAmount);
 }
 
-bool SBlock::down() {
-    if (bottomLeft->getRow() == 17) {
-        return false; // can't move down, at bottom row
+bool SBlock::down(int dropAmount) {
+    for (int i = 0; i < dropAmount; i++) {
+        if (bottomLeft->getRow() == 17) {
+            return false; // can't move down, at bottom row
+        }
+        vector<Cell *> newMovement;
+        int curRow, curCol;
+        for (int i = 0; i < blockCells.size(); i++) {
+            curRow = blockCells[i]->getRow();
+            curCol = blockCells[i]->getCol();
+            newMovement.push_back(blockGrid[curRow+1][curCol]);
+        }
+        if (replaceCells(newMovement, "S")) continue;
+        else return false;
     }
-    vector<Cell *> newMovement;
-    int curRow, curCol;
-    for (int i = 0; i < blockCells.size(); i++) {
-        curRow = blockCells[i]->getRow();
-        curCol = blockCells[i]->getCol();
-        newMovement.push_back(blockGrid[curRow+1][curCol]);
-    }
-    return replaceCells(newMovement, "S");
+    return true;
 }
 
 void SBlock::drop() {
@@ -192,5 +196,8 @@ void SBlock::drop() {
 
 SBlock::~SBlock() {
     bottomLeft = nullptr;
+    for(int i = 0; i < blockCells.size();++i){
+        blockCells[i]->setLetter("");
+    }
     blockCells.clear();
 }

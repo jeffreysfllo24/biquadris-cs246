@@ -1,6 +1,12 @@
 #include <cstdlib>
-
 #include "level2.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "sblock.h"
+#include "tblock.h"
+#include "zblock.h"
 
 char Level2::generateRandom() {
     int r = rand() % 7;
@@ -36,4 +42,24 @@ Block * Level2::generateBlock() {
     nextBlock = generateRandom();
 
     return newBlock;
+}
+
+Block * Level2::createSpecificBlock(char blockChar) {
+    if (blockChar == 'I') {
+        return new IBlock(2);
+    } else if (blockChar == 'J') {
+        return new JBlock(2);
+    } else if (blockChar == 'L') {
+        return new LBlock(2);
+    } else if (blockChar == 'O') {
+        return new OBlock(2);
+    } else if (blockChar == 'S') {
+        return new SBlock(2);
+    } else if (blockChar == 'T') {
+        return new TBlock(2);
+    } else if (blockChar == 'Z') {
+        return new ZBlock(2);
+    } else {
+        return nullptr;
+    }
 }

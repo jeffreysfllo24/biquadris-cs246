@@ -18,3 +18,7 @@ int Block::updateBlock(){
     }
     return score;
 }
+
+void Block::setLevel(int newLevel){
+    level = newLevel;
+}
