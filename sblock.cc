@@ -121,7 +121,7 @@ void SBlock::clockwise(int dropAmount) {
             rotation++;
         }
     } else if (rotation == 1 || rotation == 3) { // same rotation for positions 1 and 3
-        if (bottomLeft->getRow() + 3 > 10) {
+        if (bottomLeft->getCol() + 3 > 10) {
             return; // can't rotate
         }
         try {

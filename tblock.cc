@@ -147,7 +147,7 @@ void TBlock::clockwise(int dropAmount) {
             rotation++;
         }
     } else if (rotation == 1) {
-        if (bottomLeft->getRow() + 3 > 10) {
+        if (bottomLeft->getCol() + 3 > 10) {
             return; // can't rotate
         }
         try {
@@ -170,7 +170,7 @@ void TBlock::clockwise(int dropAmount) {
             rotation++;
         }
     } else if (rotation == 3) {
-        if (bottomLeft->getRow() + 3 > 10) {
+        if (bottomLeft->getCol() + 3 > 10) {
             return; // can't rotate
         }
         try {
@@ -199,7 +199,7 @@ void TBlock::counterclockwise(int dropAmount) {
             rotation = 3;
         }
     } else if (rotation == 1) {
-        if (bottomLeft->getRow() + 3 > 10) {
+        if (bottomLeft->getCol() + 3 > 10) {
             return; // can't rotate
         }
         try {
@@ -222,7 +222,7 @@ void TBlock::counterclockwise(int dropAmount) {
             rotation--;
         }
     } else if (rotation == 3) {
-        if (bottomLeft->getRow() + 3 > 10) {
+        if (bottomLeft->getCol() + 3 > 10) {
             return; // can't rotate
         }
         try {
