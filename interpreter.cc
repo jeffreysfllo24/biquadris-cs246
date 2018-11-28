@@ -50,38 +50,51 @@ int getMultiplier(string & command) {
     }
 }
 
+int linesToDrop(int levelInt) {
+    if (levelInt == 3 || levelInt == 4) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 void Interpreter::runLeft(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
+    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->left();
+        currentBlock->left(drop);
     }
 }
 
 void Interpreter::runRight(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
+    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->right();
+        currentBlock->right(drop);
     }
 }
 
 void Interpreter::runDown(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
+    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->down();
+        currentBlock->down(drop);
     }
 }
 
 void Interpreter::runClockwise(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
+    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->clockwise();
+        currentBlock->clockwise(drop);
     }
 }
 
 void Interpreter::runCounterclockwise(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
+    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->counterclockwise();
+        currentBlock->counterclockwise(drop);
     }
 }
 

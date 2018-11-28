@@ -9,7 +9,7 @@
 class Board{
     Block *block;
     std::vector<std::vector<Cell *>> theGrid;
-    int level;  //TODO: Change level integer based on command interpreter
+    int level;
     std::vector<Block *> blockList;
     public:
         Board();
