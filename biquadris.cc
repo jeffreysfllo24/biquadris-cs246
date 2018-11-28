@@ -67,6 +67,14 @@ AbstractGame * Biquadris::getCurrentPlayer() {
     }
 }
 
+AbstractGame * Biquadris::getNonCurrentPlayer() {
+    if (isPlayerOnePlaying) {
+        return playerTwo;
+    } else {
+        return playerOne;
+    }
+}
+
 AbstractGame * Biquadris::getFirstPlayer(){
     return playerOne;
 }

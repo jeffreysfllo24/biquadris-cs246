@@ -82,9 +82,12 @@ void AbstractGame::random() {
     level->random();
 }
 
-void AbstractGame::dropBlock(){ // called from interpreter
-    int pointsScored = board.dropBlock();
+bool AbstractGame::dropBlock(){ // called from interpreter
+    bool multipleLines = false;
+    int pointsScored = board.dropBlock(multipleLines);
     score.addScore(pointsScored);
+
+    return multipleLines;
 }
 
 Board & AbstractGame::getBoard() {

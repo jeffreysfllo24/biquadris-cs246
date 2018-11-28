@@ -20,14 +20,14 @@ protected:
 public:
     virtual void setOtherGame(AbstractGame *) = 0;
     virtual void createBlock() = 0;
-    virtual void createSpecificBlock(char) = 0;
+    virtual void createSpecificBlock(char) = 0; // TODO not used?
     virtual void replaceSpecificBlock(char) = 0;
     void levelUp();
     void levelDown();
     void restart();
     void norandom(std::string);
     void random();
-    void dropBlock();
+    bool dropBlock();
     Board & getBoard();
     Score & getScore();
     int getLevel();

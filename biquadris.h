@@ -24,6 +24,7 @@ public:
     void restart();
     bool getIsGameOver();
     AbstractGame * getCurrentPlayer();
+    AbstractGame * getNonCurrentPlayer();
     AbstractGame *getFirstPlayer();
     AbstractGame *getSecondPlayer();
 };

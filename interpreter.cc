@@ -104,7 +104,29 @@ void Interpreter::runDrop(int multiplier) {
             return;
         }
         // Get board every time to use other board
-        biquadris->getCurrentPlayer()->dropBlock();
+        if (biquadris->getCurrentPlayer()->dropBlock()) { // multiple lines, prompt special action
+            cout << "Enter a special action" << endl;
+            string specialAction;
+            while (cin >> specialAction) {
+                if (specialAction == "blind") {
+                    // blind
+                    break;
+                } else if (specialAction == "heavy") {
+                    // heavy
+                    break;
+                } else if (specialAction == "force") {
+                    char blockChar;
+                    if (cin >> blockChar && (blockChar == 'I' || blockChar == 'J' || blockChar == 'L'
+                      || blockChar == 'O' || blockChar == 'S' || blockChar == 'T' || blockChar == 'Z')) {
+                        biquadris->getNonCurrentPlayer()->replaceSpecificBlock(blockChar);
+                        break;
+                    }
+                    cout << "bad letter" << endl;
+                } else {
+                    cout << "bad special action" << endl;
+                }
+            }
+        }
         biquadris->switchPlayers();
     }
 }

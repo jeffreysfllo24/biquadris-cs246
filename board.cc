@@ -57,7 +57,7 @@ bool Board::isAlive(){
     return true;
 }
 
-int Board::dropBlock(){    //Called from abstract game
+int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
     int numLines = 0;
     int scoredPoints = 0;
     currBlock->drop();
@@ -75,13 +75,17 @@ int Board::dropBlock(){    //Called from abstract game
     
     //Make sure the dropped currBlock doesn't get deleted
     currBlock = nullptr;
-    
+
     if (numLines > 0){
-        scoredPoints += pow(numLines + level,2);
+        if (numLines > 1) {
+            multipleLines = true; // update multipleLines for AbstractGame to know
+        }
+        scoredPoints += pow(numLines + level, 2);
         return scoredPoints;
     }else{
         return 0;
     }
+
 }
 
 Board::~Board(){
