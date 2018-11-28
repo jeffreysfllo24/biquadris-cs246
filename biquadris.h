@@ -16,6 +16,7 @@ class Biquadris {
     DisplayObserver * textDisplay;
     Interpreter interpreter;
     void updateDisplay();
+    void startGame();
 public:
     Biquadris();
     void run();

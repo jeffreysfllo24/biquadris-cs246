@@ -21,6 +21,7 @@ public:
     virtual void setOtherGame(AbstractGame *) = 0;
     virtual void createBlock() = 0;
     virtual void createSpecificBlock(char) = 0;
+    virtual void replaceSpecificBlock(char) = 0;
     void levelUp();
     void levelDown();
     void restart();
@@ -29,7 +30,6 @@ public:
     void dropBlock();
     Board & getBoard();
     Score & getScore();
-    char getNextBlock();
     int getLevel();
     virtual ~AbstractGame() = 0;
 };

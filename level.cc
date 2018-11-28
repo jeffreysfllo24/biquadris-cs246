@@ -37,8 +37,4 @@ void Level::random() {
     // empty implementation
 }
 
-char Level::getNextBlock() {
-    return nextBlock;
-}
-
 Level::~Level() = default;

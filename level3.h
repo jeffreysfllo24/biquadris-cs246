@@ -13,7 +13,7 @@ class Level3 : public Level {
 
     char generateRandom();
 public:
-    Level3(char = ' ', bool = false);
+    Level3();
     Block * generateBlock() override;
     void norandom(std::string) override;
     void random() override;

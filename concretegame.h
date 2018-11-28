@@ -13,6 +13,7 @@ public:
     void setOtherGame(AbstractGame *) override;
     void createBlock() override;
     void createSpecificBlock(char) override;
+    void replaceSpecificBlock(char) override;
 };
 
 #endif //CONCRETEGAME_H

@@ -28,18 +28,10 @@ char Level2::generateRandom() {
     }
 }
 
-Level2::Level2(char nextBlock, bool providedBlock) {
-    if (providedBlock) {
-        this->nextBlock = nextBlock;
-    } else {
-        this->nextBlock = generateRandom();
-    }
-}
+Level2::Level2() = default;
 
 Block * Level2::generateBlock() {
-    Block * newBlock = createSpecificBlock(nextBlock, 2);
-
-    nextBlock = generateRandom();
+    Block * newBlock = createSpecificBlock(generateRandom(), 2);
 
     return newBlock;
 }

@@ -56,7 +56,7 @@ void printBlockTop(char block) {
         cout << " SS        ";
     } else if (block == 'T') {
         cout << "TTT        ";
-    } else { // if (block == 'Z') {
+    } else { // if (currBlock == 'Z') {
         cout << "ZZ        ";
     }
 }
@@ -74,7 +74,7 @@ void printBlockBottom(char block) {
         cout << "SS         ";
     } else if (block == 'T') {
         cout << " T         ";
-    } else { // if (block == 'Z') {
+    } else { // if (currBlock == 'Z') {
         cout << " ZZ        ";
     }
 };
@@ -103,8 +103,8 @@ void TextDisplay::displayBoard() {
                 biquadris->getSecondPlayer()->getBoard());
     printDivider();
     printNext();
-    printBlocks(biquadris->getFirstPlayer()->getNextBlock(),
-                biquadris->getSecondPlayer()->getNextBlock());
+    printBlocks(biquadris->getFirstPlayer()->getBoard().getNextBlock()->getType()[0],   // get block type, convert
+                biquadris->getSecondPlayer()->getBoard().getNextBlock()->getType()[0]); // string to char
 }
 
 

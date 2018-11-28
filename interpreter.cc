@@ -196,25 +196,25 @@ void Interpreter::interpretCommand(string command) {
             break;
         }
         case Interpreter::I:
-            biquadris->getCurrentPlayer()->createSpecificBlock('I');
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('I');
             break;
         case Interpreter::J:
-            biquadris->getCurrentPlayer()->createSpecificBlock('J');
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('J');
             break;
         case Interpreter::L:
-            biquadris->getCurrentPlayer()->createSpecificBlock('L');
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('L');
             break;
         case Interpreter::O:
-            biquadris->getCurrentPlayer()->createSpecificBlock('O');
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('O');
             break;
         case Interpreter::S:
-            biquadris->getCurrentPlayer()->createSpecificBlock('S');
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('S');
             break;
         case Interpreter::T:
-            biquadris->getCurrentPlayer()->createSpecificBlock('T');
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('T');
             break;
         case Interpreter::Z:
-            biquadris->getCurrentPlayer()->createSpecificBlock('Z');
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('Z');
             break;
         case Interpreter::restart:
             biquadris->restart();

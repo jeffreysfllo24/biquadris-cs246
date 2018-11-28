@@ -22,18 +22,10 @@ char Level1::generateRandom() {
     }
 }
 
-Level1::Level1(char nextBlock, bool providedBlock) {
-    if (providedBlock) {
-        this->nextBlock = nextBlock;
-    } else {
-        this->nextBlock = generateRandom();
-    }
-}
+Level1::Level1() = default;
 
 Block * Level1::generateBlock() {
-    Block * newBlock = createSpecificBlock(nextBlock, 1);
-
-    nextBlock = generateRandom();
+    Block * newBlock = createSpecificBlock(generateRandom(), 1);
 
     return newBlock;
 }

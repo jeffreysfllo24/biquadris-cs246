@@ -25,3 +25,8 @@ void ConcreteGame::createSpecificBlock(char blockChar) {
     Block * newBlock = level->createSpecificBlock(blockChar, levelInt);
     board.createBlock(newBlock);
 }
+
+void ConcreteGame::replaceSpecificBlock(char blockChar) {
+    Block * newBlock = level->createSpecificBlock(blockChar, levelInt);
+    board.replaceBlock(newBlock);
+}

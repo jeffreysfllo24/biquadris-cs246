@@ -15,23 +15,22 @@ void AbstractGame::levelUp() {
 
     levelInt++;
     board.setLevel(levelInt);
-    char nextBlock = level->getNextBlock();
     switch (levelInt) {
         case 1:
             delete level;
-            level = new Level1{nextBlock, true};
+            level = new Level1{};
             break;
         case 2:
             delete level;
-            level = new Level2{nextBlock, true};
+            level = new Level2{};
             break;
         case 3:
             delete level;
-            level = new Level3{nextBlock, true};
+            level = new Level3{};
             break;
         case 4:
             delete level;
-            level = new Level4{nextBlock, true};
+            level = new Level4{};
             break;
         default:
             break;
@@ -44,24 +43,23 @@ void AbstractGame::levelDown() {
     }
 
     levelInt--;
-     board.setLevel(levelInt);
-    char nextBlock = level->getNextBlock();
+    board.setLevel(levelInt);
     switch (levelInt) {
         case 0:
             delete level;
-            level = new Level0{isPlayerOne, nextBlock, true};
+            level = new Level0{isPlayerOne};
             break;
         case 1:
             delete level;
-            level = new Level1{nextBlock, true};
+            level = new Level1{};
             break;
         case 2:
             delete level;
-            level = new Level2{nextBlock, true};
+            level = new Level2{};
             break;
         case 3:
             delete level;
-            level = new Level3{nextBlock, true};
+            level = new Level3{};
             break;
         default:
             break;
@@ -99,10 +97,6 @@ Score & AbstractGame::getScore(){
 
 int AbstractGame::getLevel(){
     return levelInt;
-}
-
-char AbstractGame::getNextBlock() {
-    return level->getNextBlock();
 }
 
 AbstractGame::~AbstractGame() = default;

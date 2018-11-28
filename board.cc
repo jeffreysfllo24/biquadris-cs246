@@ -5,7 +5,7 @@ using namespace std;
 
 const int width = 11;
 const int height = 18;
-Board::Board() : block{nullptr},level(0){
+Board::Board() : currBlock{nullptr},level(0){
     init();
 }
 
@@ -27,8 +27,8 @@ void Board::clearBoard(){
         }
     }
     theGrid.clear();
-    delete block;   //Delete the block pointer in the grid
-    block = nullptr;
+    delete currBlock;   //Delete the currBlock pointer in the grid
+    currBlock = nullptr;
 
     init();
 }
@@ -60,10 +60,10 @@ bool Board::isAlive(){
 int Board::dropBlock(){    //Called from abstract game
     int numLines = 0;
     int scoredPoints = 0;
-    block->drop();
-    blockList.push_back(block);
+    currBlock->drop();
+    blockList.push_back(currBlock);
     
-    int blockRow = block->getBottomLeft()->getRow();
+    int blockRow = currBlock->getBottomLeft()->getRow();
     while(isRowFull(blockRow)){
         numLines += 1;  //Increment number of lines
         copyRow(blockRow - 1, blockRow);
@@ -73,8 +73,8 @@ int Board::dropBlock(){    //Called from abstract game
         }
     }
     
-    //Make sure the dropped block doesn't get deleted
-    block = nullptr;
+    //Make sure the dropped currBlock doesn't get deleted
+    currBlock = nullptr;
     
     if (numLines > 0){
         scoredPoints += pow(numLines + level,2);
@@ -101,7 +101,11 @@ string Board::getLine(int row){
 }
 
 Block * Board::getCurrentBlock(){
-    return block;
+    return currBlock;
+}
+
+Block * Board::getNextBlock() {
+   return nextBlock;
 }
 
 void Board::copyRow(int firstRow,int secondRow){
@@ -125,16 +129,31 @@ int Board::updateBlockList(){
     return scoredPoints;
 }
 
-void Board::createBlock(Block * other){
-    if(block){
-        //Used when we want to replace the current undropped block
-        delete block;
-    }
-    block = other;
-    block->init(theGrid[3][0], theGrid);
-}
-
 void Board::setLevel(int newLevel){
     level = newLevel;
 }
+
+
+void Board::createBlock(Block * newBlock){
+    if (!nextBlock) { // The very first time, nextBlock is not initialized, so set it
+        nextBlock = newBlock;
+        return;
+    }
+
+    currBlock = nextBlock;
+    nextBlock = newBlock;
+    currBlock->init(theGrid[3][0], theGrid);
+}
+
+void Board::replaceBlock(Block * newBlock) {
+    if (currBlock) {
+        //Used when we want to replace the current undropped currBlock
+        delete currBlock;
+    }
+
+    currBlock = newBlock;
+    currBlock->init(theGrid[3][0], theGrid);
+}
+
+
 

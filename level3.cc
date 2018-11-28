@@ -26,26 +26,23 @@ char Level3::generateRandom() {
     }
 }
 
-Level3::Level3(char nextBlock, bool providedBlock): useSequence{false} {
-    if (providedBlock) {
-        this->nextBlock = nextBlock;
-    } else {
-        this->nextBlock = generateRandom();
-    }
-}
+Level3::Level3(): useSequence{false} {}
 
 Block * Level3::generateBlock() {
-    Block * newBlock = createSpecificBlock(nextBlock, 3);
+    char nextBlockChar;
 
     if (useSequence) {
+        nextBlockChar = sequence[index];
+
         index++;
         if (index >= sequence.size()) {
             index = 0;
         }
-        nextBlock = sequence[index];
     } else {
-        nextBlock = generateRandom();
+        nextBlockChar = generateRandom();
     }
+
+    Block * newBlock = createSpecificBlock(nextBlockChar, 3);
 
     return newBlock;
 }
@@ -55,9 +52,9 @@ void Level3::norandom(string filename) {
 
     ifstream file{filename};
 
-    string letter;
+    char letter;
     while (file >> letter) {
-        sequence.push_back(letter[0]); // Take the first index of each string to get the character
+        sequence.push_back(letter);
     }
 }
 

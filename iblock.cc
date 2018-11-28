@@ -16,7 +16,7 @@ void IBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     if (didLose()) {
         throw runtime_error("Game Over");
     }
-    // create pointers to cells in the block
+    // create pointers to cells in the currBlock
     bottomLeft->setLetter("I");
     Cell * firstCell = blockGrid[3][1];
     firstCell->setLetter("I");
@@ -52,12 +52,12 @@ vector<Cell *> IBlock::getBlockCells() const {
 
 bool IBlock::isValidMove(vector<Cell *> newBlockCells) const {
     for (int i = 0; i < blockCells.size(); i++) {
-        blockCells[i]->setLetter(""); // temporarily set old block cells to empty letter
+        blockCells[i]->setLetter(""); // temporarily set old currBlock cells to empty letter
     }
     for (int i = 0; i < newBlockCells.size(); i++) {
-        if (newBlockCells[i]->isFilled()) { // check if cell is already occupied by another block
+        if (newBlockCells[i]->isFilled()) { // check if cell is already occupied by another currBlock
             for (int i = 0; i < blockCells.size(); i++) {
-                blockCells[i]->setLetter("I"); // temporarily set old block cells to empty letter
+                blockCells[i]->setLetter("I"); // temporarily set old currBlock cells to empty letter
             }
             return false;
         }

@@ -7,7 +7,7 @@ Block::~Block() {}
 int Block::updateBlock(){
     int score = 0;
     for(int i = 0; i < blockCells.size();i++){
-        //Remove cell from block if it is deleted
+        //Remove cell from currBlock if it is deleted
         if(!(blockCells[i]->isFilled())){
             blockCells.erase(blockCells.begin() + i);
             i -= 1;

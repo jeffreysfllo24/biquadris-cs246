@@ -17,10 +17,15 @@ void Biquadris::updateDisplay() {
     textDisplay->displayBoard();
 }
 
-void Biquadris::run() {
+void Biquadris::startGame() {
+    playerOne->createBlock();
     playerOne->createBlock();
     playerTwo->createBlock();
+    playerTwo->createBlock();
+}
 
+void Biquadris::run() {
+    startGame();
     updateDisplay();
 
     string command;
@@ -32,7 +37,7 @@ void Biquadris::run() {
 
 void Biquadris::switchPlayers() {
     try {
-        getCurrentPlayer()->createBlock(); // Create new block for current player as other player already has a block
+        getCurrentPlayer()->createBlock(); // Create new currBlock for current player as other player already has a currBlock
         isPlayerOnePlaying = !isPlayerOnePlaying;
     } catch (runtime_error & err) {
         cerr << err.what() << endl;
@@ -45,8 +50,7 @@ void Biquadris::restart() {
     playerTwo->restart();
     isPlayerOnePlaying = true; // player one begins
 
-    playerOne->createBlock(); // create first blocks
-    playerTwo->createBlock();
+    startGame(); // create starting blocks
 
     isGameOver = false; // allow play again
 }

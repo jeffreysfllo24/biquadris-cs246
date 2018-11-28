@@ -8,8 +8,8 @@
 class Block {
     protected:
         Cell * bottomLeft; // pointer to the bottom left cell
-        std::vector<Cell *> blockCells; // vector of all cells inside block
-        int level; //The Level that the block was generated in
+        std::vector<Cell *> blockCells; // vector of all cells inside currBlock
+        int level; //The Level that the currBlock was generated in
         // movement
         bool isBottom;
         virtual bool isValidMove(std::vector<Cell *>) const = 0;

@@ -13,7 +13,7 @@ SBlock::SBlock(int levelVal){
 void SBlock::init(Cell * cell, vector<vector<Cell *>> grid) {
     bottomLeft = cell;
     blockGrid = grid;
-    // create pointers to cells in the block
+    // create pointers to cells in the currBlock
     if (didLose()) {
         throw runtime_error("Game Over");
     }
@@ -52,12 +52,12 @@ vector<Cell *> SBlock::getBlockCells() const {
 
 bool SBlock::isValidMove(vector<Cell *> newBlockCells) const {
     for (int i = 0; i < blockCells.size(); i++) {
-        blockCells[i]->setLetter(""); // temporarily set old block cells to empty letter
+        blockCells[i]->setLetter(""); // temporarily set old currBlock cells to empty letter
     }
     for (int i = 0; i < newBlockCells.size(); i++) {
-        if (newBlockCells[i]->isFilled()) { // check if cell is already occupied by another block
+        if (newBlockCells[i]->isFilled()) { // check if cell is already occupied by another currBlock
             for (int i = 0; i < blockCells.size(); i++) {
-                blockCells[i]->setLetter("S"); // temporarily set old block cells to empty letter
+                blockCells[i]->setLetter("S"); // temporarily set old currBlock cells to empty letter
             }
             return false;
         }
