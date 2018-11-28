@@ -116,7 +116,7 @@ void IBlock::clockwise(int dropAmount) {
             down(dropAmount);
         }
     } else if (rotation == 1 || rotation == 3) { // same rotation for positions 1 and 3
-        if (bottomLeft->getRow() + 4 > 10) {
+        if (bottomLeft->getCol() + 4 > 10) {
             return; // can't rotate
         }
         try {
