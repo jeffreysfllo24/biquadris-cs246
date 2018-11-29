@@ -5,9 +5,11 @@
 
 class Level2 : public Level {
     char generateRandom();
+    int seed;
 public:
     Level2();
     Block * generateBlock() override;
+    void setSeed(int)override;
 };
 
 #endif //LEVEL2_H

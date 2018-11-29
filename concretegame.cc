@@ -8,7 +8,7 @@ using namespace std;
 ConcreteGame::ConcreteGame(bool isPlayerOne) {
     this->isPlayerOne = isPlayerOne;
     this->levelInt = 0;
-    this->level = new Level0{isPlayerOne};
+    this->level = new Level0{isPlayerOne,sequence1,sequence2};
     this->otherGame = nullptr;
 }
 

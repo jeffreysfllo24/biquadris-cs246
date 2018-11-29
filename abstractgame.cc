@@ -19,18 +19,22 @@ void AbstractGame::levelUp() {
         case 1:
             delete level;
             level = new Level1{};
+            level->setSeed(seed);
             break;
         case 2:
             delete level;
             level = new Level2{};
+            level->setSeed(seed);
             break;
         case 3:
             delete level;
             level = new Level3{};
+            level->setSeed(seed);
             break;
         case 4:
             delete level;
             level = new Level4{};
+            level->setSeed(seed);
             break;
         default:
             break;
@@ -47,19 +51,23 @@ void AbstractGame::levelDown() {
     switch (levelInt) {
         case 0:
             delete level;
-            level = new Level0{isPlayerOne};
+            level = new Level0{isPlayerOne,sequence1,sequence2};
+            level->setSeed(seed);
             break;
         case 1:
             delete level;
             level = new Level1{};
+            level->setSeed(seed);
             break;
         case 2:
             delete level;
             level = new Level2{};
+            level->setSeed(seed);
             break;
         case 3:
             delete level;
             level = new Level3{};
+            level->setSeed(seed);
             break;
         default:
             break;
@@ -71,7 +79,7 @@ void AbstractGame::restart() {
     score.resetScore();
 
     delete level;
-    level = new Level0{isPlayerOne};
+    level = new Level0{isPlayerOne,sequence1,sequence2};
 }
 
 void AbstractGame::norandom(string filename) {
@@ -100,6 +108,43 @@ Score & AbstractGame::getScore(){
 
 int AbstractGame::getLevel(){
     return levelInt;
+}
+
+void AbstractGame::setLevel(int newLevel){
+    levelInt = newLevel;
+    board.setLevel(levelInt);
+    switch (levelInt) {
+        case 0:
+            delete level;
+            level = new Level0{isPlayerOne,sequence1,sequence2};
+            break;
+        case 1:
+            delete level;
+            level = new Level1{};
+            level->setSeed(seed);
+            break;
+        case 2:
+            delete level;
+            level = new Level2{};
+            level->setSeed(seed);
+            break;
+        case 3:
+            delete level;
+            level = new Level3{};
+            level->setSeed(seed);
+            break;
+        default:
+            break;
+    }
+}
+
+void AbstractGame::setSequences(string newSequence1,string newSequence2){
+    sequence1 = newSequence1;
+    sequence2 = newSequence2;
+}
+
+void AbstractGame::setSeed(int seedVal){
+    seed = seedVal;
 }
 
 AbstractGame::~AbstractGame() = default;

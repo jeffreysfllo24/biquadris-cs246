@@ -13,6 +13,9 @@ class AbstractGame {
 protected:
     bool isPlayerOne;
     int levelInt;
+    int seed;
+    std::string sequence1;
+    std::string sequence2;
     Level * level;
     AbstractGame * otherGame;
     Board board;
@@ -31,6 +34,9 @@ public:
     Board & getBoard();
     Score & getScore();
     int getLevel();
+    void setLevel(int);
+    void setSequences(std::string,std::string);
+    void setSeed(int);
     virtual ~AbstractGame() = 0;
 };
 

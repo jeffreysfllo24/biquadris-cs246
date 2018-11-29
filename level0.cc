@@ -6,9 +6,9 @@
 
 using namespace std;
 
-Level0::Level0(bool isPlayerOne): // Add each letter from input file to a vector
+Level0::Level0(bool isPlayerOne,string sequence1, string sequence2): // Add each letter from input file to a vector
     index{0} {
-    string sequenceFile = isPlayerOne ? "sequence1.txt" : "sequence2.txt"; // set sequence based on player
+    string sequenceFile = isPlayerOne ? sequence1 : sequence2; // set sequence based on player
     ifstream file{sequenceFile};
 
     char letter;
@@ -29,4 +29,8 @@ Block * Level0::generateBlock() {
     }
 
     return newBlock;
+}
+
+void Level0::setSeed(int newSeed){
+    //Does nothing because not random
 }

@@ -8,7 +8,7 @@ using namespace std;
 
 char Level3::generateRandom() {
     int r = rand() % 9;
-
+srand(seed);
     if (r < 1) {
         return 'I';
     } else if (r < 2) {
@@ -62,4 +62,8 @@ void Level3::random() {
     useSequence = false;
     index = 0;
     sequence.clear();
+}
+
+void Level3::setSeed(int newSeed){
+    seed = newSeed;
 }

@@ -10,8 +10,9 @@ class Level0 : public Level {
     int index;
     std::vector<char> sequence;
 public:
-    Level0(bool);
+    Level0(bool,std::string,std::string);
     Block * generateBlock() override;
+    void setSeed(int) override;
 };
 
 #endif //LEVEL0_H

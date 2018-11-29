@@ -24,10 +24,24 @@ void Biquadris::startGame() {
     playerTwo->createBlock();
 }
 
-void Biquadris::run() {
+void Biquadris::run(bool isText,int seed, string sequence1, string sequence2,int startlevel) {
+    //Set start level
+    playerOne->setLevel(startlevel);
+    playerTwo->setLevel(startlevel);
+    
+    //Set sequence1 and sequence2 files for Level0 to read
+    playerOne->setSequences(sequence1, sequence2);
+    playerTwo->setSequences(sequence1, sequence2);
+    
+    //Set seed
+    playerOne->setSeed(seed);
+    playerTwo->setSeed(seed);
+    
+    //TODO:Logic to allow only test display when graphics display is implemented
+    
     startGame();
     updateDisplay();
-
+    
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);

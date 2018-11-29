@@ -14,6 +14,7 @@ public:
     virtual void norandom(std::string);
     virtual void random();
     virtual ~Level() = 0;
+    virtual void setSeed(int) = 0;
 };
 
 #endif //LEVEL_H

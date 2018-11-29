@@ -10,7 +10,7 @@
 
 char Level2::generateRandom() {
     int r = rand() % 7;
-
+srand(seed);
     if (r < 1) {
         return 'I';
     } else if (r < 2) {
@@ -34,4 +34,8 @@ Block * Level2::generateBlock() {
     Block * newBlock = createSpecificBlock(generateRandom(), 2);
 
     return newBlock;
+}
+
+void Level2::setSeed(int newSeed){
+    seed = newSeed;
 }
