@@ -12,6 +12,8 @@ class Board{
     std::vector<std::vector<Cell *>> theGrid;
     int level;
     std::vector<Block *> blockList;
+    bool blind;
+    bool heavy;
     public:
         Board();
         int updateBlockList(); //Checks if any blocks have been fully deleted
@@ -29,6 +31,9 @@ class Board{
         void setLevel(int); //Setter for integer 
         void createBlock(Block *);
         void replaceBlock(Block *);
+        void setBlind();
+        void setHeavy();
+        int getHeavyInt();
 };
 
 #endif /* board_hpp */

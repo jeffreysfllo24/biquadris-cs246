@@ -5,7 +5,7 @@ using namespace std;
 
 const int width = 11;
 const int height = 18;
-Board::Board() : currBlock{nullptr},level(0){
+Board::Board() : currBlock{nullptr}, level(0), blind{false}, heavy{false} {
     init();
 }
 
@@ -76,6 +76,10 @@ int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
     //Make sure the dropped currBlock doesn't get deleted
     currBlock = nullptr;
 
+    // reset special actions
+    blind = false;
+    heavy = false;
+
     if (numLines > 0){
         if (numLines > 1) {
             multipleLines = true; // update multipleLines for AbstractGame to know
@@ -95,10 +99,12 @@ Board::~Board(){
 string Board::getLine(int row){
     string res = "";
     for(int j = 0; j < width; ++j){
-        if(theGrid[row][j]->isFilled()){
+        if (blind && row >= 2 && row <= 11 && j >= 2 && j <= 8) {
+          res += "?";
+        } else if (theGrid[row][j]->isFilled()) {
             res += theGrid[row][j]->getLetter();
-        }else{
-            res += "."; // TODO change back to spaces
+        } else {
+            res += ".";
         }
     }
     return res;
@@ -159,5 +165,14 @@ void Board::replaceBlock(Block * newBlock) {
     currBlock->init(theGrid[3][0], theGrid);
 }
 
+void Board::setBlind() {
+    blind = true;
+}
 
+void Board::setHeavy() {
+    heavy = true;
+}
 
+int Board::getHeavyInt() {
+    return heavy ? 2 : 0;
+}

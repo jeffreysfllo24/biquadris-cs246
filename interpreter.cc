@@ -60,25 +60,27 @@ int linesToDrop(int levelInt) {
 
 void Interpreter::runLeft(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
-    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
+    int down = linesToDrop(biquadris->getCurrentPlayer()->getLevel())
+               + biquadris->getCurrentPlayer()->getBoard().getHeavyInt();
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->left(drop);
+        currentBlock->left(down);
     }
 }
 
 void Interpreter::runRight(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
-    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
+    int down = linesToDrop(biquadris->getCurrentPlayer()->getLevel())
+               + biquadris->getCurrentPlayer()->getBoard().getHeavyInt();
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->right(drop);
+        currentBlock->right(down);
     }
 }
 
 void Interpreter::runDown(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
-    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
+    int down = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->down(drop);
+        currentBlock->down(down + 1); // down naturally should fall by 1
     }
 }
 
@@ -92,9 +94,9 @@ void Interpreter::runClockwise(int multiplier) {
 
 void Interpreter::runCounterclockwise(int multiplier) {
     Block * currentBlock = biquadris->getCurrentPlayer()->getBoard().getCurrentBlock();
-    int drop = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
+    int down = linesToDrop(biquadris->getCurrentPlayer()->getLevel());
     for (int i = 0; i < multiplier; i++) {
-        currentBlock->counterclockwise(drop);
+        currentBlock->counterclockwise(down);
     }
 }
 
@@ -109,10 +111,10 @@ void Interpreter::runDrop(int multiplier) {
             string specialAction;
             while (cin >> specialAction) {
                 if (specialAction == "blind") {
-                    // blind
+                    biquadris->getNonCurrentPlayer()->getBoard().setBlind();
                     break;
                 } else if (specialAction == "heavy") {
-                    // heavy
+                    biquadris->getNonCurrentPlayer()->getBoard().setHeavy();
                     break;
                 } else if (specialAction == "force") {
                     char blockChar;
