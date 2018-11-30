@@ -1,13 +1,14 @@
 #include "biquadris.h"
 #include "concretegame.h"
 #include "textdisplay.h"
+#include "graphicsdisplay.h"
 
 using namespace std;
 
 Biquadris::Biquadris(string sequence1,string sequence2):
     isPlayerOnePlaying{true}, isGameOver{false},
     playerOne{new ConcreteGame{true,sequence1,sequence2}}, playerTwo{new ConcreteGame{false,sequence1,sequence2}},
-    textDisplay{new TextDisplay{this}}, interpreter{Interpreter{this}} {
+    textDisplay{new TextDisplay{this}}, graphicsDisplay{new GraphicsDisplay{this}}, interpreter{Interpreter{this}} {
 
     playerOne->setOtherGame(playerTwo); // Give players access to other player
     playerTwo->setOtherGame(playerOne); // for special actions
@@ -15,6 +16,7 @@ Biquadris::Biquadris(string sequence1,string sequence2):
 
 void Biquadris::updateDisplay() {
     textDisplay->displayBoard();
+    graphicsDisplay->displayBoard();
 }
 
 void Biquadris::startGame() {

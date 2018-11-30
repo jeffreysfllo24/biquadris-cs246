@@ -5,23 +5,65 @@
 
 using namespace std;
 
-void printScores(int firstPlayerScore, int secondPlayerScore) {}
+// void printScores(int firstPlayerScore, int secondPlayerScore) {}
 
-void printLevels(int firstPlayerLevel, int secondPlayerLevel) {}
+// void printLevels(int firstPlayerLevel, int secondPlayerLevel) {}
 
-void printBoards(Board & firstPlayerBoard, Board & secondPlayerBoard) {}
+int getCellColour(char block) {
+    if (block == 'I') {
+        return Xwindow::Black;
+    } else if (block == 'J') {
+        return Xwindow::Black;
+    } else if (block == 'L') {
+        return Xwindow::Black;
+    } else if (block == 'O') {
+        return Xwindow::Black;
+    } else if (block == 'S') {
+        return Xwindow::Black;
+    } else if (block == 'T') {
+        return Xwindow::Black;
+    } else if (block == 'Z') {
+        return Xwindow::Black;
+    } else {
+        return Xwindow::White;
+    }
+}
 
-void printDivider() {}
+void GraphicsDisplay::printBoards(Board & firstPlayerBoard, Board & secondPlayerBoard) {
+    const int cellWidth = 700 / 28;
+    const int cellHeight = 650 / 26;
+    for (int i = 0; i < 18; ++i) {
+        string firstBoardLine = firstPlayerBoard.getLine(i);
+        string secondBoardLine = secondPlayerBoard.getLine(i);
+        for (int j = 0; j < firstBoardLine.length(); ++j) {
+            xw->fillRectangle(j, i+3, cellWidth, cellHeight, getCellColour(firstBoardLine[j]));
+        }
+        for (int j = 0; j < secondBoardLine.length(); ++j) {
+            xw->fillRectangle(j+6, i+3, cellWidth, cellHeight, getCellColour(secondBoardLine[j]));
+        }
+    }
+}
 
-void printNext() {}
+// void printDivider() {}
 
-void printBlockTop(char block) {}
+// void printNext() {}
 
-void printBlockBottom(char block) {}
+// void printBlockTop(char block) {}
 
-void printBlocks(char firstPlayerBlock, char secondPlayerBlock) {}
+// void printBlockBottom(char block) {}
+
+// void printBlocks(char firstPlayerBlock, char secondPlayerBlock) {}
 
 GraphicsDisplay::GraphicsDisplay(Biquadris * biquadris):
-    biquadris{biquadris} {}
+    biquadris{biquadris} {
+        xw = new Xwindow;
+    }
 
-void GraphicsDisplay::displayBoard() {}
+GraphicsDisplay::~GraphicsDisplay() {
+    delete xw;
+}
+
+void GraphicsDisplay::displayBoard() {
+    printBoards(biquadris->getFirstPlayer()->getBoard(),
+                biquadris->getSecondPlayer()->getBoard());
+}

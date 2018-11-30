@@ -12,7 +12,7 @@ class Xwindow {
     unsigned long colours[10];
 
     public:
-        Xwindow(int width=600, int height=800);  // Constructor; displays the window.
+        Xwindow(int width=700, int height=650);  // Constructor; displays the window.
         ~Xwindow();                              // Destructor; destroys the window.
         Xwindow(const Xwindow&) = delete;
         Xwindow &operator=(const Xwindow&) = delete;

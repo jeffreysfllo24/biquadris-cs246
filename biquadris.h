@@ -14,6 +14,7 @@ class Biquadris {
     AbstractGame * playerOne;
     AbstractGame * playerTwo;
     DisplayObserver * textDisplay;
+    DisplayObserver * graphicsDisplay;
     Interpreter interpreter;
     void updateDisplay();
     void startGame();
