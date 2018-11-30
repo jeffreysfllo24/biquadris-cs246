@@ -12,6 +12,14 @@ void printScores(int firstPlayerScore, int secondPlayerScore) {
     cout << endl;
 }
 
+void printHighScores(int firstPlayerHighScore, int secondPlayerHighScore) {
+    string res = "HiScore:  ";
+    cout << res << firstPlayerHighScore;
+    cout << "       "; //TODO Dynamic spacing for more than 1 digit
+    cout << res << secondPlayerHighScore;
+    cout << endl;
+}
+
 void printLevels(int firstPlayerLevel, int secondPlayerLevel){
     string res = "Level:    ";
     cout << res << firstPlayerLevel;
@@ -98,6 +106,7 @@ void TextDisplay::displayBoard() {
                 biquadris->getSecondPlayer()->getLevel());
     printScores(biquadris->getFirstPlayer()->getScore().getCurrentScore(),
                 biquadris->getSecondPlayer()->getScore().getCurrentScore());
+    printHighScores(biquadris->getFirstPlayer()->getScore().getHighScore(),biquadris->getSecondPlayer()->getScore().getHighScore());
     printDivider();
     printBoards(biquadris->getFirstPlayer()->getBoard(),
                 biquadris->getSecondPlayer()->getBoard());
