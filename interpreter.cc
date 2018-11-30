@@ -101,6 +101,30 @@ void Interpreter::runCounterclockwise(int multiplier) {
     }
 }
 
+void Interpreter::promptSpecialAction() {
+    cout << "Enter a special action" << endl;
+    string specialAction;
+    while (cin >> specialAction) {
+        if (specialAction == "blind") {
+            biquadris->getNonCurrentPlayer()->getBoard().setBlind();
+            break;
+        } else if (specialAction == "heavy") {
+            biquadris->getNonCurrentPlayer()->getBoard().setHeavy();
+            break;
+        } else if (specialAction == "force") {
+            char blockChar;
+            if (cin >> blockChar && (blockChar == 'I' || blockChar == 'J' || blockChar == 'L'
+                                     || blockChar == 'O' || blockChar == 'S' || blockChar == 'T' || blockChar == 'Z')) {
+                biquadris->getNonCurrentPlayer()->replaceSpecificBlock(blockChar);
+                break;
+            }
+            cout << "bad letter" << endl;
+        } else {
+            cout << "bad special action" << endl;
+        }
+    }
+}
+
 void Interpreter::runDrop(int multiplier) {
     for (int i = 0; i < multiplier; i++) {
         if (biquadris->getIsGameOver()) { // Check game over every iteration
@@ -108,28 +132,14 @@ void Interpreter::runDrop(int multiplier) {
         }
         // Get board every time to use other board
         if (biquadris->getCurrentPlayer()->dropBlock()) { // multiple lines, prompt special action
-            cout << "Enter a special action" << endl;
-            string specialAction;
-            while (cin >> specialAction) {
-                if (specialAction == "blind") {
-                    biquadris->getNonCurrentPlayer()->getBoard().setBlind();
-                    break;
-                } else if (specialAction == "heavy") {
-                    biquadris->getNonCurrentPlayer()->getBoard().setHeavy();
-                    break;
-                } else if (specialAction == "force") {
-                    char blockChar;
-                    if (cin >> blockChar && (blockChar == 'I' || blockChar == 'J' || blockChar == 'L'
-                      || blockChar == 'O' || blockChar == 'S' || blockChar == 'T' || blockChar == 'Z')) {
-                        biquadris->getNonCurrentPlayer()->replaceSpecificBlock(blockChar);
-                        break;
-                    }
-                    cout << "bad letter" << endl;
-                } else {
-                    cout << "bad special action" << endl;
-                }
+            promptSpecialAction();
+        } else if (biquadris->getCurrentPlayer()->getBoard().shouldDropStar()) {
+            biquadris->getCurrentPlayer()->replaceSpecificBlock('*');
+            if (biquadris->getCurrentPlayer()->dropBlock()) { // multiple lines, prompt special action
+                promptSpecialAction();
             }
         }
+
         biquadris->switchPlayers();
     }
 }

@@ -19,6 +19,7 @@ private:
     void runDown(int);
     void runClockwise(int);
     void runCounterclockwise(int);
+    void promptSpecialAction();
     void runDrop(int);
     void runLevelUp(int);
     void runLevelDown(int);

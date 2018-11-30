@@ -1,11 +1,14 @@
-#include "board.h"
-#include <string>
 #include <cmath>
+#include <string>
+
+#include "board.h"
+
 using namespace std;
 
 const int width = 11;
 const int height = 18;
-Board::Board() : currBlock{nullptr}, level(0), blind{false}, heavy{false} {
+
+Board::Board() : currBlock{nullptr}, level{0}, lastClear{0}, blind{false}, heavy{false} {
     init();
 }
 
@@ -29,6 +32,8 @@ void Board::clearBoard(){
     theGrid.clear();
     delete currBlock;   //Delete the currBlock pointer in the grid
     currBlock = nullptr;
+    delete nextBlock;
+    nextBlock = nullptr;
 
     init();
 }
@@ -81,12 +86,18 @@ int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
     heavy = false;
 
     if (numLines > 0){
+        if (level == 4) {
+            lastClear = 0;
+        }
         if (numLines > 1) {
-            multipleLines = true; // update multipleLines for AbstractGame to know
+            multipleLines = true; // update multipleLines for AbstractGame to know for special action
         }
         scoredPoints += pow(numLines + level, 2);
         return scoredPoints;
     }else{
+        if (level == 4) {
+            lastClear++;
+        }
         return 0;
     }
 
@@ -141,6 +152,7 @@ int Board::updateBlockList(){
 
 void Board::setLevel(int newLevel){
     level = newLevel;
+    lastClear = 0;
 }
 
 
@@ -162,7 +174,11 @@ void Board::replaceBlock(Block * newBlock) {
     }
 
     currBlock = newBlock;
-    currBlock->init(theGrid[3][0], theGrid);
+    if (currBlock->getType() == "*") { // if level 4 block
+        currBlock->init(theGrid[3][5], theGrid);
+    } else {
+        currBlock->init(theGrid[3][0], theGrid);
+    }
 }
 
 void Board::setBlind() {
@@ -175,4 +191,9 @@ void Board::setHeavy() {
 
 int Board::getHeavyInt() {
     return heavy ? 2 : 0;
+}
+
+bool Board::shouldDropStar() {
+    // drop a block if level 4 and last clear was a multiple of 5
+    return (level == 4) && (lastClear % 5 == 0);
 }
