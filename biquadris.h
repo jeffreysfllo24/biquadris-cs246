@@ -18,7 +18,7 @@ class Biquadris {
     void updateDisplay();
     void startGame();
 public:
-    Biquadris();
+    Biquadris(std::string,std::string);
     void run(bool isText,int seed, std::string sequence1, std::string sequence2,int startlevel);
     void switchPlayers();
     void restart();

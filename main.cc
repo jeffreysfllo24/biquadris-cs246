@@ -25,6 +25,6 @@ int main(int argc,char * argv[]) {
             startLevel = stoi(argv[i + 1]);
         }
     }
-    Biquadris bq;
+    Biquadris bq(sequence1,sequence2);
     bq.run(isText,seed,sequence1,sequence2,startLevel);
 }

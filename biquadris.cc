@@ -4,9 +4,9 @@
 
 using namespace std;
 
-Biquadris::Biquadris():
+Biquadris::Biquadris(string sequence1,string sequence2):
     isPlayerOnePlaying{true}, isGameOver{false},
-    playerOne{new ConcreteGame{true}}, playerTwo{new ConcreteGame{false}},
+    playerOne{new ConcreteGame{true,sequence1,sequence2}}, playerTwo{new ConcreteGame{false,sequence1,sequence2}},
     textDisplay{new TextDisplay{this}}, interpreter{Interpreter{this}} {
 
     playerOne->setOtherGame(playerTwo); // Give players access to other player
@@ -25,13 +25,13 @@ void Biquadris::startGame() {
 }
 
 void Biquadris::run(bool isText,int seed, string sequence1, string sequence2,int startlevel) {
-    //Set start level
-    playerOne->setLevel(startlevel);
-    playerTwo->setLevel(startlevel);
-    
     //Set sequence1 and sequence2 files for Level0 to read
     playerOne->setSequences(sequence1, sequence2);
     playerTwo->setSequences(sequence1, sequence2);
+    
+    //Set start level
+    playerOne->setLevel(startlevel);
+    playerTwo->setLevel(startlevel);
     
     //Set seed
     playerOne->setSeed(seed);

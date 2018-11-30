@@ -9,7 +9,7 @@ class Level;
 
 class ConcreteGame : public AbstractGame {
 public:
-    ConcreteGame(bool);
+    ConcreteGame(bool,std::string,std::string);
     void setOtherGame(AbstractGame *) override;
     void createBlock() override;
     void createSpecificBlock(char) override;

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-ConcreteGame::ConcreteGame(bool isPlayerOne) {
+ConcreteGame::ConcreteGame(bool isPlayerOne,string sequence1, string sequence2) {
     this->isPlayerOne = isPlayerOne;
     this->levelInt = 0;
     this->level = new Level0{isPlayerOne,sequence1,sequence2};
