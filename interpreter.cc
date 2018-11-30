@@ -29,7 +29,8 @@ Interpreter::Interpreter(Biquadris * biquadris):
                {"S", Interpreter::S},
                {"T", Interpreter::T},
                {"Z", Interpreter::Z},
-               {"restart", Interpreter::restart}} {}
+               {"restart", Interpreter::restart},
+               {"rename", Interpreter::rename}} {}
 
 int getMultiplier(string & command) {
     string multiplierString;
@@ -243,6 +244,18 @@ void Interpreter::interpretCommand(string command) {
         case Interpreter::restart:
             biquadris->restart();
             break;
+        case Interpreter::rename: {
+            string oldName;
+            string newName;
+            if (cin >> oldName >> newName) {
+                if (commandMap.count(oldName) == 1) {
+                    Interpreter::Command iCommand = commandMap[oldName];
+                    commandMap.insert(pair<string, Interpreter::Command>(newName, iCommand));
+                    commandMap.erase(oldName);
+                }
+            }
+            break;
+        }
         default:
             cerr << "bad command" << endl;
             break;

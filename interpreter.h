@@ -10,7 +10,7 @@ class Biquadris;
 class Interpreter {
 private:
     enum Command { noCommand, left, right, down, clockwise, counterclockwise, drop, levelup, leveldown, norandom,
-        random, sequence, I, J, L, O, S, T, Z, restart };
+        random, sequence, I, J, L, O, S, T, Z, restart, rename };
     std::map<std::string, Interpreter::Command> commandMap;
     Biquadris * biquadris;
 
