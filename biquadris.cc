@@ -27,9 +27,7 @@ void Biquadris::startGame() {
 }
 
 void Biquadris::run(bool isText,int seed, string sequence1, string sequence2,int startlevel) {
-    //Set sequence1 and sequence2 files for Level0 to read
-    playerOne->setSequences(sequence1, sequence2);
-    playerTwo->setSequences(sequence1, sequence2);
+    //Set sequence1 and sequence2 files for Level0 to read being done in constructor
     
     //Set start level
     playerOne->setLevel(startlevel);

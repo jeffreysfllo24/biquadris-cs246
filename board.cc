@@ -8,7 +8,7 @@ using namespace std;
 const int width = 11;
 const int height = 18;
 
-Board::Board() : currBlock{nullptr}, level{0}, lastClear{0}, blind{false}, heavy{false} {
+Board::Board() : currBlock{nullptr},nextBlock{nullptr}, level{0}, lastClear{0}, blind{false}, heavy{false} {
     init();
 }
 
