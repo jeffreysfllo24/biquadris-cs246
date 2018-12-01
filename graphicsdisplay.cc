@@ -4,19 +4,29 @@
 using namespace std;
 
 const int cellWidth = 650 / 26;
-const int cellHeight = 750 / 30;
+const int cellHeight = (750 / 30) - 3;
 
 void GraphicsDisplay::printHelp(){
     string title = "Tips and Tricks:";
-    string tip1 = "1. Understand the spacial relationship between the piece that you want to drop and the current landscape of the play space.";
-    string tip2 = "2. Use the next piece indicator to your advantage! Before that piece appears in the play space you should know exactly where it belongs.";
-    string tip3 = "3. Know your controls! Ensure that you are familiar with all possible actions and that you understand how each action effects the block on your board. Knowing what to type based on where you want to place the block should be second nature.";
+    string tip1 = "1. Understand the spacial relationship between the piece that you want to drop";
+    string tip1b = "  and the current landscape of the play space.";
+    string tip2 = "2. Use the next piece indicator to your advantage! Before that piece appears in";
+    string tip2b = "  the play space you should know exactly where it belongs.";
+    string tip3 = "3. Know your controls! Ensure that you are familiar with all possible actions and";
+    string tip3b = "   that you understand how each action effects the block on your board.";
     string tip4 = "4. The most important tip is have fun! As long as you enjoy playing the game you're a winner :)";
-    xw->drawString(2 * cellWidth, 30 * cellHeight, title);
+    xw->drawString(2 * cellWidth, 31 * cellHeight, title);
     xw->drawString(2 * cellWidth, 32 * cellHeight, tip1);
+    xw->drawString(2 * cellWidth, 33 * cellHeight, tip1b);
     xw->drawString(2 * cellWidth, 34 * cellHeight, tip2);
+    xw->drawString(2 * cellWidth, 35 * cellHeight, tip2b);
     xw->drawString(2 * cellWidth, 36 * cellHeight, tip3);
+    xw->drawString(2 * cellWidth, 37 * cellHeight, tip3b);
     xw->drawString(2 * cellWidth, 38 * cellHeight, tip4);
+}
+
+void GraphicsDisplay::unDraw(){
+    xw->fillRectangle(1 * cellWidth, 30 * cellHeight,40 * cellWidth , 12 * cellHeight, Xwindow::White);
 }
 
 void GraphicsDisplay::printTitle() {
@@ -184,6 +194,7 @@ GraphicsDisplay::~GraphicsDisplay() {
 }
 
 void GraphicsDisplay::displayBoard() {
+    unDraw();
     printTitle();
     printLevels(biquadris->getFirstPlayer()->getLevel(),
                 biquadris->getSecondPlayer()->getLevel());
