@@ -14,6 +14,11 @@ Biquadris::Biquadris(string sequence1,string sequence2):
     playerTwo->setOtherGame(playerOne); // for special actions
 }
 
+void Biquadris::displayHelp(){
+    textDisplay->printHelp();
+    graphicsDisplay->printHelp();
+}
+
 void Biquadris::updateDisplay() {
     textDisplay->displayBoard();
     graphicsDisplay->displayBoard();
@@ -45,7 +50,9 @@ void Biquadris::run(bool isText,int seed, string sequence1, string sequence2,int
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);
+        if(command != "help"){
         updateDisplay();
+        }
     }
 }
 

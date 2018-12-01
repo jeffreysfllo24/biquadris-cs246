@@ -8,6 +8,7 @@ class TextDisplay : public DisplayObserver {
 public:
     TextDisplay(Biquadris *);
     void displayBoard() override;
+    void printHelp() override;
 };
 
 #endif //TEXTDISPLAY_H

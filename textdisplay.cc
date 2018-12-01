@@ -4,6 +4,14 @@
 #include <string>
 using namespace std;
 
+void TextDisplay::printHelp(){
+    cout << "Tips and Tricks:" << endl;
+    cout << "1. Understand the spacial relationship between the piece that you want to drop and the current landscape of the play space." << endl;
+    cout << "2. Use the next piece indicator to your advantage! Before that piece appears in the play space you should know exactly where it belongs." << endl;
+    cout << "3. Know your controls! Ensure that you are familiar with all possible actions and that you understand how each action effects the block on your board. Knowing what to type based on where you want to place the block should be second nature." << endl;
+    cout << "4. The most important tip is have fun! As long as you enjoy playing the game you're a winner :)"<< endl;
+}
+
 void printLevels(int firstPlayerLevel, int secondPlayerLevel){
     string res = "Level:    ";
     cout << res << firstPlayerLevel;

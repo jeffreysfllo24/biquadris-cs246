@@ -30,7 +30,8 @@ Interpreter::Interpreter(Biquadris * biquadris):
                {"T", Interpreter::T},
                {"Z", Interpreter::Z},
                {"restart", Interpreter::restart},
-               {"rename", Interpreter::rename}} {}
+               {"rename", Interpreter::rename},
+               {"help", Interpreter::help}} {}
 
 int getMultiplier(string & command) {
     string multiplierString;
@@ -253,6 +254,9 @@ void Interpreter::interpretCommand(string command) {
             break;
         case Interpreter::restart:
             biquadris->restart();
+            break;
+        case Interpreter::help:
+            biquadris->displayHelp();
             break;
         case Interpreter::rename: {
             string oldName;

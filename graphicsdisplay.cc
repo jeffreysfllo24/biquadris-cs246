@@ -6,6 +6,19 @@ using namespace std;
 const int cellWidth = 650 / 26;
 const int cellHeight = 750 / 30;
 
+void GraphicsDisplay::printHelp(){
+    string title = "Tips and Tricks:";
+    string tip1 = "1. Understand the spacial relationship between the piece that you want to drop and the current landscape of the play space.";
+    string tip2 = "2. Use the next piece indicator to your advantage! Before that piece appears in the play space you should know exactly where it belongs.";
+    string tip3 = "3. Know your controls! Ensure that you are familiar with all possible actions and that you understand how each action effects the block on your board. Knowing what to type based on where you want to place the block should be second nature.";
+    string tip4 = "4. The most important tip is have fun! As long as you enjoy playing the game you're a winner :)";
+    xw->drawString(2 * cellWidth, 30 * cellHeight, title);
+    xw->drawString(2 * cellWidth, 32 * cellHeight, tip1);
+    xw->drawString(2 * cellWidth, 34 * cellHeight, tip2);
+    xw->drawString(2 * cellWidth, 36 * cellHeight, tip3);
+    xw->drawString(2 * cellWidth, 38 * cellHeight, tip4);
+}
+
 void GraphicsDisplay::printTitle() {
     string res = "BIQUADRIS";
     xw->drawString(1 * cellWidth, 2 * cellHeight, res);
