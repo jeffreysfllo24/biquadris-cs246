@@ -4,19 +4,51 @@
 #include <string>
 using namespace std;
 
-void printScores(int firstPlayerScore, int secondPlayerScore) {
-    string res = "Score:    ";
-    cout << res << firstPlayerScore;
-    cout << "       "; //TODO Dynamic spacing for more than 1 digit
-    cout << res << secondPlayerScore;
-    cout << endl;
-}
-
 void printLevels(int firstPlayerLevel, int secondPlayerLevel){
     string res = "Level:    ";
     cout << res << firstPlayerLevel;
     cout << "       ";
     cout << res << secondPlayerLevel;
+    cout << endl;
+}
+
+void printScores(int firstPlayerScore, int secondPlayerScore) {
+    string res = "Score: ";
+
+    string firstScore = to_string(firstPlayerScore);
+    while (firstScore.length() < 4) {
+        firstScore = " " + firstScore;
+    }
+    cout << res << firstScore;
+
+    cout << "       ";
+
+    string secondScore = to_string(secondPlayerScore);
+    while (secondScore.length() < 4) {
+        secondScore = " " + secondScore;
+    }
+    cout << res << secondScore;
+
+    cout << endl;
+}
+
+void printHighScores(int firstPlayerHighScore, int secondPlayerHighScore) {
+    string res = "High: ";
+
+    string firstScore = to_string(firstPlayerHighScore);
+    while (firstScore.length() < 5) {
+        firstScore = " " + firstScore;
+    }
+    cout << res << firstScore;
+
+    cout << "       ";
+
+    string secondScore = to_string(secondPlayerHighScore);
+    while (secondScore.length() < 5) {
+        secondScore = " " + secondScore;
+    }
+    cout << res << secondScore;
+
     cout << endl;
 }
 
@@ -98,6 +130,7 @@ void TextDisplay::displayBoard() {
                 biquadris->getSecondPlayer()->getLevel());
     printScores(biquadris->getFirstPlayer()->getScore().getCurrentScore(),
                 biquadris->getSecondPlayer()->getScore().getCurrentScore());
+    printHighScores(biquadris->getFirstPlayer()->getScore().getHighScore(),biquadris->getSecondPlayer()->getScore().getHighScore());
     printDivider();
     printBoards(biquadris->getFirstPlayer()->getBoard(),
                 biquadris->getSecondPlayer()->getBoard());

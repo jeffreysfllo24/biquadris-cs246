@@ -6,6 +6,8 @@
 #include "sblock.h"
 #include "tblock.h"
 #include "zblock.h"
+#include "starblock.h"
+
 using namespace std;
 
 Block * Level::createSpecificBlock(char blockChar, int level) {
@@ -23,6 +25,8 @@ Block * Level::createSpecificBlock(char blockChar, int level) {
         return new TBlock{level};
     } else if (blockChar == 'Z') {
         return new ZBlock{level};
+    } else if (blockChar == '*') {
+        return new StarBlock{level};
     } else {
         return nullptr;
     }

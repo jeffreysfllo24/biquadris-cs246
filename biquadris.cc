@@ -53,7 +53,7 @@ void Biquadris::run(bool isText,int seed, string sequence1, string sequence2,int
 
 void Biquadris::switchPlayers() {
     try {
-        getCurrentPlayer()->createBlock(); // Create new currBlock for current player as other player already has a currBlock
+        getCurrentPlayer()->createBlock(); // Create new currBlock for current player for next turn
         isPlayerOnePlaying = !isPlayerOnePlaying;
     } catch (runtime_error & err) {
         cerr << err.what() << endl;

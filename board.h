@@ -11,9 +11,10 @@ class Board{
     Block * nextBlock;
     std::vector<std::vector<Cell *>> theGrid;
     int level;
+    int lastClear; // used for level 4
     std::vector<Block *> blockList;
-    bool blind;
-    bool heavy;
+    bool blind; // used for blind special action
+    bool heavy; // used for heavy special action
     public:
         Board();
         int updateBlockList(); //Checks if any blocks have been fully deleted
@@ -34,6 +35,7 @@ class Board{
         void setBlind();
         void setHeavy();
         int getHeavyInt();
+        bool shouldDropStar();
 };
 
 #endif /* board_hpp */
