@@ -7,7 +7,6 @@
 #include "abstractgame.h"
 
 class GraphicsDisplay : public DisplayObserver {
-    Biquadris * biquadris;
     Xwindow * xw;
     void printTitle();
     void printLevels(int, int);

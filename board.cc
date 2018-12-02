@@ -53,15 +53,6 @@ void Board::clearRow(int row){
     }
 }
 
-bool Board::isAlive(){
-    for(int i = 0; i < width; ++i){
-        if(theGrid[i][2]->isFilled()){
-            return false;   //Checks if any of the blocks in the 3 reserve rows are filled
-        }
-    }
-    return true;
-}
-
 int Board::dropBlock(int & linesCleared){    // Called from AbstractGame
     int numLines = 0;
     int scoredPoints = 0;

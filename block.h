@@ -11,7 +11,6 @@ class Block {
         std::vector<Cell *> blockCells; // vector of all cells inside currBlock
         int level; //The Level that the currBlock was generated in
         // movement
-        bool isBottom;
         virtual bool isValidMove(std::vector<Cell *>) const = 0;
         virtual bool replaceCells(std::vector<Cell *>, std::string) = 0;
 

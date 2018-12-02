@@ -5,7 +5,6 @@ using namespace std;
 
 ZBlock::ZBlock(int levelVal){
      this->bottomLeft = nullptr;
-     this->isBottom = false;
      this->rotation = 0;
      this->maxWidth = 3;
      this->level = levelVal;

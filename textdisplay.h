@@ -4,7 +4,6 @@
 #include "displayobserver.h"
 
 class TextDisplay : public DisplayObserver {
-    Biquadris * biquadris;
 public:
     TextDisplay(Biquadris *);
     void displayBoard() override;

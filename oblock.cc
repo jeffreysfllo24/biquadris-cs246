@@ -4,7 +4,6 @@ using namespace std;
 
 OBlock::OBlock(int levelVal){
     this->bottomLeft = nullptr;
-    this->isBottom = false;
     this->rotation = 0;
     this->maxWidth = 2;
     this->level = levelVal;
