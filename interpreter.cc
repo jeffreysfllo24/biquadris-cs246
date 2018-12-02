@@ -130,14 +130,16 @@ void Interpreter::runDrop(int multiplier) {
         if (biquadris->getIsGameOver()) { // Check game over every iteration
             return;
         }
-        // Get board every time to use other board
-        if (biquadris->getCurrentPlayer()->dropBlock()) { // multiple lines, prompt special action
+        int linesCleared = biquadris->getCurrentPlayer()->dropBlock(); // multiple lines, prompt special action
+
+        while (linesCleared > 1) {
             promptSpecialAction();
-        } else if (biquadris->getCurrentPlayer()->getBoard().shouldDropStar()) {
+            --linesCleared;
+        }
+
+        if (biquadris->getCurrentPlayer()->getBoard().shouldDropStar()) { // level4 extra block
             biquadris->getCurrentPlayer()->replaceSpecificBlock('*');
-            if (biquadris->getCurrentPlayer()->dropBlock()) { // multiple lines, prompt special action
-                promptSpecialAction();
-            }
+            biquadris->getCurrentPlayer()->dropBlock();
         }
 
         biquadris->switchPlayers();

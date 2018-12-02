@@ -9,9 +9,8 @@ Biquadris::Biquadris(string sequence1,string sequence2):
     isPlayerOnePlaying{true}, isGameOver{false},
     playerOne{new ConcreteGame{true,sequence1,sequence2}}, playerTwo{new ConcreteGame{false,sequence1,sequence2}},
     textDisplay{new TextDisplay{this}}, graphicsDisplay{new GraphicsDisplay{this}}, interpreter{Interpreter{this}} {
+    
 
-    playerOne->setOtherGame(playerTwo); // Give players access to other player
-    playerTwo->setOtherGame(playerOne); // for special actions
 }
 
 void Biquadris::updateDisplay() {
