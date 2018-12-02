@@ -75,7 +75,7 @@ int getCellColour(char block) {
     } else if (block == 'Z') {
         return Xwindow::Red;
     } else if (block == '?') {
-        return Xwindow::Black;
+        return Xwindow::White;
     } else { // if (block == '*') {
         return Xwindow::Tan;
     }
