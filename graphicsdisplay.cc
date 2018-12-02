@@ -72,8 +72,12 @@ int getCellColour(char block) {
         return Xwindow::Green;
     } else if (block == 'T') {
         return Xwindow::Purple;
-    } else { // if (block == 'Z') {
+    } else if (block == 'Z') {
         return Xwindow::Red;
+    } else if (block == '?') {
+        return Xwindow::Black;
+    } else { // if (block == '*') {
+        return Xwindow::Tan;
     }
 }
 
@@ -82,6 +86,8 @@ void GraphicsDisplay::printBoard() {
     xw->fillRectangle(1 * cellWidth, 7 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::Black); // fix magic numbers
     // board two
     xw->fillRectangle(14 * cellWidth, 7 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::Black); // fix magic numbers
+    // scores
+    xw->fillRectangle(2 * cellWidth, 3 * cellHeight, 24 * cellWidth, 3 * cellHeight, Xwindow::White);
     // next block areas
     xw->fillRectangle(2 * cellWidth, 27 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::White); // fix magic numbers
     xw->fillRectangle(15 * cellWidth, 27 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::White); // fix magic numbers
@@ -154,13 +160,6 @@ void GraphicsDisplay::printNext(char firstPlayerBlock, char secondPlayerBlock) {
     printNextBlock(15, 27, secondPlayerBlock);
 }
 
-
-// void printBlockTop(char block) {}
-
-// void printBlockBottom(char block) {}
-
-// void printBlocks(char firstPlayerBlock, char secondPlayerBlock) {}
-
 GraphicsDisplay::GraphicsDisplay(Biquadris * biquadris):
     biquadris{biquadris} {
         xw = new Xwindow;
@@ -172,12 +171,12 @@ GraphicsDisplay::~GraphicsDisplay() {
 
 void GraphicsDisplay::displayBoard() {
     printTitle();
+    printBoard();
     printLevels(biquadris->getFirstPlayer()->getLevel(),
                 biquadris->getSecondPlayer()->getLevel());
     printScores(biquadris->getFirstPlayer()->getScore().getCurrentScore(),
                 biquadris->getSecondPlayer()->getScore().getCurrentScore());
     printHighScores(biquadris->getFirstPlayer()->getScore().getHighScore(), biquadris->getSecondPlayer()->getScore().getHighScore());
-    printBoard();
     printBoardBlocks(biquadris->getFirstPlayer()->getBoard(),
                 biquadris->getSecondPlayer()->getBoard());
     printNext(biquadris->getFirstPlayer()->getBoard().getNextBlock()->getType()[0],   // get block type, convert
