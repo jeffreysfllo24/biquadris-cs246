@@ -8,9 +8,8 @@ using namespace std;
 Biquadris::Biquadris(string sequence1,string sequence2):
     isPlayerOnePlaying{true}, isGameOver{false},
     playerOne{new ConcreteGame{true,sequence1,sequence2}}, playerTwo{new ConcreteGame{false,sequence1,sequence2}},
-    textDisplay{new TextDisplay{this}}, graphicsDisplay{new GraphicsDisplay{this}}, interpreter{Interpreter{this}} {
-    
-
+    textDisplay{new TextDisplay{this}}, graphicsDisplay{new GraphicsDisplay{this}}, interpreter{Interpreter{this}},
+    multipleSpecialActions{false} {
 }
 
 void Biquadris::updateDisplay() {
@@ -94,4 +93,11 @@ AbstractGame * Biquadris::getFirstPlayer(){
 
 AbstractGame * Biquadris::getSecondPlayer(){
     return playerTwo;
+}
+
+void Biquadris::toggleMultipleSpecialActions() {
+    multipleSpecialActions = !multipleSpecialActions;
+}
+bool Biquadris::getMultipleSpecialActions() {
+    return multipleSpecialActions;
 }

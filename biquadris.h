@@ -16,6 +16,7 @@ class Biquadris {
     DisplayObserver * textDisplay;
     DisplayObserver * graphicsDisplay;
     Interpreter interpreter;
+    bool multipleSpecialActions;
     void updateDisplay();
     void startGame();
 public:
@@ -28,6 +29,8 @@ public:
     AbstractGame * getNonCurrentPlayer();
     AbstractGame *getFirstPlayer();
     AbstractGame *getSecondPlayer();
+    void toggleMultipleSpecialActions();
+    bool getMultipleSpecialActions();
 };
 
 #endif //BIQUADRIS_H
