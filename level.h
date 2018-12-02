@@ -7,7 +7,6 @@
 class Block;
 
 class Level {
-protected:
 public:
     Block * createSpecificBlock(char, int);
     virtual Block * generateBlock() = 0;

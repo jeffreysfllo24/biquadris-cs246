@@ -4,7 +4,6 @@
 
 char Level1::generateRandom() {
     int r = rand() % 12;
-    srand(seed);
     if (r < 2) {
         return 'I';
     } else if (r < 4) {
@@ -32,4 +31,5 @@ Block * Level1::generateBlock() {
 
 void Level1::setSeed(int newSeed){
     seed = newSeed;
+    srand(seed);
 }
