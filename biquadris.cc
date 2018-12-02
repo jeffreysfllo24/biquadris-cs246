@@ -5,18 +5,20 @@
 
 using namespace std;
 
-Biquadris::Biquadris(string sequence1,string sequence2):
+Biquadris::Biquadris(string sequence1,string sequence2,bool isGraphics):
     isPlayerOnePlaying{true}, isGameOver{false},
     playerOne{new ConcreteGame{true,sequence1,sequence2}}, playerTwo{new ConcreteGame{false,sequence1,sequence2}},
-    textDisplay{new TextDisplay{this}}, graphicsDisplay{new GraphicsDisplay{this}}, interpreter{Interpreter{this}} {
+textDisplay{new TextDisplay{this}}, graphicsDisplay{isGraphics? new GraphicsDisplay{this}:nullptr}, interpreter{Interpreter{this}} {
 
     playerOne->setOtherGame(playerTwo); // Give players access to other player
     playerTwo->setOtherGame(playerOne); // for special actions
 }
 
-void Biquadris::updateDisplay() {
+void Biquadris::updateDisplay(bool isGraphics) {
     textDisplay->displayBoard();
-    graphicsDisplay->displayBoard();
+    if(isGraphics){
+        graphicsDisplay->displayBoard();
+    }
 }
 
 void Biquadris::startGame() {
@@ -26,7 +28,7 @@ void Biquadris::startGame() {
     playerTwo->createBlock();
 }
 
-void Biquadris::run(bool isText,int seed, string sequence1, string sequence2,int startlevel) {
+void Biquadris::run(bool isGraphics,int seed, string sequence1, string sequence2,int startlevel) {
     //Set sequence1 and sequence2 files for Level0 to read being done in constructor
     
     //Set start level
@@ -37,15 +39,13 @@ void Biquadris::run(bool isText,int seed, string sequence1, string sequence2,int
     playerOne->setSeed(seed);
     playerTwo->setSeed(seed);
     
-    //TODO:Logic to allow only test display when graphics display is implemented
-    
     startGame();
-    updateDisplay();
+    updateDisplay(isGraphics);
     
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);
-        updateDisplay();
+        updateDisplay(isGraphics);
     }
 }
 

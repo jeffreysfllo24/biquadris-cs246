@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(int argc,char * argv[]) {
-    bool isText = false;
+    bool isGraphics = true;
     int seed = 1;
     string sequence1 = "sequence1.txt";
     string sequence2 = "sequence2.txt";
@@ -14,7 +14,7 @@ int main(int argc,char * argv[]) {
     for(int i = 0; i < argc; ++i){
         string input = argv[i];
         if(input == "-text"){
-            isText = true;
+            isGraphics = false;
         }else if (input == "-seed"){
             seed = stoi(argv[i+1]);
         }else if (input == "-scriptfile1"){
@@ -25,6 +25,6 @@ int main(int argc,char * argv[]) {
             startLevel = stoi(argv[i + 1]);
         }
     }
-    Biquadris bq(sequence1,sequence2);
-    bq.run(isText,seed,sequence1,sequence2,startLevel);
+    Biquadris bq(sequence1,sequence2,isGraphics);
+    bq.run(isGraphics,seed,sequence1,sequence2,startLevel);
 }

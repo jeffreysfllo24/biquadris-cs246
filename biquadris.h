@@ -16,11 +16,11 @@ class Biquadris {
     DisplayObserver * textDisplay;
     DisplayObserver * graphicsDisplay;
     Interpreter interpreter;
-    void updateDisplay();
+    void updateDisplay(bool);
     void startGame();
 public:
-    Biquadris(std::string,std::string);
-    void run(bool isText,int seed, std::string sequence1, std::string sequence2,int startlevel);
+    Biquadris(std::string,std::string,bool);
+    void run(bool isGraphics,int seed, std::string sequence1, std::string sequence2,int startlevel);
     void switchPlayers();
     void restart();
     bool getIsGameOver();
