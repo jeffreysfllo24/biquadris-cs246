@@ -136,9 +136,7 @@ void Interpreter::runDrop(int multiplier) {
             promptSpecialAction();
         } else if (biquadris->getCurrentPlayer()->getBoard().shouldDropStar()) {
             biquadris->getCurrentPlayer()->replaceSpecificBlock('*');
-            if (biquadris->getCurrentPlayer()->dropBlock()) { // multiple lines, prompt special action
-                promptSpecialAction();
-            }
+            biquadris->getCurrentPlayer()->dropBlock();
         }
 
         biquadris->switchPlayers();

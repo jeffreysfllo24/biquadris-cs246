@@ -200,10 +200,10 @@ void GraphicsDisplay::printResult(int firstPlayerScore, int secondPlayerScore) {
     xw->drawString(11 * cellWidth, 16 * cellHeight, winMessage);
 } 
 
-GraphicsDisplay::GraphicsDisplay(Biquadris * biquadris):
-    biquadris{biquadris} {
-        xw = new Xwindow;
-    }
+GraphicsDisplay::GraphicsDisplay(Biquadris * biquadris) {
+    this->biquadris = biquadris; 
+    xw = new Xwindow;
+}
 
 GraphicsDisplay::~GraphicsDisplay() {
     delete xw;
