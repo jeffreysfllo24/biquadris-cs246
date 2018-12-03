@@ -122,8 +122,9 @@ void printBlocks(char firstPlayerBlock, char secondPlayerBlock) {
     cout << endl;
 }
 
-TextDisplay::TextDisplay(Biquadris * biquadris):
-    biquadris{biquadris} {}
+TextDisplay::TextDisplay(Biquadris * biquadris) {
+    this->biquadris = biquadris;
+}
 
 TextDisplay::~TextDisplay() = default;
 

@@ -160,10 +160,10 @@ void GraphicsDisplay::printNext(char firstPlayerBlock, char secondPlayerBlock) {
     printNextBlock(15, 27, secondPlayerBlock);
 }
 
-GraphicsDisplay::GraphicsDisplay(Biquadris * biquadris):
-    biquadris{biquadris} {
-        xw = new Xwindow;
-    }
+GraphicsDisplay::GraphicsDisplay(Biquadris * biquadris) {
+    this->biquadris = biquadris;
+    xw = new Xwindow;
+}
 
 GraphicsDisplay::~GraphicsDisplay() {
     delete xw;
