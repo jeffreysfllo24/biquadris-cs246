@@ -14,6 +14,11 @@ textDisplay{new TextDisplay{this}}, graphicsDisplay{isGraphics? new GraphicsDisp
     playerTwo->setOtherGame(playerOne); // for special actions
 }
 
+void Biquadris::displayHelp(){
+    textDisplay->printHelp();
+    graphicsDisplay->printHelp();
+}
+
 void Biquadris::updateDisplay(bool isGraphics) {
     textDisplay->displayBoard();
     if(isGraphics){
@@ -45,7 +50,9 @@ void Biquadris::run(bool isGraphics,int seed, string sequence1, string sequence2
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);
-        updateDisplay(isGraphics);
+        if(command != "help"){
+            updateDisplay(isGraphics);
+        }
     }
 }
 

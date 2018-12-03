@@ -24,6 +24,7 @@ public:
     void switchPlayers();
     void restart();
     bool getIsGameOver();
+    void displayHelp();
     AbstractGame * getCurrentPlayer();
     AbstractGame * getNonCurrentPlayer();
     AbstractGame * getFirstPlayer();
