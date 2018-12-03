@@ -17,6 +17,7 @@ class Biquadris {
     DisplayObserver * graphicsDisplay;
     Interpreter interpreter;
     void updateDisplay(bool);
+    bool multipleSpecialActions;
     void startGame();
 public:
     Biquadris(std::string,std::string,bool);
@@ -26,9 +27,11 @@ public:
     bool getIsGameOver();
     AbstractGame * getCurrentPlayer();
     AbstractGame * getNonCurrentPlayer();
-    AbstractGame * getFirstPlayer();
-    AbstractGame * getSecondPlayer();
     ~Biquadris();
+    AbstractGame *getFirstPlayer();
+    AbstractGame *getSecondPlayer();
+    void toggleMultipleSpecialActions();
+    bool getMultipleSpecialActions();
 };
 
 #endif //BIQUADRIS_H

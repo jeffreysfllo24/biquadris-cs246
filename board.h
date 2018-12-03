@@ -21,8 +21,7 @@ class Board{
         void clearBoard();
         bool isRowFull(int);
         void clearRow(int);
-        bool isAlive();
-        int dropBlock(bool &);    //Abstract game calls board->drop and returns the score if any rows cleared
+        int dropBlock(int &);    //Abstract game calls board->drop and returns the score if any rows cleared
         Block * getCurrentBlock();
         Block * getNextBlock();
         std::string getLine(int);

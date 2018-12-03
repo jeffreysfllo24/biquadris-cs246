@@ -30,7 +30,8 @@ Interpreter::Interpreter(Biquadris * biquadris):
                {"T", Interpreter::T},
                {"Z", Interpreter::Z},
                {"restart", Interpreter::restart},
-               {"rename", Interpreter::rename}} {}
+               {"rename", Interpreter::rename},
+               {"togglemultiplespecialactions", Interpreter::toggleMultipleSpecialActions}} {}
 
 int getMultiplier(string & command) {
     string multiplierString;
@@ -130,10 +131,17 @@ void Interpreter::runDrop(int multiplier) {
         if (biquadris->getIsGameOver()) { // Check game over every iteration
             return;
         }
-        // Get board every time to use other board
-        if (biquadris->getCurrentPlayer()->dropBlock()) { // multiple lines, prompt special action
+        int linesCleared = biquadris->getCurrentPlayer()->dropBlock(); // multiple lines, prompt special action
+
+        while (linesCleared > 1) {
             promptSpecialAction();
-        } else if (biquadris->getCurrentPlayer()->getBoard().shouldDropStar()) {
+            --linesCleared;
+            if (!biquadris->getMultipleSpecialActions()) {
+                break; // if multiple not toggled, break after one
+            }
+        }
+
+        if (biquadris->getCurrentPlayer()->getBoard().shouldDropStar()) { // level4 extra block
             biquadris->getCurrentPlayer()->replaceSpecificBlock('*');
             biquadris->getCurrentPlayer()->dropBlock();
         }
@@ -261,6 +269,15 @@ void Interpreter::interpretCommand(string command) {
                     commandMap.insert(pair<string, Interpreter::Command>(newName, iCommand));
                     commandMap.erase(oldName);
                 }
+            }
+            break;
+        }
+        case Interpreter::toggleMultipleSpecialActions: {
+            biquadris->toggleMultipleSpecialActions();
+            if (biquadris->getMultipleSpecialActions()) {
+                cout << "Multiple Special Actions: ON" << endl;
+            } else {
+                cout << "Multiple Special Actions: OFF" << endl;
             }
             break;
         }

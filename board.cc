@@ -57,16 +57,7 @@ void Board::clearRow(int row){
     }
 }
 
-bool Board::isAlive(){
-    for(int i = 0; i < width; ++i){
-        if(theGrid[i][2]->isFilled()){
-            return false;   //Checks if any of the blocks in the 3 reserve rows are filled
-        }
-    }
-    return true;
-}
-
-int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
+int Board::dropBlock(int & linesCleared){    // Called from AbstractGame
     int numLines = 0;
     int scoredPoints = 0;
     currBlock->drop();
@@ -93,9 +84,7 @@ int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
         if (level == 4) {
             lastClear = 0;
         }
-        if (numLines > 1) {
-            multipleLines = true; // update multipleLines for AbstractGame to know for special action
-        }
+        linesCleared = numLines;
         scoredPoints += pow(numLines + level, 2);
         return scoredPoints;
     }else{

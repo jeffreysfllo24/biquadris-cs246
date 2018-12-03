@@ -17,20 +17,17 @@ protected:
     std::string sequence1;
     std::string sequence2;
     Level * level;
-    AbstractGame * otherGame;
     Board board;
     Score score;
 public:
-    virtual void setOtherGame(AbstractGame *) = 0;
     virtual void createBlock() = 0;
-    virtual void createSpecificBlock(char) = 0; // TODO not used?
     virtual void replaceSpecificBlock(char) = 0;
     void levelUp();
     void levelDown();
     void restart();
     void norandom(std::string);
     void random();
-    bool dropBlock();
+    int dropBlock();
     Board & getBoard();
     Score & getScore();
     int getLevel();

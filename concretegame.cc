@@ -10,20 +10,11 @@ ConcreteGame::ConcreteGame(bool isPlayerOne,string sequence1, string sequence2) 
     this->levelInt = 0;
     this->setSequences(sequence1, sequence2);
     this->level = new Level0{isPlayerOne,sequence1,sequence2};
-    this->otherGame = nullptr;
 }
 
-void ConcreteGame::setOtherGame(AbstractGame * otherGame) {
-    this->otherGame = otherGame;
-}
 
 void ConcreteGame::createBlock() {
     Block * newBlock = level->generateBlock();
-    board.createBlock(newBlock);
-}
-
-void ConcreteGame::createSpecificBlock(char blockChar) {
-    Block * newBlock = level->createSpecificBlock(blockChar, levelInt);
     board.createBlock(newBlock);
 }
 

@@ -4,7 +4,6 @@ using namespace std;
 
 StarBlock::StarBlock(int levelVal){
     this->bottomLeft = nullptr;
-    this->isBottom = false;
     this->rotation = 0;
     this->maxWidth = 4;
     this->level = levelVal;
