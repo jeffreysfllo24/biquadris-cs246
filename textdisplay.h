@@ -8,6 +8,7 @@ public:
     TextDisplay(Biquadris *);
     ~TextDisplay() override;
     void displayBoard() override;
+    void printHelp() override;
 };
 
 #endif //TEXTDISPLAY_H

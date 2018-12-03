@@ -13,11 +13,14 @@ class GraphicsDisplay : public DisplayObserver {
     void printScores(int, int);
     void printHighScores(int, int);
     void printBoard();
+    void unDraw();
     void printBoardBlocks(Board &, Board &);
     void printNextBlock(int, int, char);
     void printNext(char, char);
+    void printResult(int, int);
 public:
     GraphicsDisplay(Biquadris *);
+    void printHelp() override;
     ~GraphicsDisplay() override;
     void displayBoard() override;
 };

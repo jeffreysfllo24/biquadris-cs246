@@ -12,6 +12,11 @@ Biquadris::Biquadris(string sequence1,string sequence2,bool isGraphics):
     multipleSpecialActions{false} {
 }
 
+void Biquadris::displayHelp(){
+    textDisplay->printHelp();
+    graphicsDisplay->printHelp();
+}
+
 void Biquadris::updateDisplay(bool isGraphics) {
     textDisplay->displayBoard();
     if(isGraphics){
@@ -43,7 +48,9 @@ void Biquadris::run(bool isGraphics,int seed, string sequence1, string sequence2
     string command;
     while (cin >> command) {
         interpreter.interpretCommand(command);
-        updateDisplay(isGraphics);
+        if(command != "help"){
+            updateDisplay(isGraphics);
+        }
     }
 }
 

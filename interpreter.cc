@@ -31,7 +31,8 @@ Interpreter::Interpreter(Biquadris * biquadris):
                {"Z", Interpreter::Z},
                {"restart", Interpreter::restart},
                {"rename", Interpreter::rename},
-               {"togglemultiplespecialactions", Interpreter::toggleMultipleSpecialActions}} {}
+               {"togglemultiplespecialactions", Interpreter::toggleMultipleSpecialActions},
+               {"help", Interpreter::help}} {}
 
 int getMultiplier(string & command) {
     string multiplierString;
@@ -260,6 +261,9 @@ void Interpreter::interpretCommand(string command) {
         case Interpreter::restart:
             biquadris->restart();
             break;
+        case Interpreter::help:
+            biquadris->displayHelp();
+            break;
         case Interpreter::rename: {
             string oldName;
             string newName;
@@ -286,5 +290,4 @@ void Interpreter::interpretCommand(string command) {
             break;
     }
 
-    // TODO: extension for renaming commands
 }
