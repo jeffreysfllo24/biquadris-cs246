@@ -125,6 +125,8 @@ void printBlocks(char firstPlayerBlock, char secondPlayerBlock) {
 TextDisplay::TextDisplay(Biquadris * biquadris):
     biquadris{biquadris} {}
 
+TextDisplay::~TextDisplay() = default;
+
 void TextDisplay::displayBoard() {
     printLevels(biquadris->getFirstPlayer()->getLevel(),
                 biquadris->getSecondPlayer()->getLevel());

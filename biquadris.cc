@@ -96,3 +96,10 @@ AbstractGame * Biquadris::getFirstPlayer(){
 AbstractGame * Biquadris::getSecondPlayer(){
     return playerTwo;
 }
+
+Biquadris::~Biquadris() {
+    delete playerOne;
+    delete playerTwo;
+    delete textDisplay;
+    delete graphicsDisplay;
+}

@@ -19,7 +19,7 @@ class GraphicsDisplay : public DisplayObserver {
     void printNext(char, char);
 public:
     GraphicsDisplay(Biquadris *);
-    ~GraphicsDisplay();
+    ~GraphicsDisplay() override;
     void displayBoard() override;
 };
 

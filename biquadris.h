@@ -26,8 +26,9 @@ public:
     bool getIsGameOver();
     AbstractGame * getCurrentPlayer();
     AbstractGame * getNonCurrentPlayer();
-    AbstractGame *getFirstPlayer();
-    AbstractGame *getSecondPlayer();
+    AbstractGame * getFirstPlayer();
+    AbstractGame * getSecondPlayer();
+    ~Biquadris();
 };
 
 #endif //BIQUADRIS_H

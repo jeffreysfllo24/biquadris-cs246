@@ -24,7 +24,7 @@ void Board::init(){
 }
 
 void Board::clearBoard(){
-    for(int i = 0; i < height; ++i){
+    for(int i = 0; i < height+1; ++i){
         for(int j = 0; j < width; ++j){
             delete theGrid[i][j];   //Delete the cell pointers in the grid
         }
@@ -34,8 +34,6 @@ void Board::clearBoard(){
     currBlock = nullptr;
     delete nextBlock;
     nextBlock = nullptr;
-
-    init();
 }
 
 bool Board::isRowFull(int row){
@@ -105,6 +103,8 @@ int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
 
 Board::~Board(){
     this->clearBoard();
+    delete currBlock;
+    delete nextBlock;
 }
 
 string Board::getLine(int row){
