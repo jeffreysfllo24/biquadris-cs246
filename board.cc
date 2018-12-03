@@ -34,6 +34,11 @@ void Board::clearBoard(){
     currBlock = nullptr;
     delete nextBlock;
     nextBlock = nullptr;
+
+    for (auto & block : blockList) {
+        delete block;
+    }
+    blockList.clear();
 }
 
 bool Board::isRowFull(int row){
@@ -103,8 +108,6 @@ int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
 
 Board::~Board(){
     this->clearBoard();
-    delete currBlock;
-    delete nextBlock;
 }
 
 string Board::getLine(int row){
@@ -142,6 +145,7 @@ int Board::updateBlockList(){
     for(int i = 0; i < blockList.size();++i ) {
         int blockScore = blockList[i]->updateBlock();
         if(blockScore > 0){
+            delete blockList[i];
             blockList.erase(blockList.begin()+i);
             i -= 1;
         }
@@ -162,16 +166,16 @@ void Board::createBlock(Block * newBlock){
         return;
     }
 
+    delete currBlock;
+
     currBlock = nextBlock;
     nextBlock = newBlock;
     currBlock->init(theGrid[3][0], theGrid);
 }
 
 void Board::replaceBlock(Block * newBlock) {
-    if (currBlock) {
-        //Used when we want to replace the current undropped currBlock
-        delete currBlock;
-    }
+    //Used when we want to replace the current undropped currBlock
+    delete currBlock;
 
     currBlock = newBlock;
     if (currBlock->getType() == "*") { // if level 4 block
