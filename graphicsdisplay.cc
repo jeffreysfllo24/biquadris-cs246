@@ -3,31 +3,8 @@
 
 using namespace std;
 
-const int cellWidth = 650 / 26;
-const int cellHeight = (750 / 30) - 3;
-
-void GraphicsDisplay::printHelp(){
-    string title = "Tips and Tricks:";
-    string tip1 = "1. Understand the spacial relationship between the piece that you want to drop";
-    string tip1b = "  and the current landscape of the play space.";
-    string tip2 = "2. Use the next piece indicator to your advantage! Before that piece appears in";
-    string tip2b = "  the play space you should know exactly where it belongs.";
-    string tip3 = "3. Know your controls! Ensure that you are familiar with all possible actions and";
-    string tip3b = "   that you understand how each action effects the block on your board.";
-    string tip4 = "4. The most important tip is have fun! As long as you enjoy playing the game you're a winner :)";
-    xw->drawString(2 * cellWidth, 31 * cellHeight, title);
-    xw->drawString(2 * cellWidth, 32 * cellHeight, tip1);
-    xw->drawString(2 * cellWidth, 33 * cellHeight, tip1b);
-    xw->drawString(2 * cellWidth, 34 * cellHeight, tip2);
-    xw->drawString(2 * cellWidth, 35 * cellHeight, tip2b);
-    xw->drawString(2 * cellWidth, 36 * cellHeight, tip3);
-    xw->drawString(2 * cellWidth, 37 * cellHeight, tip3b);
-    xw->drawString(2 * cellWidth, 38 * cellHeight, tip4);
-}
-
-void GraphicsDisplay::unDraw(){
-    xw->fillRectangle(1 * cellWidth, 30 * cellHeight,40 * cellWidth , 12 * cellHeight, Xwindow::White);
-}
+const int cellWidth = 572 / 26; // each cell is width and height of 22
+const int cellHeight = 880 / 40;
 
 void GraphicsDisplay::printTitle() {
     string res = "BIQUADRIS";
@@ -95,8 +72,12 @@ int getCellColour(char block) {
         return Xwindow::Green;
     } else if (block == 'T') {
         return Xwindow::Purple;
-    } else { // if (block == 'Z') {
+    } else if (block == 'Z') {
         return Xwindow::Red;
+    } else if (block == '?') {
+        return Xwindow::White;
+    } else { // if (block == '*') {
+        return Xwindow::Tan;
     }
 }
 
@@ -105,6 +86,8 @@ void GraphicsDisplay::printBoard() {
     xw->fillRectangle(1 * cellWidth, 7 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::Black); // fix magic numbers
     // board two
     xw->fillRectangle(14 * cellWidth, 7 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::Black); // fix magic numbers
+    // scores
+    xw->fillRectangle(2 * cellWidth, 3 * cellHeight, 24 * cellWidth, 3 * cellHeight, Xwindow::White);
     // next block areas
     xw->fillRectangle(2 * cellWidth, 27 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::White); // fix magic numbers
     xw->fillRectangle(15 * cellWidth, 27 * cellHeight, 11 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::White); // fix magic numbers
@@ -177,12 +160,45 @@ void GraphicsDisplay::printNext(char firstPlayerBlock, char secondPlayerBlock) {
     printNextBlock(15, 27, secondPlayerBlock);
 }
 
+void GraphicsDisplay::printHelp() {
+    string title = "Tips and Tricks: ";
+    string tip1 = "1. Understand the spacial relationship between the piece that you";
+    string tip1b = "   want to drop and the current landscape of the play space.";
+    string tip2 = "2. Use the next piece indicator to your advantage! Before that piece";
+    string tip2b = "   appears in the play space you should know exactly where it belongs.";
+    string tip3 = "3. Know your controls! Ensure that you are familiar with all possible actions";
+    string tip3b = "   and that you understand how each action effects the block on your board.";
+    string tip4 = "4. The most important tip is have fun! As long as you enjoy playing";
+    string tip4b = "   the game you're a winner! :)";
+    xw->drawString(2 * cellWidth, 31 * cellHeight, title);
+    xw->drawString(2 * cellWidth, 32 * cellHeight, tip1);
+    xw->drawString(2 * cellWidth, 33 * cellHeight, tip1b);
+    xw->drawString(2 * cellWidth, 34 * cellHeight, tip2);
+    xw->drawString(2 * cellWidth, 35 * cellHeight, tip2b);
+    xw->drawString(2 * cellWidth, 36 * cellHeight, tip3);
+    xw->drawString(2 * cellWidth, 37 * cellHeight, tip3b);
+    xw->drawString(2 * cellWidth, 38 * cellHeight, tip4);
+    xw->drawString(2 * cellWidth, 39 * cellHeight, tip4b);
+}
 
-// void printBlockTop(char block) {}
+void GraphicsDisplay::unDraw(){
+    xw->fillRectangle(1 * cellWidth, 30 * cellHeight, 40 * cellWidth, 12 * cellHeight, Xwindow::White);
+}
 
-// void printBlockBottom(char block) {}
-
-// void printBlocks(char firstPlayerBlock, char secondPlayerBlock) {}
+void GraphicsDisplay::printResult(int firstPlayerScore, int secondPlayerScore) { // winner is 0 if player1 wins and 1 if player2 wins
+    string gameOver = "GAME OVER";
+    string winMessage;
+    if (firstPlayerScore == secondPlayerScore) {
+        winMessage = "Result is draw!!";
+    } else if (firstPlayerScore > secondPlayerScore) {
+        winMessage = "Player 1 wins!!!";
+    } else {
+        winMessage = "Player 2 wins!!!";
+    }
+    xw->fillRectangle(1 * cellWidth, 7 * cellHeight, 24 * cellWidth + 2, 18 * cellHeight + 2, Xwindow::Red);
+    xw->drawString(12 * cellWidth, 15 * cellHeight, gameOver);
+    xw->drawString(11 * cellWidth, 16 * cellHeight, winMessage);
+} 
 
 GraphicsDisplay::GraphicsDisplay(Biquadris * biquadris):
     biquadris{biquadris} {
@@ -196,14 +212,19 @@ GraphicsDisplay::~GraphicsDisplay() {
 void GraphicsDisplay::displayBoard() {
     unDraw();
     printTitle();
+    printBoard();
     printLevels(biquadris->getFirstPlayer()->getLevel(),
                 biquadris->getSecondPlayer()->getLevel());
     printScores(biquadris->getFirstPlayer()->getScore().getCurrentScore(),
                 biquadris->getSecondPlayer()->getScore().getCurrentScore());
     printHighScores(biquadris->getFirstPlayer()->getScore().getHighScore(), biquadris->getSecondPlayer()->getScore().getHighScore());
-    printBoard();
-    printBoardBlocks(biquadris->getFirstPlayer()->getBoard(),
+    if (biquadris->getIsGameOver()) {
+        printResult(biquadris->getFirstPlayer()->getScore().getCurrentScore(),
+                    biquadris->getSecondPlayer()->getScore().getCurrentScore());
+    } else {
+        printBoardBlocks(biquadris->getFirstPlayer()->getBoard(),
                 biquadris->getSecondPlayer()->getBoard());
-    printNext(biquadris->getFirstPlayer()->getBoard().getNextBlock()->getType()[0],   // get block type, convert
+        printNext(biquadris->getFirstPlayer()->getBoard().getNextBlock()->getType()[0],   // get block type, convert
                 biquadris->getSecondPlayer()->getBoard().getNextBlock()->getType()[0]);
+    }
 }

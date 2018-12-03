@@ -18,10 +18,11 @@ class GraphicsDisplay : public DisplayObserver {
     void printBoardBlocks(Board &, Board &);
     void printNextBlock(int, int, char);
     void printNext(char, char);
+    void printResult(int, int);
 public:
     GraphicsDisplay(Biquadris *);
-    ~GraphicsDisplay();
-    void printHelp();
+    void printHelp() override;
+    ~GraphicsDisplay() override;
     void displayBoard() override;
 };
 

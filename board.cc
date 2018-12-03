@@ -34,8 +34,6 @@ void Board::clearBoard(){
     currBlock = nullptr;
     delete nextBlock;
     nextBlock = nullptr;
-
-    init();
 }
 
 bool Board::isRowFull(int row){
@@ -105,6 +103,8 @@ int Board::dropBlock(bool & multipleLines){    // Called from AbstractGame
 
 Board::~Board(){
     this->clearBoard();
+    delete currBlock;
+    delete nextBlock;
 }
 
 string Board::getLine(int row){

@@ -76,6 +76,7 @@ void AbstractGame::levelDown() {
 
 void AbstractGame::restart() {
     board.clearBoard();
+    board.init();
     score.resetScore();
 
     delete level;
@@ -147,5 +148,7 @@ void AbstractGame::setSeed(int seedVal){
     seed = seedVal;
 }
 
-AbstractGame::~AbstractGame() = default;
+AbstractGame::~AbstractGame() {
+    delete level;
+}
 

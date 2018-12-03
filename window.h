@@ -12,12 +12,12 @@ class Xwindow {
     unsigned long colours[10];
 
     public:
-        Xwindow(int width=650, int height= 850);  // Constructor; displays the window.
+        Xwindow(int width=572, int height=880);  // Constructor; displays the window.
         ~Xwindow();                              // Destructor; destroys the window.
         Xwindow(const Xwindow&) = delete;
         Xwindow &operator=(const Xwindow&) = delete;
 
-        enum { White=0, Black, Red, Green, Blue, Yellow, Purple, Orange, Cyan }; // Available colours.
+        enum { White=0, Black, Red, Green, Blue, Yellow, Purple, Orange, Cyan, Tan }; // Available colours.
 
         // Draws a rectangle
         void fillRectangle(int x, int y, int width, int height, int colour=Black);
